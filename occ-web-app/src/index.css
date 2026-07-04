@@ -406,6 +406,8 @@ small, .text-sm { font-size:0.875rem; }
 .module-card h3 { color:#fff; margin-bottom:var(--space-sm); }
 .module-card p { color:rgba(255,255,255,0.75); font-size:0.9rem; margin-bottom:var(--space-lg); }
 .module-card .module-stat { color:rgba(255,255,255,0.6); font-size:0.82rem; font-weight:600; }
+.module-card .module-arrow { color:rgba(255,255,255,0.6); transition:transform 0.3s; display:inline-block; }
+.module-card:hover .module-arrow { transform:translateX(4px); color:#fff; }
 .module-tip-card { background:linear-gradient(135deg, #4A1A80 0%, #6B2FA0 60%, #9B5FD0 100%); }
 .module-mentor-card { background:linear-gradient(135deg, #0E4C6A 0%, #0891B2 60%, #06B6D4 100%); }
 .module-jobs-card { background:linear-gradient(135deg, #7A4000 0%, #B45309 60%, #F59E0B 100%); }
@@ -1343,7 +1345,13 @@ small, .text-sm { font-size:0.875rem; }
 .module-card-icon { font-size: 2.5rem; margin-bottom: var(--space-md); }
 .module-card h3 { font-size: 1.25rem; margin-bottom: var(--space-sm); }
 .module-card p { font-size: 0.9rem; color: var(--text-secondary); }
-.module-stat { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+.module-card .module-stat { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+
+[data-theme="light"] .module-card h3 { color: var(--text-primary); }
+[data-theme="light"] .module-card p { color: var(--text-secondary); }
+[data-theme="light"] .module-card .module-stat { color: var(--text-muted); }
+[data-theme="light"] .module-card .module-arrow { color: var(--text-secondary); }
+[data-theme="light"] .module-card:hover .module-arrow { color: var(--brand-primary); }
 .module-tip-card { background: linear-gradient(135deg, rgba(155,95,208,0.08) 0%, rgba(79,70,229,0.08) 100%); border-color: rgba(155,95,208,0.2); }
 .module-tip-card:hover { border-color: rgba(155,95,208,0.4); box-shadow: 0 12px 40px rgba(155,95,208,0.15); }
 .module-mentor-card { background: linear-gradient(135deg, rgba(6,182,212,0.08) 0%, rgba(14,116,144,0.08) 100%); border-color: rgba(6,182,212,0.2); }
