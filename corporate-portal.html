@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OCC Corporate Portal — Manage job postings, campus placement drives, and candidate applications via ATS.">
+  <title>Corporate Portal | Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand">
+        <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" loading="lazy">
+        <span class="nav-brand-text">Offcampus<span>career</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <button class="btn btn-sm btn-secondary" id="logout-btn">Logout</button>
+        <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+
+  <!-- PORTAL LAYOUT -->
+  <div class="portal-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Corporate Portal Navigation">
+      <div class="sidebar-header">
+        <div class="flex items-center gap-md">
+          <div class="avatar avatar-md" id="corp-avatar-img" style="background:linear-gradient(135deg,#FB7185,#F59E0B);">T</div>
+          <div>
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text-primary);" id="corp-sidebar-name">Tata Consultancy Services</div>
+            <div style="font-size:0.75rem; color:var(--module-corporate);">✓ Certified Employer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="sidebar-section-title">Hiring</div>
+        <button class="sidebar-link active" data-view="dashboard">
+          <span class="icon">📊</span>Dashboard
+        </button>
+        <button class="sidebar-link" data-view="jobs">
+          <span class="icon">💼</span>Job Openings
+          <span class="badge badge-rose" id="jobs-count-badge">0</span>
+        </button>
+        <button class="sidebar-link" data-view="applicants">
+          <span class="icon">👥</span>ATS Applicants
+          <span class="badge badge-amber" id="applicants-count-badge">0</span>
+        </button>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-title">Collaborations</div>
+        <button class="sidebar-link" data-view="drives">
+          <span class="icon">🏫</span>Campus Drives
+        </button>
+        <button class="sidebar-link" data-view="colleges">
+          <span class="icon">🏛️</span>Partner Colleges
+        </button>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-title">Settings</div>
+        <button class="sidebar-link" data-view="profile">
+          <span class="icon">👤</span>Company Profile
+        </button>
+        <div class="sidebar-divider"></div>
+        <a href="index.html" class="sidebar-link">
+          <span class="icon">🌐</span>View Platform
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="portal-main">
+      <button class="burger sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar" style="display:none; margin-bottom:var(--space-md);"><span></span><span></span><span></span></button>
+
+      <!-- Dashboard View -->
+      <div class="portal-view active" id="view-dashboard">
+        <div class="welcome-banner" style="background:linear-gradient(135deg, #881337, #BE123C, #FB7185);">
+          <div class="grid-bg"></div>
+          <div style="position:relative; z-index:1;">
+            <h2 id="corp-welcome">Welcome back, Partner! 🏢</h2>
+            <p>Your job listings are active. You have <strong id="new-applicants-count">0</strong> new applications to screen.</p>
+          </div>
+        </div>
+        
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon rose">💼</div>
+            <div>
+              <div class="kpi-value" id="kpi-active-jobs">0</div>
+              <div class="kpi-label">Active Jobs</div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon amber">👥</div>
+            <div>
+              <div class="kpi-value" id="kpi-total-applicants">0</div>
+              <div class="kpi-label">Total Applicants</div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon green">🎓</div>
+            <div>
+              <div class="kpi-value" id="kpi-drives">0</div>
+              <div class="kpi-label">Campus Drives Scheduled</div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon cyan">📊</div>
+            <div>
+              <div class="kpi-value">92%</div>
+              <div class="kpi-label">Avg Match Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2 gap-xl" style="margin-top:var(--space-xl);">
+          <div class="card">
+            <div class="portal-header" style="margin-bottom:var(--space-lg);">
+              <h4>💼 Recent Job Openings</h4>
+              <button class="btn btn-corporate btn-sm" onclick="switchView('jobs')">Manage Jobs</button>
+            </div>
+            <div id="recent-jobs-list" style="display:flex; flex-direction:column; gap:var(--space-md);"></div>
+          </div>
+          <div class="card">
+            <div class="portal-header" style="margin-bottom:var(--space-lg);">
+              <h4>⚡ Quick ATS Screening</h4>
+              <button class="btn btn-ghost btn-sm" onclick="switchView('applicants')">ATS Panel</button>
+            </div>
+            <div id="quick-applicants-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jobs View -->
+      <div class="portal-view" id="view-jobs">
+        <div class="portal-header">
+          <div>
+            <div class="portal-title">Job Openings</div>
+            <div class="portal-subtitle">Create and manage your career opportunities</div>
+          </div>
+          <button class="btn btn-corporate" onclick="openPostJobModal()">+ Post a Job</button>
+        </div>
+        <div id="corp-jobs-grid" class="grid grid-2 gap-xl"></div>
+      </div>
+
+      <!-- Applicants (ATS) View -->
+      <div class="portal-view" id="view-applicants">
+        <div class="portal-header">
+          <div>
+            <div class="portal-title">ATS Screening & Pipeline</div>
+            <div class="portal-subtitle">Evaluate candidates and manage hiring stages</div>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Candidate</th>
+                <th>Applied Job</th>
+                <th>Match Score</th>
+                <th>Status</th>
+                <th>Applied Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="applicants-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Drives View -->
+      <div class="portal-view" id="view-drives">
+        <div class="portal-header">
+          <div>
+            <div class="portal-title">Campus Placement Drives</div>
+            <div class="portal-subtitle">Schedule recruitment drives at partner colleges</div>
+          </div>
+          <button class="btn btn-corporate" onclick="openDriveModal()">+ Schedule a Drive</button>
+        </div>
+        <div class="grid grid-2 gap-xl">
+          <div>
+            <div class="card">
+              <h4 style="margin-bottom:var(--space-lg);">📅 Drive Requests & Calendar</h4>
+              <div id="drives-list" style="display:flex; flex-direction:column; gap:var(--space-md);"></div>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <h4 style="margin-bottom:var(--space-lg);">🏫 Available Partner Colleges</h4>
+              <div id="drive-colleges" style="display:flex; flex-direction:column; gap:var(--space-md);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colleges View -->
+      <div class="portal-view" id="view-colleges">
+        <div class="portal-header">
+          <div>
+            <div class="portal-title">Partner Colleges & Universities</div>
+            <div class="portal-subtitle">Collaborate directly with top institutes across India</div>
+          </div>
+        </div>
+        <div class="grid grid-3 gap-xl" id="partner-colleges-grid"></div>
+      </div>
+
+      <!-- Profile View -->
+      <div class="portal-view" id="view-profile">
+        <div class="portal-header">
+          <div>
+            <div class="portal-title">Company Profile</div>
+            <div class="portal-subtitle">Update company branding and details</div>
+          </div>
+        </div>
+        <div class="grid grid-2 gap-xl">
+          <form id="corp-profile-form" class="card">
+            <div class="form-group">
+              <label class="form-label required">Company Name</label>
+              <input type="text" class="form-input" id="cp-name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Industry</label>
+              <input type="text" class="form-input" id="cp-industry" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Website URL</label>
+              <input type="url" class="form-input" id="cp-website" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company Description</label>
+              <textarea class="form-textarea" rows="4" id="cp-desc"></textarea>
+            </div>
+            <button type="submit" class="btn btn-corporate">Save Profile</button>
+          </form>
+          <div>
+            <div class="card text-center" style="padding:var(--space-2xl);">
+              <div class="avatar avatar-2xl avatar-ring" id="cp-avatar-preview" style="background:linear-gradient(135deg,#FB7185,#F59E0B); margin:0 auto var(--space-lg);">T</div>
+              <h3 id="cp-preview-name">Tata Consultancy Services</h3>
+              <p class="text-sm text-muted" id="cp-preview-industry">IT & Consulting</p>
+              <div class="divider"></div>
+              <div style="text-align:left;">
+                <div style="font-weight:700; font-size:0.9rem; margin-bottom:var(--space-sm);">Verification Status</div>
+                <div class="flex items-center gap-sm"><span class="status-dot status-active"></span><span class="text-sm">Verified Employer Partner (OCC Enterprise)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Corporate Login Modal -->
+  <div class="modal-overlay" id="corp-login-modal" style="display:flex;">
+    <div class="modal modal-sm">
+      <div class="modal-header text-center">
+        <div style="font-size:3rem; margin-bottom:var(--space-md);">🏢</div>
+        <h3>Corporate Portal Login</h3>
+        <p>Login to manage job posts and campus drives</p>
+      </div>
+      <form id="corp-login-form">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="hr@tcs.com" id="cl-email" value="hr@tcs.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="Password" id="cl-password" value="corp123">
+        </div>
+        <p class="text-sm text-muted" style="margin-bottom:var(--space-lg);">Demo credentials: hr@tcs.com / corp123</p>
+        <button type="submit" class="btn btn-corporate w-full btn-lg" style="justify-content:center;">Login as Corporate Partner →</button>
+        <div class="divider" style="margin:var(--space-md) 0 var(--space-xs);"></div>
+        <div class="text-center">
+          <p class="text-xs text-muted">Switch portal: <a href="student.html" style="color:var(--brand-primary); font-weight:600;">Student Login</a> · <a href="mentor-portal.html" style="color:var(--module-mentor); font-weight:600;">Mentor Login</a> · <a href="admin.html" style="color:var(--brand-primary); font-weight:600;">Admin Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Post Job Modal -->
+  <div class="modal-overlay" id="post-job-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="OC2.Modal.close('post-job-modal')" aria-label="Close">✕</button>
+      <div class="modal-header">
+        <h3>Post a Job Opening</h3>
+        <p style="color:var(--text-muted);">Reach thousands of qualified candidates</p>
+      </div>
+      <form id="post-job-form">
+        <div class="form-group">
+          <label class="form-label required">Job Title</label>
+          <input type="text" class="form-input" placeholder="e.g. Software Developer Intern" id="job-title" required>
+        </div>
+        <div class="grid grid-2 gap-md">
+          <div class="form-group">
+            <label class="form-label required">Job Type</label>
+            <select class="form-select" id="job-type-input" required>
+              <option>Job</option>
+              <option>Internship</option>
+              <option>Freelance</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Location</label>
+            <input type="text" class="form-input" placeholder="City / Remote" id="job-location" required>
+          </div>
+        </div>
+        <div class="grid grid-2 gap-md">
+          <div class="form-group">
+            <label class="form-label required">Salary / Stipend</label>
+            <input type="text" class="form-input" placeholder="e.g. ₹15,000/month" id="job-salary" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Hiring Mode</label>
+            <select class="form-select" id="job-mode" required>
+              <option>Remote</option>
+              <option>Hybrid</option>
+              <option>On-site</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Job Description</label>
+          <textarea class="form-textarea" rows="4" placeholder="Describe the role, responsibilities, and requirements..." id="job-desc" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Required Skills (comma-separated)</label>
+          <input type="text" class="form-input" placeholder="React, Node.js, Python" id="job-skills">
+        </div>
+        <button type="submit" class="btn btn-corporate w-full btn-lg" style="justify-content:center;">Post Job Now →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Schedule Drive Modal -->
+  <div class="modal-overlay" id="drive-modal">
+    <div class="modal modal-sm">
+      <button class="modal-close" onclick="OC2.Modal.close('drive-modal')" aria-label="Close">✕</button>
+      <div class="modal-header">
+        <h3>Schedule Campus Drive</h3>
+        <p>Coordinate placement drive with a partner college</p>
+      </div>
+      <form id="drive-form">
+        <div class="form-group">
+          <label class="form-label required">Target College</label>
+          <select class="form-select" id="drive-target-college" required></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Drive Date</label>
+          <input type="date" class="form-input" id="drive-date" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Target Branches (comma-separated)</label>
+          <input type="text" class="form-input" placeholder="CSE, ECE, IT" id="drive-branches" required>
+        </div>
+        <button type="submit" class="btn btn-corporate w-full">Request Drive →</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" role="alert" aria-live="polite"></div>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let currentCorp = null;
+
+    document.getElementById('corp-login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('cl-email').value;
+      const password = document.getElementById('cl-password').value;
+      
+      if (password === 'corp123') {
+        const corps = AppState.getCorporates();
+        currentCorp = corps.find(c => c.company.toLowerCase().includes('tata') || c.company.toLowerCase().includes('tcs')) || corps[0];
+        AppState.setSession('corporate', currentCorp.id);
+        document.getElementById('corp-login-modal').style.display = 'none';
+        loadCorpPortal();
+        OC2.Toast.success(`Logged in as ${currentCorp.company}! 🏢`);
+      } else {
+        OC2.Toast.error('Invalid credentials. Use hr@tcs.com / corp123');
+      }
+    });
+
+    function loadCorpPortal() {
+      if (!currentCorp) return;
+      const jobs = AppState.getJobs().filter(j => j.company.toLowerCase() === currentCorp.company.toLowerCase());
+      
+      // Update sidebar & profile preview
+      document.getElementById('corp-sidebar-name').textContent = currentCorp.company;
+      document.getElementById('corp-avatar-img').textContent = currentCorp.logo || currentCorp.company[0];
+      document.getElementById('corp-welcome').textContent = `Welcome back, ${currentCorp.company}! 🏢`;
+      
+      document.getElementById('jobs-count-badge').textContent = jobs.length;
+      document.getElementById('kpi-active-jobs').textContent = jobs.filter(j => j.status === 'Active').length;
+      
+      // Get all application records for these jobs directly (supporting both registered students and guests)
+      const appliedList = [];
+      jobs.forEach(j => {
+        if (j.applications) {
+          j.applications.forEach(a => {
+            // Find student if registered, else create mock guest student object
+            let student = AppState.getStudent(a.studentId);
+            if (!student) {
+              student = {
+                id: a.studentId,
+                name: a.name || 'Guest Candidate',
+                email: a.email || 'guest@example.com',
+                phone: a.phone || '',
+                college: a.college || 'N/A',
+                avatar: (a.name || 'GC').split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2),
+                stream: 'General Stream',
+                joinedAt: a.appliedAt || new Date().toISOString().split('T')[0]
+              };
+            }
+            appliedList.push({
+              student: student,
+              applied: a,
+              job: j
+            });
+          });
+        }
+      });
+      
+      document.getElementById('applicants-count-badge').textContent = appliedList.length;
+      document.getElementById('kpi-total-applicants').textContent = appliedList.length;
+      document.getElementById('new-applicants-count').textContent = appliedList.filter(a => a.applied.status === 'Under Review').length;
+
+      // Render recent job openings
+      document.getElementById('recent-jobs-list').innerHTML = jobs.slice(0, 3).map(j => `
+        <div class="course-card-mini" style="cursor:default;">
+          <div class="course-icon-sm">💼</div>
+          <div class="course-info">
+            <div class="course-title-sm">${j.role}</div>
+            <div class="course-meta-sm">${j.location} · ${j.stipend}</div>
+          </div>
+          <span class="badge ${j.status === 'Active' ? 'badge-success' : 'badge-rose'}">${j.status}</span>
+        </div>
+      `).join('') || '<p class="text-muted">No jobs posted yet</p>';
+
+      // Render quick applicants
+      document.getElementById('quick-applicants-list').innerHTML = appliedList.slice(0, 3).map(a => `
+        <div class="flex items-center justify-between gap-md" style="padding:var(--space-sm) 0; border-bottom: 1px solid var(--border-subtle);">
+          <div>
+            <div style="font-weight:600; font-size:0.9rem; color:var(--text-primary);">${a.student.name}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${a.job.role} · Match score: <strong style="color:var(--accent-green);">${Math.floor(75 + Math.random()*20)}%</strong></div>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="switchView('applicants')">Process</button>
+        </div>
+      `).join('') || '<p class="text-muted">No applicants yet</p>';
+
+      // Render jobs grid
+      document.getElementById('corp-jobs-grid').innerHTML = jobs.map(j => {
+        const jAppCount = appliedList.filter(a => a.job.id === j.id).length;
+        return `
+          <div class="card">
+            <div class="flex items-start justify-between" style="margin-bottom:var(--space-md);">
+              <div>
+                <h4 style="font-size:1.1rem; color:var(--text-primary);">${j.role}</h4>
+                <div class="text-sm text-muted">${j.location} · ${j.type}</div>
+              </div>
+              <span class="badge ${j.status === 'Active' ? 'badge-success' : 'badge-rose'}">${j.status}</span>
+            </div>
+            <div class="flex gap-xl" style="margin-bottom:var(--space-lg); border-top:1px solid var(--border-subtle); padding-top:var(--space-md);">
+              <div><div style="font-size:1.1rem; font-weight:800; color:var(--text-primary);">${jAppCount}</div><div class="text-xs text-muted">Applicants</div></div>
+              <div><div style="font-size:1.1rem; font-weight:800; color:var(--accent-green);">${j.stipend}</div><div class="text-xs text-muted">Salary</div></div>
+            </div>
+            <div class="flex gap-sm">
+              <button class="btn btn-sm btn-ghost" onclick="OC2.Toast.info('Job edit is coming soon')">Edit</button>
+              <button class="btn btn-sm btn-secondary" onclick="switchView('applicants')">View Candidates</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Render applicants table
+      document.getElementById('applicants-table-body').innerHTML = appliedList.map(a => {
+        const score = Math.floor(78 + (a.student.name.charCodeAt(0) % 20));
+        return `
+          <tr>
+            <td>
+              <div class="flex items-center gap-md">
+                <div class="avatar avatar-sm">${a.student.avatar}</div>
+                <div><div style="font-weight:600; color:var(--text-primary);">${a.student.name}</div><div style="font-size:0.75rem; color:var(--text-muted);">${a.student.college}</div></div>
+              </div>
+            </td>
+            <td>${a.job.role}</td>
+            <td><strong style="color:${score > 85 ? 'var(--accent-green)' : 'var(--accent-amber)'};">${score}%</strong></td>
+            <td><span class="badge badge-outline">${a.applied.status}</span></td>
+            <td>${OC2.Utils.formatDate(a.applied.appliedAt)}</td>
+            <td>
+              <div class="flex gap-xs">
+                <button class="btn btn-sm btn-exams" onclick="processApplicant('${a.student.id}', '${a.job.id}', 'Shortlisted')">Shortlist</button>
+                <button class="btn btn-sm btn-jobs" onclick="processApplicant('${a.student.id}', '${a.job.id}', 'Interview')">Interview</button>
+                <button class="btn btn-sm btn-ghost" onclick="processApplicant('${a.student.id}', '${a.job.id}', 'Rejected')">Reject</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('') || '<tr><td colspan="6" class="text-center text-muted">No applicants found</td></tr>';
+
+      // Profile View fields
+      document.getElementById('cp-name').value = currentCorp.company;
+      document.getElementById('cp-industry').value = currentCorp.industry || 'Technology';
+      document.getElementById('cp-website').value = currentCorp.website || 'https://tcs.com';
+      document.getElementById('cp-desc').value = currentCorp.description || 'Tata Consultancy Services is a global leader in IT services, consulting & business solutions.';
+      document.getElementById('cp-preview-name').textContent = currentCorp.company;
+      document.getElementById('cp-preview-industry').textContent = currentCorp.industry;
+      document.getElementById('cp-avatar-preview').textContent = currentCorp.logo || currentCorp.company[0];
+
+      // Campus drives
+      const colleges = AppState.getColleges();
+      document.getElementById('drive-target-college').innerHTML = colleges.map(c => `<option value="${c.name}">${c.name} (${c.location})</option>`).join('');
+      
+      const drives = [
+        { college: 'IIT Delhi', date: '2026-08-15', branches: 'CSE, ECE', status: 'Approved' },
+        { college: 'BITS Pilani', date: '2026-09-02', branches: 'CSE, EEE, IT', status: 'Pending Approval' }
+      ];
+      document.getElementById('kpi-drives').textContent = drives.length;
+
+      document.getElementById('drives-list').innerHTML = drives.map(d => `
+        <div class="card">
+          <div class="flex items-center justify-between" style="margin-bottom:var(--space-sm);">
+            <div style="font-weight:700; color:var(--text-primary);">${d.college}</div>
+            <span class="badge ${d.status === 'Approved' ? 'badge-success' : 'badge-amber'}">${d.status}</span>
+          </div>
+          <div class="text-sm text-muted">📅 Date: ${d.date}</div>
+          <div class="text-sm text-muted">🎓 Target: ${d.branches}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('drive-colleges').innerHTML = colleges.slice(0, 4).map(c => `
+        <div class="flex items-center justify-between" style="padding:var(--space-sm) 0; border-bottom:1px solid var(--border-subtle);">
+          <div>
+            <div style="font-weight:600; color:var(--text-primary);">${c.name}</div>
+            <div class="text-xs text-muted">${c.location} · Placement Rate: ${c.placementRate || '85%'}</div>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="scheduleDriveDirect('${c.name}')">Schedule Drive</button>
+        </div>
+      `).join('');
+
+      // Partner colleges page
+      document.getElementById('partner-colleges-grid').innerHTML = colleges.map(c => `
+        <div class="card">
+          <h4 style="margin-bottom:var(--space-sm);">${c.name}</h4>
+          <div class="text-sm text-muted" style="margin-bottom:var(--space-md);">${c.location} · Partner Since ${c.partnerSince}</div>
+          <div class="flex justify-between items-center" style="margin-top:var(--space-lg); border-top:1px solid var(--border-subtle); padding-top:var(--space-md);">
+            <span class="badge badge-corporate">${c.collaborationType}</span>
+            <button class="btn btn-ghost btn-sm" onclick="scheduleDriveDirect('${c.name}')">Request Drive</button>
+          </div>
+        </div>
+      `).join('');
+
+      OC2.Portal.init();
+      OC2.Sidebar.init();
+    }
+
+    function switchView(viewId) {
+      document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.portal-view').forEach(v => v.classList.remove('active'));
+      const view = document.getElementById(`view-${viewId}`);
+      if (view) view.classList.add('active');
+      const link = document.querySelector(`.sidebar-link[data-view="${viewId}"]`);
+      if (link) link.classList.add('active');
+    }
+
+    function processApplicant(studentId, jobId, newStatus) {
+      AppState.updateApplicationStatus(jobId, studentId, newStatus);
+      OC2.Toast.success(`Candidate status updated to: ${newStatus}`);
+      loadCorpPortal();
+    }
+
+    function openPostJobModal() {
+      OC2.Modal.open('post-job-modal');
+    }
+
+    function openDriveModal() {
+      OC2.Modal.open('drive-modal');
+    }
+
+    function scheduleDriveDirect(collegeName) {
+      document.getElementById('drive-target-college').value = collegeName;
+      openDriveModal();
+    }
+
+    // Post job form
+    document.getElementById('post-job-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('job-title').value;
+      const location = document.getElementById('job-location').value;
+      const salary = document.getElementById('job-salary').value;
+      const desc = document.getElementById('job-desc').value;
+      const skills = document.getElementById('job-skills').value.split(',').map(s => s.trim()).filter(Boolean);
+
+      AppState.addJob({
+        company: currentCorp.company,
+        companyLogo: currentCorp.logo || currentCorp.company[0],
+        role: title,
+        type: document.getElementById('job-type-input').value,
+        location: location,
+        mode: document.getElementById('job-mode').value,
+        domain: 'Technology',
+        stipend: salary,
+        description: desc,
+        skills: skills,
+        experience: 'Fresher / Experienced',
+        status: 'Active',
+        deadline: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0]
+      });
+
+      OC2.Modal.close('post-job-modal');
+      OC2.Toast.success(`Job Opening "${title}" published!`);
+      loadCorpPortal();
+      this.reset();
+    });
+
+    // Schedule Drive Form
+    document.getElementById('drive-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const college = document.getElementById('drive-target-college').value;
+      const date = document.getElementById('drive-date').value;
+      const branches = document.getElementById('drive-branches').value;
+
+      OC2.Modal.close('drive-modal');
+      OC2.Toast.success(`Drive request submitted to ${college} for ${date}!`);
+      this.reset();
+    });
+
+    // Profile update
+    document.getElementById('corp-profile-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const newName = document.getElementById('cp-name').value;
+      const newInd = document.getElementById('cp-industry').value;
+      
+      currentCorp.company = newName;
+      currentCorp.industry = newInd;
+      currentCorp.website = document.getElementById('cp-website').value;
+      currentCorp.description = document.getElementById('cp-desc').value;
+      
+      const corps = AppState.getCorporates();
+      const index = corps.findIndex(c => c.id === currentCorp.id);
+      if (index !== -1) {
+        corps[index] = currentCorp;
+        AppState.set('corporates', corps);
+      }
+      
+      OC2.Toast.success('Profile settings saved.');
+      loadCorpPortal();
+    });
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      AppState.clearSession();
+      window.location.href = 'index.html';
+    });
+
+    OC2.Modal.init('post-job-modal');
+    OC2.Modal.init('drive-modal');
+
+    // Check existing session
+    const session = AppState.getSession();
+    if (session && session.type === 'corporate') {
+      const corps = AppState.getCorporates();
+      currentCorp = corps.find(c => c.id === session.userId) || corps[0];
+      if (currentCorp) {
+        document.getElementById('corp-login-modal').style.display = 'none';
+        loadCorpPortal();
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OCC Corporate — Partner with Offcampuscareer for hiring, campus drives, and course collaborations. Post jobs, access India's top talent pool, and connect with 50+ partner colleges.">
+  <title>OCC Corporate — Hire Top Talent | Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand">
+        <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" loading="lazy">
+        <span class="nav-brand-text">Offcampus<span>career</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="training.html">OCC TIP</a>
+        <a href="mentor.html">OCC Mentor</a>
+        <a href="careers.html">OCC Jobs</a>
+        <a href="exams.html">OCC Exams</a>
+        <a href="corporate.html" class="active">Corporate</a>
+        <a href="community.html">Community</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <a href="corporate-portal.html" class="btn btn-sm btn-secondary">Employer Login</a>
+        <a href="#partner-form" class="btn btn-sm btn-corporate">Partner With Us</a>
+        <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <div class="nav-links-mobile" id="mobile-nav">
+    <div class="mobile-nav-header">
+      <span class="nav-brand-text" style="font-size:1rem;">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+      <button onclick="OC2.Navbar.closeMobileMenu()" style="background:none;border:none;color:var(--text-secondary);font-size:1.25rem;cursor:pointer;">✕</button>
+    </div>
+    <a href="index.html">🏠 Home</a>
+    <a href="training.html">📚 OCC TIP</a>
+    <a href="mentor.html">🎓 OCC Mentor</a>
+    <a href="careers.html">💼 OCC Jobs</a>
+    <a href="exams.html">📝 OCC Exams</a>
+    <a href="corporate.html" class="active">🏢 Corporate</a>
+    <a href="community.html">👥 Community</a>
+    <div class="mobile-actions">
+      <a href="corporate-portal.html" class="btn btn-secondary w-full" style="justify-content:center;">Employer Login</a>
+      <a href="#partner-form" class="btn btn-corporate w-full" style="justify-content:center;">Partner With Us</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero" style="background:radial-gradient(ellipse at 30% 30%, rgba(251,113,133,0.1) 0%, transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(245,158,11,0.07) 0%, transparent 60%);">
+    <div class="grid-bg"></div>
+    <div class="container" style="position:relative; z-index:1;">
+      <span class="section-label corporate">// OCC Corporate</span>
+      <h1 style="margin-top:var(--space-md);">Hire India's <span class="text-gradient-corporate">Best Talent</span>,<br>Build Great Teams</h1>
+      <p>Partner with Offcampuscareer to access a curated pool of 12,500+ skilled candidates from IITs, NITs, and top colleges across India. We handle sourcing, screening, and placement.</p>
+      <div class="page-hero-actions">
+        <a href="#for-companies" class="btn btn-corporate btn-lg">For Companies <span class="arrow">→</span></a>
+        <a href="#for-colleges" class="btn btn-secondary btn-lg">For Colleges</a>
+      </div>
+      <div class="flex gap-xl justify-center flex-wrap" style="margin-top:var(--space-2xl);">
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-corporate);">120+</div><div style="font-size:0.82rem;color:var(--text-muted);">Hiring Partners</div></div>
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-corporate);">50+</div><div style="font-size:0.82rem;color:var(--text-muted);">College Partners</div></div>
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-corporate);">2,800+</div><div style="font-size:0.82rem;color:var(--text-muted);">Students Placed</div></div>
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-corporate);">95%</div><div style="font-size:0.82rem;color:var(--text-muted);">Satisfaction Rate</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR COMPANIES -->
+  <section class="section" id="for-companies">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label corporate">// For Companies</span>
+        <h2>Access India's <span class="text-gradient-corporate">Top Talent Pool</span></h2>
+        <p>Whether you're a startup or an MNC, we have the right candidates for you — pre-screened, trained, and job-ready.</p>
+      </div>
+      <div class="grid grid-3 gap-xl">
+        <div class="card card-corporate reveal reveal-delay-1">
+          <div class="card-icon" style="background:rgba(251,113,133,0.1); color:var(--module-corporate);">🎯</div>
+          <h4>Post Jobs Free</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">List your job openings on our platform for free. Reach thousands of qualified candidates actively looking for opportunities.</p>
+          <a href="#post-job" class="btn btn-corporate btn-sm" style="margin-top:var(--space-lg);">Post a Job</a>
+        </div>
+        <div class="card card-corporate reveal reveal-delay-2">
+          <div class="card-icon" style="background:rgba(251,113,133,0.1); color:var(--module-corporate);">🔍</div>
+          <h4>Talent Search</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Browse our curated talent database. Filter by skills, college, CGPA, experience, and domain for precise hiring.</p>
+          <button class="btn btn-secondary btn-sm" style="margin-top:var(--space-lg);" onclick="OC2.Toast.info('Talent search available for premium partners. Contact us to learn more!')">Browse Talent</button>
+        </div>
+        <div class="card card-corporate reveal reveal-delay-3">
+          <div class="card-icon" style="background:rgba(251,113,133,0.1); color:var(--module-corporate);">🏫</div>
+          <h4>Campus Drives</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Conduct virtual or on-campus placement drives across 50+ partner colleges. We coordinate everything end-to-end.</p>
+          <a href="#partner-form" class="btn btn-secondary btn-sm" style="margin-top:var(--space-lg);">Request Campus Drive</a>
+        </div>
+        <div class="card card-corporate reveal reveal-delay-1">
+          <div class="card-icon" style="background:rgba(251,113,133,0.1); color:var(--module-corporate);">🤖</div>
+          <h4>AI Screening (ATS)</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Our AI-powered ATS screens resumes, shortlists candidates based on your JD, and ranks them by fit score.</p>
+          <button class="btn btn-secondary btn-sm" style="margin-top:var(--space-lg);" onclick="OC2.Toast.info('ATS available for registered partner companies!')">Learn More</button>
+        </div>
+        <div class="card card-corporate reveal reveal-delay-2">
+          <div class="card-icon" style="background:rgba(251,113,133,0.1); color:var(--module-corporate);">📊</div>
+          <h4>Hiring Analytics</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Real-time dashboards showing application pipeline, funnel metrics, time-to-hire, and hiring success rates.</p>
+          <button class="btn btn-secondary btn-sm" style="margin-top:var(--space-lg);" onclick="OC2.Toast.info('Analytics available for registered partner companies!')">View Demo</button>
+        </div>
+        <div class="card card-corporate reveal reveal-delay-3">
+          <div class="card-icon" style="background:rgba(251,113,133,0.1); color:var(--module-corporate);">🤝</div>
+          <h4>Custom Training</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Co-create training programs with us. Train our students on your specific tech stack or domain requirements before hiring.</p>
+          <a href="#partner-form" class="btn btn-secondary btn-sm" style="margin-top:var(--space-lg);">Co-create Program</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR COLLEGES -->
+  <section class="section" style="background:var(--bg-surface);" id="for-colleges">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label corporate">// For Colleges & Universities</span>
+        <h2>Empower Your Students with<br><span class="text-gradient-corporate">Industry Connections</span></h2>
+        <p>Partner with us to bring industry training, placement drives, and mentorship directly to your campus.</p>
+      </div>
+      <div class="grid grid-2 gap-xl">
+        <div class="reveal reveal-left">
+          <div class="card" style="height:100%;">
+            <h3 style="margin-bottom:var(--space-lg);">🎓 College Partnership Benefits</h3>
+            <div style="display:flex; flex-direction:column; gap:var(--space-lg);">
+              <div class="flex gap-md">
+                <div style="width:40px; height:40px; border-radius:var(--radius-md); background:rgba(251,113,133,0.1); color:var(--module-corporate); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.25rem;">📚</div>
+                <div><div style="font-weight:700; margin-bottom:4px; color:var(--text-primary);">OCC Training Programs on Campus</div><div style="font-size:0.88rem; color:var(--text-secondary);">Bring our Job Bootcamp, AI Training, and other programs to your campus at subsidized rates</div></div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:40px; height:40px; border-radius:var(--radius-md); background:rgba(251,113,133,0.1); color:var(--module-corporate); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.25rem;">💼</div>
+                <div><div style="font-weight:700; margin-bottom:4px; color:var(--text-primary);">Exclusive Job Fairs</div><div style="font-size:0.88rem; color:var(--text-secondary);">Host virtual or physical job fairs with 20+ companies participating for your students</div></div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:40px; height:40px; border-radius:var(--radius-md); background:rgba(251,113,133,0.1); color:var(--module-corporate); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.25rem;">🏆</div>
+                <div><div style="font-weight:700; margin-bottom:4px; color:var(--text-primary);">Placement Co-ordination</div><div style="font-size:0.88rem; color:var(--text-secondary);">Our dedicated placement cell works alongside your TPO to maximize placement rates</div></div>
+              </div>
+              <div class="flex gap-md">
+                <div style="width:40px; height:40px; border-radius:var(--radius-md); background:rgba(251,113,133,0.1); color:var(--module-corporate); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.25rem;">🎓</div>
+                <div><div style="font-weight:700; margin-bottom:4px; color:var(--text-primary);">Mentorship Programs</div><div style="font-size:0.88rem; color:var(--text-secondary);">Connect your students with 85+ industry mentors for career guidance and internship opportunities</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-right">
+          <div class="card">
+            <h3 style="margin-bottom:var(--space-lg);">🏛️ Our College Partners</h3>
+            <div id="college-list" style="display:flex; flex-direction:column; gap:var(--space-md);"></div>
+            <div style="margin-top:var(--space-xl); padding-top:var(--space-xl); border-top:1px solid var(--border-subtle); text-align:center;">
+              <p style="font-size:0.88rem; margin-bottom:var(--space-md);">Not on our list yet? Become a partner today!</p>
+              <a href="#partner-form" class="btn btn-corporate">Request Partnership →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERSHIP FORM -->
+  <section class="section" id="partner-form">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label corporate">// Get Started</span>
+        <h2>Request a <span class="text-gradient-corporate">Partnership</span></h2>
+        <p>Fill out the form below and our team will reach out within 2 business days to discuss how we can work together.</p>
+      </div>
+      <div class="card mx-auto reveal" style="max-width:640px;">
+        <form id="partnership-form">
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label required">Organization Name</label>
+              <input type="text" class="form-input" placeholder="TCS, IIT Delhi, etc." id="org-name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Organization Type</label>
+              <select class="form-select" id="org-type" required>
+                <option value="">Select Type</option>
+                <option value="Company">Company / Startup</option>
+                <option value="College">College / University</option>
+                <option value="NGO">NGO / Social Organization</option>
+                <option value="Government">Government Body</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label required">Contact Person</label>
+              <input type="text" class="form-input" placeholder="Full name" id="contact-person" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Designation</label>
+              <input type="text" class="form-input" placeholder="HR Manager, Principal, etc." id="designation" required>
+            </div>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label required">Email</label>
+              <input type="email" class="form-input" placeholder="contact@company.com" id="partner-email" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Phone</label>
+              <input type="tel" class="form-input" placeholder="9876543210" id="partner-phone" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Partnership Interest</label>
+            <div style="display:flex; flex-direction:column; gap:var(--space-sm); margin-top:var(--space-xs);">
+              <label class="flex items-center gap-sm" style="cursor:pointer; font-size:0.9rem;"><input type="checkbox" value="hiring"> Post Jobs & Hire Students</label>
+              <label class="flex items-center gap-sm" style="cursor:pointer; font-size:0.9rem;"><input type="checkbox" value="campus"> Campus Drives</label>
+              <label class="flex items-center gap-sm" style="cursor:pointer; font-size:0.9rem;"><input type="checkbox" value="training"> Training Programs</label>
+              <label class="flex items-center gap-sm" style="cursor:pointer; font-size:0.9rem;"><input type="checkbox" value="course"> Co-create Courses</label>
+              <label class="flex items-center gap-sm" style="cursor:pointer; font-size:0.9rem;"><input type="checkbox" value="events"> Events & Hackathons</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell us more about what you're looking for..." rows="3" id="partner-message"></textarea>
+          </div>
+          <button type="submit" class="btn btn-corporate w-full btn-lg" style="justify-content:center;">Submit Partnership Request →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXISTING PARTNERS -->
+  <section class="section" style="background:var(--bg-surface);" id="partners">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label corporate">// Trusted By</span>
+        <h2>Our Hiring <span class="text-gradient-corporate">Partners</span></h2>
+      </div>
+      <div class="grid grid-4 gap-xl" id="corporate-list"></div>
+    </div>
+  </section>
+
+  <!-- POST JOB MODAL -->
+  <div class="modal-overlay" id="post-job-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="OC2.Modal.close('post-job-modal')" aria-label="Close">✕</button>
+      <div class="modal-header">
+        <h3>Post a Job Opening</h3>
+        <p style="color:var(--text-muted);">Reach thousands of qualified candidates</p>
+      </div>
+      <form id="post-job-form">
+        <div class="form-group">
+          <label class="form-label required">Job Title</label>
+          <input type="text" class="form-input" placeholder="e.g. Software Developer Intern" id="job-title" required>
+        </div>
+        <div class="grid grid-2 gap-md">
+          <div class="form-group">
+            <label class="form-label required">Company Name</label>
+            <input type="text" class="form-input" placeholder="Your company" id="job-company" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Job Type</label>
+            <select class="form-select" id="job-type-input" required>
+              <option>Job</option>
+              <option>Internship</option>
+              <option>Freelance</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-2 gap-md">
+          <div class="form-group">
+            <label class="form-label required">Location</label>
+            <input type="text" class="form-input" placeholder="City / Remote" id="job-location" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Salary / Stipend</label>
+            <input type="text" class="form-input" placeholder="e.g. ₹15,000/month" id="job-salary" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Job Description</label>
+          <textarea class="form-textarea" rows="4" placeholder="Describe the role, responsibilities, and requirements..." id="job-desc" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Required Skills (comma-separated)</label>
+          <input type="text" class="form-input" placeholder="React, Node.js, Python" id="job-skills">
+        </div>
+        <button type="submit" class="btn btn-corporate w-full btn-lg" style="justify-content:center;">Post Job Now →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="flex items-center justify-between flex-wrap gap-md">
+        <div class="flex items-center gap-sm">
+          <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" style="height:32px;" loading="lazy">
+          <span class="nav-brand-text">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+        </div>
+        <div class="flex gap-xl flex-wrap">
+          <a href="index.html" style="font-size:0.88rem; color:var(--text-secondary);">Home</a>
+          <a href="careers.html" style="font-size:0.88rem; color:var(--text-secondary);">Jobs</a>
+          <a href="corporate.html" style="font-size:0.88rem; color:var(--module-corporate);">Corporate</a>
+          <a href="contact.html" style="font-size:0.88rem; color:var(--text-secondary);">Contact</a>
+        </div>
+        <p style="font-size:0.82rem; color:var(--text-muted);">© 2026 Offcampuscareer · SHAMIIT LLP</p>
+      </div>
+    </div>
+  </footer>
+  <div class="toast-container" role="alert" aria-live="polite"></div>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Render colleges
+    const colleges = AppState.getColleges();
+    document.getElementById('college-list').innerHTML = colleges.map(c => `
+      <div class="flex items-center justify-between gap-md" style="padding:var(--space-sm) 0; border-bottom:1px solid var(--border-subtle);">
+        <div>
+          <div style="font-weight:700; color:var(--text-primary);">${c.name}</div>
+          <div style="font-size:0.8rem; color:var(--text-muted);">${c.type} · ${c.location}</div>
+        </div>
+        <div class="text-right">
+          <span class="badge badge-corporate" style="font-size:0.7rem;">${c.collaborationType}</span>
+          <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">Since ${c.partnerSince}</div>
+        </div>
+      </div>
+    `).join('');
+
+    // Render corporates
+    const corporates = AppState.getCorporates();
+    document.getElementById('corporate-list').innerHTML = corporates.map((c, i) => `
+      <div class="card reveal reveal-delay-${(i%4)+1}">
+        <div style="display:flex; align-items:center; gap:var(--space-md); margin-bottom:var(--space-md);">
+          <div class="company-logo">${c.logo}</div>
+          <div>
+            <div style="font-weight:800; font-size:1.1rem; color:var(--text-primary);">${c.company}</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">${c.industry}</div>
+          </div>
+        </div>
+        <div class="flex gap-sm flex-wrap">
+          <span class="badge badge-corporate" style="font-size:0.72rem;">${c.partnerType}</span>
+          <span class="badge badge-outline" style="font-size:0.72rem;">${c.activeJobs} Active Jobs</span>
+        </div>
+        <div style="margin-top:var(--space-md); padding-top:var(--space-md); border-top:1px solid var(--border-subtle); font-size:0.8rem; color:var(--text-muted);">
+          ✅ ${c.placedStudents} Students Placed
+        </div>
+      </div>
+    `).join('');
+
+    setTimeout(() => OC2.ScrollReveal.init(), 100);
+    OC2.Modal.init('post-job-modal');
+
+    // Partnership form
+    document.getElementById('partnership-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('org-name').value;
+      const type = document.getElementById('org-type').value;
+      const person = document.getElementById('contact-person').value;
+      const email = document.getElementById('partner-email').value;
+      if (!name || !type || !person || !email) { OC2.Toast.error('Please fill all required fields.'); return; }
+      OC2.Toast.success('🎉 Partnership request submitted! Our team will contact you within 2 business days.');
+      AppState.addContact({ name: person, email, phone: document.getElementById('partner-phone').value, subject: `Corporate Partnership — ${type}`, message: `${name} (${type}) wants to partner. Interest: Various programs.`, date: new Date().toISOString().split('T')[0] });
+      this.reset();
+    });
+
+    // Post job form
+    document.getElementById('post-job-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('job-title').value;
+      const company = document.getElementById('job-company').value;
+      if (!title || !company) { OC2.Toast.error('Please fill all required fields.'); return; }
+      const skills = document.getElementById('job-skills').value.split(',').map(s => s.trim()).filter(Boolean);
+      const job = AppState.addJob({
+        company, companyLogo: company[0].toUpperCase(), role: title,
+        type: document.getElementById('job-type-input').value,
+        location: document.getElementById('job-location').value,
+        mode: 'On-site', domain: 'General',
+        stipend: document.getElementById('job-salary').value,
+        description: document.getElementById('job-desc').value,
+        skills, experience: 'Fresher', status: 'Active',
+        deadline: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0]
+      });
+      OC2.Modal.close('post-job-modal');
+      OC2.Toast.success(`✅ Job "${title}" posted successfully! It's now live on OCC Jobs.`);
+      this.reset();
+    });
+
+    // Post job button
+    document.querySelector('[href="#post-job"]').addEventListener('click', (e) => {
+      e.preventDefault();
+      OC2.Modal.open('post-job-modal');
+    });
+  </script>
+</body>
+</html>

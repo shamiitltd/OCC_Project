@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+.gemini/
+db/offcampuscareer.db
+temp_images/
+resumes/
+*.log

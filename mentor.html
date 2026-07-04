@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OCC Mentor — Connect with IITians, IAS Officers, and Industry Experts. Book 1:1 mentorship sessions or learn through mentor-published courses. Anyone can become a mentor on Offcampuscareer.">
+  <title>OCC Mentor — Expert Mentorship | Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand">
+        <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" loading="lazy">
+        <span class="nav-brand-text">Offcampus<span>career</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="training.html">OCC TIP</a>
+        <a href="mentor.html" class="active">OCC Mentor</a>
+        <a href="careers.html">OCC Jobs</a>
+        <a href="exams.html">OCC Exams</a>
+        <a href="corporate.html">Corporate</a>
+        <a href="community.html">Community</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <a href="student.html" class="btn btn-sm btn-secondary">Login</a>
+        <a href="mentor-portal.html" class="btn btn-sm btn-mentor">Become a Mentor</a>
+        <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <div class="nav-links-mobile" id="mobile-nav">
+    <div class="mobile-nav-header">
+      <span class="nav-brand-text" style="font-size:1rem;">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+      <button onclick="OC2.Navbar.closeMobileMenu()" style="background:none;border:none;color:var(--text-secondary);font-size:1.25rem;cursor:pointer;">✕</button>
+    </div>
+    <a href="index.html">🏠 Home</a>
+    <a href="training.html">📚 OCC TIP</a>
+    <a href="mentor.html" class="active">🎓 OCC Mentor</a>
+    <a href="careers.html">💼 OCC Jobs</a>
+    <a href="exams.html">📝 OCC Exams</a>
+    <a href="corporate.html">🏢 Corporate</a>
+    <a href="community.html">👥 Community</a>
+    <div class="mobile-actions">
+      <a href="student.html" class="btn btn-secondary w-full" style="justify-content:center;">Student Login</a>
+      <a href="mentor-portal.html" class="btn btn-mentor w-full" style="justify-content:center;">Become a Mentor</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="hero-bg"></div>
+    <div class="grid-bg"></div>
+    <div class="container">
+      <span class="section-label mentor">// OCC Mentor</span>
+      <h1 style="margin-top:var(--space-md);">Learn from the <span class="text-gradient-mentor">Best Minds</span><br>in India</h1>
+      <p>IITians, IAS Officers, Senior Engineers, Entrepreneurs — anyone with knowledge can mentor on our platform. Connect for 1:1 sessions or take their courses.</p>
+      <div class="page-hero-actions">
+        <a href="#mentors" class="btn btn-mentor btn-lg">Find Your Mentor <span class="arrow">→</span></a>
+        <a href="mentor-portal.html" class="btn btn-secondary btn-lg">Become a Mentor</a>
+      </div>
+      <!-- Stats -->
+      <div class="flex gap-xl justify-center flex-wrap" style="margin-top:var(--space-2xl);">
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-mentor);">85+</div><div style="font-size:0.82rem;color:var(--text-muted);">Expert Mentors</div></div>
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-mentor);">5K+</div><div style="font-size:0.82rem;color:var(--text-muted);">Sessions Completed</div></div>
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-mentor);">4.8★</div><div style="font-size:0.82rem;color:var(--text-muted);">Average Rating</div></div>
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-mentor);">20+</div><div style="font-size:0.82rem;color:var(--text-muted);">Domains</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section-sm" style="background:var(--bg-surface);">
+    <div class="container">
+      <h3 class="text-center" style="margin-bottom:var(--space-2xl);">How <span class="text-gradient-mentor">Mentorship</span> Works</h3>
+      <div class="grid grid-3 gap-xl">
+        <div class="card text-center">
+          <div style="font-size:2.5rem; margin-bottom:var(--space-md);">🔍</div>
+          <h4>1. Find Your Mentor</h4>
+          <p style="font-size:0.9rem; margin-top:var(--space-sm);">Browse mentors by domain, rating, experience, or price. Read reviews from real students.</p>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2.5rem; margin-bottom:var(--space-md);">📅</div>
+          <h4>2. Book a Session</h4>
+          <p style="font-size:0.9rem; margin-top:var(--space-sm);">Schedule a 1:1 session at your preferred time. Our platform handles booking and payment.</p>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2.5rem; margin-bottom:var(--space-md);">🚀</div>
+          <h4>3. Learn & Grow</h4>
+          <p style="font-size:0.9rem; margin-top:var(--space-sm);">Connect on Google Meet or Zoom. Get personalized guidance and actionable advice from experts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER + MENTORS -->
+  <section class="section" id="mentors">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label mentor">// Our Mentors</span>
+        <h2>Connect with <span class="text-gradient-mentor">Expert Mentors</span></h2>
+        <p>Filter by domain, expertise, or price range to find the perfect mentor for your goals.</p>
+      </div>
+
+      <!-- Search + Filter -->
+      <div class="flex gap-md flex-wrap items-center" style="margin-bottom:var(--space-xl);">
+        <div class="search-bar" style="max-width:320px; flex:1;">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="mentor-search" placeholder="Search mentors..." aria-label="Search mentors">
+        </div>
+        <select class="form-select" id="domain-filter" style="max-width:200px;" aria-label="Filter by domain">
+          <option value="">All Domains</option>
+          <option value="Career">Career</option>
+          <option value="AI/ML">AI/ML</option>
+          <option value="Web Dev">Web Dev</option>
+          <option value="Data Science">Data Science</option>
+          <option value="Engineering Entrance">JEE/NEET</option>
+          <option value="Government Exam">Govt Exams</option>
+          <option value="Tech">Tech</option>
+        </select>
+        <select class="form-select" id="price-filter" style="max-width:200px;" aria-label="Filter by price">
+          <option value="">Any Price</option>
+          <option value="500">Under ₹500</option>
+          <option value="1000">Under ₹1000</option>
+          <option value="1500">Under ₹1500</option>
+        </select>
+      </div>
+
+      <div class="grid grid-4 gap-xl" id="mentors-grid">
+        <!-- Populated by JS -->
+      </div>
+      <div class="empty-state hidden" id="mentors-empty">
+        <div class="empty-icon">🎓</div>
+        <h3>No mentors found</h3>
+        <p>Try a different search or domain filter</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BECOME A MENTOR -->
+  <section class="section" style="background:var(--bg-surface);" id="become-mentor">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label mentor">// Open to Everyone</span>
+        <h2>You Know Something? <span class="text-gradient-mentor">Teach It!</span></h2>
+        <p>Our platform believes everyone has something to teach. If you have knowledge, skills, or experience that can help someone — you're qualified to be a mentor.</p>
+      </div>
+      <div class="grid grid-2 gap-xl">
+        <div>
+          <div class="card reveal reveal-delay-1">
+            <div class="card-icon" style="background:rgba(6,182,212,0.1); color:var(--module-mentor);">✅</div>
+            <h4 style="margin-bottom:var(--space-sm);">Who Can Become a Mentor?</h4>
+            <div style="display:flex; flex-direction:column; gap:var(--space-sm);">
+              <div class="flex items-center gap-md"><span style="color:var(--accent-green);">→</span><span class="text-sm">IIT/NIT/IIM graduates</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--accent-green);">→</span><span class="text-sm">IAS, IPS, IFS officers</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--accent-green);">→</span><span class="text-sm">Working professionals (any domain)</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--accent-green);">→</span><span class="text-sm">UPSC/JEE/NEET toppers</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--accent-green);">→</span><span class="text-sm">Entrepreneurs & freelancers</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--accent-green);">→</span><span class="text-sm">Anyone with expertise & passion to teach</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card reveal reveal-delay-2">
+            <div class="card-icon" style="background:rgba(6,182,212,0.1); color:var(--module-mentor);">💰</div>
+            <h4 style="margin-bottom:var(--space-sm);">What You Get as a Mentor</h4>
+            <div style="display:flex; flex-direction:column; gap:var(--space-sm);">
+              <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Earn from 1:1 session fees (you set the price)</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Revenue from your published courses</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Verified Mentor badge on your profile</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Platform marketing & student reach</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Certificate of mentorship</span></div>
+              <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Build your personal brand & portfolio</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center" style="margin-top:var(--space-2xl);">
+        <a href="mentor-portal.html" class="btn btn-mentor btn-xl">Start Your Mentor Journey <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESSION BOOKING MODAL -->
+  <div class="modal-overlay" id="book-session-modal">
+    <div class="modal modal-sm">
+      <button class="modal-close" id="close-book-modal" aria-label="Close">✕</button>
+      <div class="modal-header">
+        <h3>Book a Session</h3>
+        <p id="book-mentor-name" style="color:var(--text-muted); margin-top:4px;"></p>
+      </div>
+      <form id="book-form">
+        <div class="form-group">
+          <label class="form-label required">Your Name</label>
+          <input type="text" class="form-input" placeholder="Enter your full name" id="book-name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Email</label>
+          <input type="email" class="form-input" placeholder="your@email.com" id="book-email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Topic / Goal</label>
+          <textarea class="form-textarea" rows="3" placeholder="What do you want to discuss in this session?" id="book-topic" required style="min-height:80px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Time</label>
+          <select class="form-select" id="book-time">
+            <option>Morning (9 AM - 12 PM)</option>
+            <option>Afternoon (12 PM - 4 PM)</option>
+            <option>Evening (4 PM - 8 PM)</option>
+            <option>Night (8 PM - 10 PM)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-mentor w-full" style="justify-content:center;">Confirm Booking →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="flex items-center justify-between flex-wrap gap-md">
+        <div class="flex items-center gap-sm">
+          <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" style="height:32px;" loading="lazy">
+          <span class="nav-brand-text">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+        </div>
+        <div class="flex gap-xl flex-wrap">
+          <a href="index.html" style="font-size:0.88rem; color:var(--text-secondary);">Home</a>
+          <a href="training.html" style="font-size:0.88rem; color:var(--text-secondary);">TIP</a>
+          <a href="mentor.html" style="font-size:0.88rem; color:var(--module-mentor);">Mentor</a>
+          <a href="careers.html" style="font-size:0.88rem; color:var(--text-secondary);">Jobs</a>
+          <a href="exams.html" style="font-size:0.88rem; color:var(--text-secondary);">Exams</a>
+          <a href="contact.html" style="font-size:0.88rem; color:var(--text-secondary);">Contact</a>
+        </div>
+        <p style="font-size:0.82rem; color:var(--text-muted);">© 2026 Offcampuscareer · SHAMIIT LLP</p>
+      </div>
+    </div>
+  </footer>
+  <div class="toast-container" role="alert" aria-live="polite"></div>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let allMentors = [];
+
+    // Render mentors
+    function renderMentors(mentors) {
+      const grid = document.getElementById('mentors-grid');
+      const empty = document.getElementById('mentors-empty');
+      if (!mentors.length) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      grid.innerHTML = mentors.map((m, i) => `
+        <div class="mentor-card reveal reveal-delay-${(i%4)+1}">
+          <div class="mentor-avatar-wrap">
+            <div class="mentor-avatar">${m.initials}</div>
+            ${m.verified ? '<div class="mentor-badge">✓ Verified</div>' : ''}
+          </div>
+          <div class="mentor-name">${m.name}</div>
+          <div class="mentor-title">${m.title}</div>
+          <div class="mentor-title" style="font-size:0.78rem; color:var(--module-mentor);">${m.company}</div>
+          <div class="mentor-domains">
+            ${m.domains.slice(0,3).map(d => `<span class="badge badge-mentor" style="font-size:0.65rem;">${d}</span>`).join('')}
+          </div>
+          <div class="mentor-stats">
+            <div class="mentor-stat-item">
+              <div class="mentor-stat-value">${OC2.Utils.numberShort(m.students)}</div>
+              <div class="mentor-stat-label">Students</div>
+            </div>
+            <div class="mentor-stat-item">
+              <div class="mentor-stat-value">${OC2.Utils.numberShort(m.sessions)}</div>
+              <div class="mentor-stat-label">Sessions</div>
+            </div>
+            <div class="mentor-stat-item">
+              <div class="mentor-stat-value">${m.experience}</div>
+              <div class="mentor-stat-label">Exp</div>
+            </div>
+          </div>
+          <div class="mentor-rating">
+            <span class="stars">${OC2.Utils.generateStars(m.rating)}</span>
+            <span class="score">${m.rating}</span>
+            <span class="count">(${m.totalRatings})</span>
+          </div>
+          <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:var(--space-md); text-align:center;">🕐 ${m.responseTime}</div>
+          <div style="border-top:1px solid var(--border-subtle); padding-top:var(--space-md); display:flex; flex-direction:column; gap:var(--space-sm);">
+            <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+              <span style="font-family:'Outfit',sans-serif; font-size:1.25rem; font-weight:800; color:var(--text-primary);">${OC2.Utils.formatCurrency(m.price)}</span>
+              <span style="font-size:0.78rem; color:var(--text-muted);">${m.priceType}</span>
+            </div>
+            <button onclick="openBookModal('${m.id}')" class="btn btn-mentor btn-sm w-full" style="justify-content:center;">Book Session</button>
+            <button onclick="viewMentorProfile('${m.id}')" class="btn btn-ghost btn-sm w-full" style="justify-content:center;">View Profile</button>
+          </div>
+        </div>
+      `).join('');
+      setTimeout(() => OC2.ScrollReveal.init(), 100);
+    }
+
+    function openBookModal(mentorId) {
+      const mentor = AppState.getMentor(mentorId);
+      if (!mentor) return;
+      document.getElementById('book-mentor-name').textContent = `with ${mentor.name} · ${OC2.Utils.formatCurrency(mentor.price)}${mentor.priceType}`;
+      document.getElementById('book-session-modal')._mentorId = mentorId;
+      OC2.Modal.open('book-session-modal');
+    }
+
+    function viewMentorProfile(mentorId) {
+      OC2.Toast.info('Mentor profile page coming soon! Book a session to connect directly.');
+    }
+
+    // Init
+    allMentors = AppState.getMentors(true);
+    renderMentors(allMentors);
+    OC2.Modal.init('book-session-modal');
+
+    // Search
+    const search = document.getElementById('mentor-search');
+    const domainFilter = document.getElementById('domain-filter');
+    const priceFilter = document.getElementById('price-filter');
+
+    function applyFilters() {
+      const q = search.value.toLowerCase();
+      const domain = domainFilter.value;
+      const maxPrice = priceFilter.value ? parseInt(priceFilter.value) : Infinity;
+      const filtered = allMentors.filter(m => {
+        const matchQ = !q || m.name.toLowerCase().includes(q) || m.title.toLowerCase().includes(q) || m.specialties.some(s => s.toLowerCase().includes(q));
+        const matchDomain = !domain || m.domains.includes(domain) || m.specialties.includes(domain);
+        const matchPrice = m.price <= maxPrice;
+        return matchQ && matchDomain && matchPrice;
+      });
+      renderMentors(filtered);
+    }
+
+    search.addEventListener('input', OC2.Utils.debounce(applyFilters, 300));
+    domainFilter.addEventListener('change', applyFilters);
+    priceFilter.addEventListener('change', applyFilters);
+
+    // Booking form
+    document.getElementById('book-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('book-name').value;
+      const email = document.getElementById('book-email').value;
+      const topic = document.getElementById('book-topic').value;
+      const time = document.getElementById('book-time').value;
+      if (!name || !email || !topic) { OC2.Toast.error('Please fill all required fields.'); return; }
+      
+      const mentorId = document.getElementById('book-session-modal')._mentorId;
+      const session = AppState.getSession();
+      const studentId = session && session.type === 'student' ? session.userId : 'GUEST_' + Date.now();
+      
+      AppState.bookMentorSession(mentorId, {
+        studentId,
+        name,
+        email,
+        topic,
+        time
+      });
+      
+      OC2.Modal.close('book-session-modal');
+      OC2.Toast.success('🎓 Session booked! The mentor will reach out within their response time. Check your email for confirmation.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

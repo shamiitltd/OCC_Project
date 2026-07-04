@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OCC Jobs — Find internships, full-time jobs, and freelance opportunities. Browse 500+ active job listings from 120+ top companies for freshers and experienced professionals.">
+  <title>OCC Jobs — Find Your Dream Job | Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand">
+        <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" loading="lazy">
+        <span class="nav-brand-text">Offcampus<span>career</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="training.html">OCC TIP</a>
+        <a href="mentor.html">OCC Mentor</a>
+        <a href="careers.html" class="active">OCC Jobs</a>
+        <a href="exams.html">OCC Exams</a>
+        <a href="corporate.html">Corporate</a>
+        <a href="community.html">Community</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <a href="student.html" class="btn btn-sm btn-secondary">Login</a>
+        <a href="corporate.html#post-job" class="btn btn-sm btn-jobs">Post a Job</a>
+        <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <div class="nav-links-mobile" id="mobile-nav">
+    <div class="mobile-nav-header">
+      <span class="nav-brand-text" style="font-size:1rem;">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+      <button onclick="OC2.Navbar.closeMobileMenu()" style="background:none;border:none;color:var(--text-secondary);font-size:1.25rem;cursor:pointer;">✕</button>
+    </div>
+    <a href="index.html">🏠 Home</a>
+    <a href="training.html">📚 OCC TIP</a>
+    <a href="mentor.html">🎓 OCC Mentor</a>
+    <a href="careers.html" class="active">💼 OCC Jobs</a>
+    <a href="exams.html">📝 OCC Exams</a>
+    <a href="corporate.html">🏢 Corporate</a>
+    <a href="community.html">👥 Community</a>
+    <div class="mobile-actions">
+      <a href="student.html" class="btn btn-secondary w-full" style="justify-content:center;">Student Login</a>
+      <a href="corporate.html#post-job" class="btn btn-jobs w-full" style="justify-content:center;">Post a Job</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero" style="padding-bottom:var(--space-2xl); background:radial-gradient(ellipse at 30% 30%, rgba(245,158,11,0.1) 0%, transparent 60%);">
+    <div class="grid-bg"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <span class="section-label jobs">// OCC Jobs</span>
+      <h1 style="margin-top:var(--space-md);">Find Your <span class="text-gradient-jobs">Dream Job</span><br>or Internship</h1>
+      <p>From TCS to Google, from internships to senior roles — browse 500+ active opportunities from 120+ companies, tailored for Indian freshers and professionals.</p>
+      <!-- Search Bar Hero -->
+      <div class="card" style="margin-top:var(--space-2xl); padding:var(--space-lg); text-align:left;">
+        <div style="display:flex; gap:var(--space-md); flex-wrap:wrap;">
+          <div class="search-bar" style="flex:2; max-width:none;">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="hero-search" placeholder="Search by role, company, or skill..." aria-label="Search jobs">
+          </div>
+          <select class="form-select" id="hero-location" style="flex:1; min-width:150px;" aria-label="Filter by location">
+            <option value="">📍 Any Location</option>
+            <option value="Remote">Remote</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Delhi">Delhi / Noida</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Chennai">Chennai</option>
+          </select>
+          <select class="form-select" id="hero-type" style="flex:1; min-width:150px;" aria-label="Filter by type">
+            <option value="">💼 All Types</option>
+            <option value="Job">Full Time</option>
+            <option value="Internship">Internship</option>
+            <option value="Freelance">Freelance</option>
+          </select>
+          <button class="btn btn-jobs" onclick="applyFilters()" style="flex-shrink:0;">Search Jobs</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div style="background:var(--bg-surface); border-bottom:1px solid var(--border-subtle); padding:var(--space-lg) 0;">
+    <div class="container">
+      <div class="flex gap-xl flex-wrap items-center justify-between">
+        <div class="flex gap-xl flex-wrap">
+          <div style="display:flex; align-items:center; gap:8px;"><span style="color:var(--accent-amber); font-size:1.25rem;">💼</span><span style="font-weight:700; color:var(--text-primary);" id="active-jobs-count">8</span><span style="font-size:0.88rem; color:var(--text-muted);">Active Jobs</span></div>
+          <div style="display:flex; align-items:center; gap:8px;"><span style="color:var(--accent-cyan); font-size:1.25rem;">🏢</span><span style="font-weight:700; color:var(--text-primary);">120+</span><span style="font-size:0.88rem; color:var(--text-muted);">Companies</span></div>
+          <div style="display:flex; align-items:center; gap:8px;"><span style="color:var(--accent-green); font-size:1.25rem;">✅</span><span style="font-weight:700; color:var(--text-primary);">2,800+</span><span style="font-size:0.88rem; color:var(--text-muted);">Placed</span></div>
+        </div>
+        <!-- Filter pills -->
+        <div class="filter-pills" style="margin:0;">
+          <button class="filter-pill active" data-filter="">All</button>
+          <button class="filter-pill" data-filter="Job">Full Time</button>
+          <button class="filter-pill" data-filter="Internship">Internship</button>
+          <button class="filter-pill" data-filter="Freelance">Freelance</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOBS LISTING -->
+  <div class="container" style="padding-top:var(--space-2xl); padding-bottom:var(--space-4xl);">
+    <div style="display:grid; grid-template-columns:280px 1fr; gap:var(--space-2xl);">
+
+      <!-- Sidebar Filters -->
+      <div>
+        <div class="card" style="position:sticky; top:calc(var(--nav-height) + var(--space-lg));">
+          <div class="flex items-center justify-between" style="margin-bottom:var(--space-lg);">
+            <h4>🔧 Filters</h4>
+            <button class="btn btn-ghost btn-sm" onclick="clearFilters()">Clear All</button>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Domain</label>
+            <select class="form-select" id="filter-domain" onchange="applyFilters()">
+              <option value="">All Domains</option>
+              <option value="Web Dev">Web Dev</option>
+              <option value="AI/ML">AI / ML</option>
+              <option value="Data Science">Data Science</option>
+              <option value="Cloud">Cloud</option>
+              <option value="Tech">Tech / General</option>
+              <option value="Product Management">Product Management</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Work Mode</label>
+            <select class="form-select" id="filter-mode" onchange="applyFilters()">
+              <option value="">Any Mode</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="On-site">On-site</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Experience</label>
+            <select class="form-select" id="filter-exp" onchange="applyFilters()">
+              <option value="">Any Level</option>
+              <option value="Fresher">Fresher</option>
+              <option value="0-1 year">0-1 year</option>
+              <option value="0-2 years">0-2 years</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label">Sort By</label>
+            <select class="form-select" id="filter-sort" onchange="applyFilters()">
+              <option value="recent">Most Recent</option>
+              <option value="salary">Highest Salary</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Cards -->
+      <div>
+        <div id="jobs-count" style="margin-bottom:var(--space-lg); color:var(--text-muted); font-size:0.88rem;"></div>
+        <div id="jobs-grid" style="display:flex; flex-direction:column; gap:var(--space-lg);">
+          <!-- Populated by JS -->
+        </div>
+        <div class="empty-state hidden" id="jobs-empty">
+          <div class="empty-icon">💼</div>
+          <h3>No jobs match your filters</h3>
+          <p>Try removing some filters</p>
+          <button class="btn btn-jobs" onclick="clearFilters()">Clear Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOB APPLICATION MODAL -->
+  <div class="modal-overlay" id="apply-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="OC2.Modal.close('apply-modal')" aria-label="Close">✕</button>
+      <div class="modal-header">
+        <h3>Apply for <span id="apply-job-title" style="color:var(--module-jobs);"></span></h3>
+        <p id="apply-company-name" style="color:var(--text-muted); margin-top:4px;"></p>
+      </div>
+      <form id="apply-form">
+        <div class="form-group">
+          <label class="form-label required">Full Name</label>
+          <input type="text" class="form-input" placeholder="Your full name" id="apply-name" required>
+        </div>
+        <div class="grid grid-2 gap-md">
+          <div class="form-group">
+            <label class="form-label required">Email</label>
+            <input type="email" class="form-input" placeholder="your@email.com" id="apply-email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Phone</label>
+            <input type="tel" class="form-input" placeholder="9876543210" id="apply-phone" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">College / Organization</label>
+          <input type="text" class="form-input" placeholder="Your college or current company" id="apply-college" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Resume Link</label>
+          <input type="url" class="form-input" placeholder="https://drive.google.com/your-resume or LinkedIn URL" id="apply-resume" required>
+          <div class="form-hint">Share a Google Drive link or LinkedIn profile URL</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cover Letter / Why should we hire you?</label>
+          <textarea class="form-textarea" rows="3" placeholder="Tell us why you're the right fit for this role..." id="apply-cover"></textarea>
+        </div>
+        <!-- ATS Score Preview -->
+        <div class="card" style="background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.2); margin-bottom:var(--space-lg);">
+          <div class="flex items-center gap-md">
+            <span style="font-size:1.5rem;">🤖</span>
+            <div>
+              <div style="font-weight:700; color:var(--text-primary);">AI ATS Score</div>
+              <div style="font-size:0.82rem; color:var(--text-muted);">Your profile will be AI-scored for job fit after submission</div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-jobs w-full btn-lg" style="justify-content:center;">Submit Application →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JOB DETAIL MODAL -->
+  <div class="modal-overlay" id="job-detail-modal">
+    <div class="modal modal-lg">
+      <button class="modal-close" onclick="OC2.Modal.close('job-detail-modal')" aria-label="Close">✕</button>
+      <div id="job-detail-content"><!-- Dynamic --></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="flex items-center justify-between flex-wrap gap-md">
+        <div class="flex items-center gap-sm">
+          <img src="offcampuscareer logo.png" alt="" style="height:32px;" loading="lazy">
+          <span class="nav-brand-text">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+        </div>
+        <div class="flex gap-xl flex-wrap">
+          <a href="index.html" style="font-size:0.88rem; color:var(--text-secondary);">Home</a>
+          <a href="careers.html" style="font-size:0.88rem; color:var(--module-jobs);">Jobs</a>
+          <a href="corporate.html" style="font-size:0.88rem; color:var(--text-secondary);">Corporate</a>
+          <a href="placement.html" style="font-size:0.88rem; color:var(--text-secondary);">Placements</a>
+          <a href="contact.html" style="font-size:0.88rem; color:var(--text-secondary);">Contact</a>
+        </div>
+        <p style="font-size:0.82rem; color:var(--text-muted);">© 2026 Offcampuscareer · SHAMIIT LLP</p>
+      </div>
+    </div>
+  </footer>
+  <div class="toast-container" role="alert" aria-live="polite"></div>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let allJobs = [];
+    let activeJobId = null;
+    const typeColors = { Internship:'badge-exams', Job:'badge-primary', Freelance:'badge-mentor' };
+    const typeIcons = { Internship:'🎓', Job:'💼', Freelance:'🌐' };
+    const modeIcons = { Remote:'🌐', Hybrid:'🔄', 'On-site':'🏢' };
+
+    function renderJobs(jobs) {
+      const grid = document.getElementById('jobs-grid');
+      const empty = document.getElementById('jobs-empty');
+      document.getElementById('jobs-count').textContent = `Showing ${jobs.length} job${jobs.length !== 1 ? 's' : ''}`;
+      document.getElementById('active-jobs-count').textContent = AppState.getJobs().filter(j => j.status === 'Active').length;
+
+      if (!jobs.length) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      grid.innerHTML = jobs.map((j, i) => `
+        <div class="job-card reveal reveal-delay-${(i%3)+1}">
+          <div class="job-card-header">
+            <div class="company-logo">${j.companyLogo || j.company[0]}</div>
+            <div style="flex:1;">
+              <div class="job-role">${j.role}</div>
+              <div class="job-company">${j.company}</div>
+            </div>
+            <div class="flex flex-col items-end gap-xs">
+              <span class="badge ${typeColors[j.type] || 'badge-primary'}">${typeIcons[j.type]} ${j.type}</span>
+              <div class="flex items-center gap-xs">
+                <span class="status-dot status-active"></span>
+                <span style="font-size:0.72rem; color:var(--text-muted);">Active</span>
+              </div>
+            </div>
+          </div>
+          <div class="job-meta">
+            <div class="job-meta-item">📍 ${j.location}</div>
+            <div class="job-meta-item">${modeIcons[j.mode]||'🏢'} ${j.mode}</div>
+            <div class="job-meta-item">👤 ${j.experience}</div>
+            <div class="job-meta-item">🏛️ ${j.domain}</div>
+          </div>
+          <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:var(--space-md); line-height:1.6;">${OC2.Utils.truncate(j.description, 150)}</p>
+          <div class="job-skills">
+            ${j.skills.slice(0,5).map(s => `<span class="badge badge-outline">${s}</span>`).join('')}
+          </div>
+          <div class="job-footer">
+            <div>
+              <div class="job-salary">${j.stipend}</div>
+              <div class="job-posted">📅 Deadline: ${OC2.Utils.formatDate(j.deadline)}</div>
+            </div>
+            <div class="flex gap-sm">
+              <button class="btn btn-ghost btn-sm" onclick="showJobDetail('${j.id}')">Details</button>
+              <button class="btn btn-jobs btn-sm" onclick="openApplyModal('${j.id}')">Apply Now →</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      setTimeout(() => OC2.ScrollReveal.init(), 100);
+    }
+
+    function applyFilters() {
+      const q = (document.getElementById('hero-search')?.value || '').toLowerCase();
+      const loc = document.getElementById('hero-location')?.value || '';
+      const type = document.getElementById('hero-type')?.value || document.querySelector('.filter-pill.active')?.dataset.filter || '';
+      const domain = document.getElementById('filter-domain')?.value || '';
+      const mode = document.getElementById('filter-mode')?.value || '';
+      const exp = document.getElementById('filter-exp')?.value || '';
+      const sort = document.getElementById('filter-sort')?.value || 'recent';
+
+      let filtered = allJobs.filter(j => {
+        const matchQ = !q || j.role.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || j.skills.some(s => s.toLowerCase().includes(q));
+        const matchLoc = !loc || j.location.includes(loc);
+        const matchType = !type || j.type === type;
+        const matchDomain = !domain || j.domain === domain;
+        const matchMode = !mode || j.mode === mode;
+        const matchExp = !exp || j.experience === exp;
+        return matchQ && matchLoc && matchType && matchDomain && matchMode && matchExp;
+      });
+
+      if (sort === 'salary') {
+        filtered.sort((a, b) => Math.max(...(b.salaryRange||[0])) - Math.max(...(a.salaryRange||[0])));
+      }
+      renderJobs(filtered);
+    }
+
+    function clearFilters() {
+      ['filter-domain','filter-mode','filter-exp','filter-sort','hero-location','hero-type','hero-search'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = el.tagName === 'SELECT' ? '' : '';
+      });
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      document.querySelector('.filter-pill[data-filter=""]')?.classList.add('active');
+      renderJobs(allJobs);
+    }
+
+    function openApplyModal(jobId) {
+      const job = AppState.getJob(jobId);
+      if (!job) return;
+      activeJobId = jobId;
+      document.getElementById('apply-job-title').textContent = job.role;
+      document.getElementById('apply-company-name').textContent = `${job.company} · ${job.location} · ${job.stipend}`;
+      
+      // Pre-fill if student is logged in
+      const session = AppState.getSession();
+      if (session && session.type === 'student') {
+        const student = AppState.getStudent(session.userId);
+        if (student) {
+          document.getElementById('apply-name').value = student.name || '';
+          document.getElementById('apply-email').value = student.email || '';
+          document.getElementById('apply-phone').value = student.phone || '';
+          document.getElementById('apply-college').value = student.college || '';
+        }
+      }
+      
+      OC2.Modal.open('apply-modal');
+    }
+
+    function showJobDetail(jobId) {
+      const job = AppState.getJob(jobId);
+      if (!job) return;
+      document.getElementById('job-detail-content').innerHTML = `
+        <div style="display:flex; align-items:flex-start; gap:var(--space-lg); margin-bottom:var(--space-xl);">
+          <div class="company-logo" style="width:72px; height:72px; font-size:2rem; border-radius:var(--radius-lg); flex-shrink:0;">${job.companyLogo||job.company[0]}</div>
+          <div style="flex:1;">
+            <h2 style="margin-bottom:var(--space-sm);">${job.role}</h2>
+            <div style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:var(--space-sm);">${job.company} · ${job.location}</div>
+            <div class="flex gap-sm flex-wrap">
+              <span class="badge ${typeColors[job.type]||'badge-primary'}">${typeIcons[job.type]} ${job.type}</span>
+              <span class="badge badge-outline">${job.mode}</span>
+              <span class="badge badge-outline">Experience: ${job.experience}</span>
+            </div>
+          </div>
+          <button class="btn btn-jobs btn-lg" onclick="OC2.Modal.close('job-detail-modal'); setTimeout(() => openApplyModal('${job.id}'), 100);" style="flex-shrink:0;">Apply Now →</button>
+        </div>
+        <div class="divider"></div>
+        <div class="grid grid-2 gap-xl">
+          <div>
+            <h4 style="margin-bottom:var(--space-md);">📄 Job Description</h4>
+            <p style="font-size:0.9rem; line-height:1.8;">${job.description}</p>
+            <h4 style="margin:var(--space-xl) 0 var(--space-md);">🎯 Required Skills</h4>
+            <div class="flex gap-sm flex-wrap">${job.skills.map(s => `<span class="badge badge-jobs">${s}</span>`).join('')}</div>
+            ${job.perks ? `<h4 style="margin:var(--space-xl) 0 var(--space-md);">🎁 Perks & Benefits</h4><div class="flex gap-sm flex-wrap">${job.perks.map(p => `<span class="badge badge-exams">${p}</span>`).join('')}</div>` : ''}
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:var(--space-lg);">
+              <h4 style="margin-bottom:var(--space-md);">📊 Job Overview</h4>
+              <div style="display:flex; flex-direction:column; gap:var(--space-md);">
+                <div class="flex justify-between"><span class="text-muted">Salary/Stipend</span><span style="font-weight:700; color:var(--accent-green);">${job.stipend}</span></div>
+                <div class="flex justify-between"><span class="text-muted">Deadline</span><span style="font-weight:600;">${OC2.Utils.formatDate(job.deadline)}</span></div>
+                <div class="flex justify-between"><span class="text-muted">Applications</span><span style="font-weight:600;">${job.applications?.length || 0}+ applied</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <h4 style="margin-bottom:var(--space-md);">🔍 Selection Process</h4>
+              ${(job.process||[]).map((step, i) => `
+                <div class="flex items-center gap-md" style="margin-bottom:var(--space-sm);">
+                  <div style="width:28px; height:28px; border-radius:50%; background:var(--brand-gradient-solid); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0;">${i+1}</div>
+                  <span style="font-size:0.9rem; color:var(--text-secondary);">${step}</span>
+                </div>
+              `).join('')}
+            </div>
+            ${job.aboutCompany ? `<div class="card" style="margin-top:var(--space-lg);"><h4 style="margin-bottom:var(--space-md);">🏢 About ${job.company}</h4><p style="font-size:0.88rem; line-height:1.7;">${job.aboutCompany}</p></div>` : ''}
+          </div>
+        </div>
+      `;
+      OC2.Modal.open('job-detail-modal');
+    }
+
+    // Init
+    allJobs = AppState.getJobs().filter(j => j.status === 'Active');
+    renderJobs(allJobs);
+    OC2.Modal.init('apply-modal');
+    OC2.Modal.init('job-detail-modal');
+
+    // Filter pills
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        if (document.getElementById('hero-type')) document.getElementById('hero-type').value = this.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    // Hero search
+    document.getElementById('hero-search').addEventListener('input', OC2.Utils.debounce(applyFilters, 300));
+    document.getElementById('hero-location').addEventListener('change', applyFilters);
+    document.getElementById('hero-type').addEventListener('change', applyFilters);
+
+    // Apply form
+    document.getElementById('apply-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('apply-name').value;
+      const email = document.getElementById('apply-email').value;
+      const phone = document.getElementById('apply-phone').value;
+      const college = document.getElementById('apply-college').value;
+      const resume = document.getElementById('apply-resume').value;
+      if (!name || !email || !phone || !college || !resume) { OC2.Toast.error('Please fill all required fields.'); return; }
+
+      const session = AppState.getSession();
+      const studentId = session && session.type === 'student' ? session.userId : 'GUEST_' + Date.now();
+
+      const job = AppState.applyToJob(activeJobId, {
+        studentId: studentId,
+        name, email, phone, college, resume,
+        coverLetter: document.getElementById('apply-cover').value
+      });
+
+      OC2.Modal.close('apply-modal');
+      OC2.Toast.success('🎉 Application submitted! Track your status in your Student Dashboard.');
+      OC2.Confetti.burst();
+      this.reset();
+    });
+  </script>
+</body>
+</html>

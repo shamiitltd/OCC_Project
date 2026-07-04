@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Offcampuscareer Admin Portal — Manage students, courses, payments, and analytics.">
+  <title>Admin Portal — Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    .login-wrapper { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:var(--space-xl); padding-top:calc(var(--nav-height) + var(--space-xl)); }
+    .login-card { width:100%; max-width:440px; }
+    .chart-bar { display:flex; align-items:flex-end; gap:var(--space-sm); height:200px; padding:var(--space-md) 0; }
+    .chart-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:var(--space-xs); }
+    .chart-col .bar { width:100%; border-radius:var(--radius-sm) var(--radius-sm) 0 0; background:var(--brand-gradient); transition:height .6s ease; min-height:4px; }
+    .chart-col .label { font-size:0.7rem; color:var(--text-muted); }
+    .quick-action { display:flex; align-items:center; gap:var(--space-md); padding:var(--space-md) var(--space-lg); border-radius:var(--radius-md); background:var(--bg-surface-alt); border:1px solid var(--border-color); cursor:pointer; transition:all .25s; font-weight:600; font-size:0.9rem; color:var(--text-primary); width:100%; border:1px solid var(--border-color); }
+    .quick-action:hover { border-color:var(--brand-primary); transform:translateX(4px); }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="navbar">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand"><img src="offcampuscareer logo.png" alt="OC2 Logo"><span class="nav-brand-text">Offcampus<span>career</span></span></a>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <button class="burger sidebar-toggle" id="sidebar-toggle" aria-label="Menu" style="display:none;"><span></span><span></span><span></span></button>
+        <button class="btn btn-sm btn-ghost" id="logout-btn" style="display:none; color:var(--accent-rose);" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════ LOGIN ═══════════ -->
+  <div id="login-view">
+    <div class="login-wrapper">
+      <div class="hero-bg" style="position:fixed; inset:0;"></div>
+      <div class="login-card card" style="position:relative; z-index:1;">
+        <div class="text-center" style="margin-bottom:var(--space-xl);">
+          <div style="font-size:3rem; margin-bottom:var(--space-md);">🔐</div>
+          <h2>Admin <span class="text-gradient">Portal</span></h2>
+          <p class="text-sm text-muted" style="margin-top:var(--space-sm);">Manage everything from one place</p>
+        </div>
+        <form id="admin-login-form">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-input" placeholder="admin@oc2.in" data-validate="required,email" value="admin@oc2.in">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-input" placeholder="••••••••" data-validate="required" value="admin123">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-full">Login <span class="arrow">→</span></button>
+        </form>
+        <div style="margin-top:var(--space-lg); padding-top:var(--space-lg); border-top:1px solid var(--border-subtle); text-align:center;">
+          <p class="text-xs text-muted" style="margin-bottom:var(--space-sm);">Demo credentials: admin@oc2.in / admin123</p>
+          <div class="divider" style="margin:var(--space-xs) 0;"></div>
+          <p class="text-xs text-muted">Switch portal: <a href="student.html" style="color:var(--brand-primary); font-weight:600;">Student Login</a> · <a href="mentor-portal.html" style="color:var(--module-mentor); font-weight:600;">Mentor Login</a> · <a href="corporate-portal.html" style="color:var(--module-corporate); font-weight:600;">Employer Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ ADMIN PORTAL ═══════════ -->
+  <div id="portal-view" style="display:none;">
+    <div class="portal-layout">
+      <aside class="sidebar" id="sidebar">
+        <div style="padding:0 var(--space-lg); margin-bottom:var(--space-xl);">
+          <div class="flex items-center gap-md">
+            <div class="avatar avatar-md">🔐</div>
+            <div><div class="font-semibold">Admin</div><div class="text-xs text-muted">Offcampuscareer</div></div>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <button class="sidebar-link active" data-view="dashboard"><span class="icon">📊</span> Dashboard</button>
+          <button class="sidebar-link" data-view="students"><span class="icon">👥</span> Students</button>
+          <button class="sidebar-link" data-view="courses"><span class="icon">📚</span> Courses</button>
+          <button class="sidebar-link" data-view="classes"><span class="icon">🎥</span> Classes</button>
+          <button class="sidebar-link" data-view="assignments"><span class="icon">📝</span> Assignments</button>
+          <div class="sidebar-divider"></div>
+          <button class="sidebar-link" data-view="payments"><span class="icon">💰</span> Payments</button>
+          <button class="sidebar-link" data-view="jobs"><span class="icon">💼</span> Jobs</button>
+          <button class="sidebar-link" data-view="contacts"><span class="icon">📧</span> Contacts</button>
+        </nav>
+      </aside>
+
+      <main class="portal-main">
+        <!-- ═══ DASHBOARD ═══ -->
+        <div class="portal-view active" id="view-dashboard">
+          <h2 style="margin-bottom:var(--space-xl);">📊 Dashboard</h2>
+          <div class="kpi-grid" id="admin-kpis"></div>
+
+          <div class="grid grid-2 gap-xl" style="margin-top:var(--space-2xl);">
+            <div class="card">
+              <h4 style="margin-bottom:var(--space-lg);">📈 Enrollment Trend</h4>
+              <div class="chart-bar" id="enrollment-chart"></div>
+            </div>
+            <div class="card">
+              <h4 style="margin-bottom:var(--space-lg);">⚡ Quick Actions</h4>
+              <div class="flex flex-col gap-md">
+                <button class="quick-action" onclick="switchView('students')">👥 Manage Students</button>
+                <button class="quick-action" onclick="switchView('courses')">📚 Manage Courses</button>
+                <button class="quick-action" onclick="switchView('payments')">💰 View Payments</button>
+                <button class="quick-action" onclick="switchView('contacts')">📧 View Messages</button>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin:var(--space-2xl) 0 var(--space-lg);">🆕 Recent Enrollments</h3>
+          <div class="table-wrapper" id="recent-enrollments"></div>
+        </div>
+
+        <!-- ═══ STUDENTS ═══ -->
+        <div class="portal-view" id="view-students">
+          <div class="flex items-center justify-between flex-wrap gap-md" style="margin-bottom:var(--space-xl);">
+            <h2>👥 Students</h2>
+            <div class="flex gap-md">
+              <input type="text" class="form-input" placeholder="Search students..." id="student-search" style="width:250px;" oninput="renderStudents()">
+              <button class="btn btn-primary" onclick="openAddStudentModal()">+ Add Student</button>
+            </div>
+          </div>
+          <div class="table-wrapper" id="students-table"></div>
+        </div>
+
+        <!-- ═══ COURSES ═══ -->
+        <div class="portal-view" id="view-courses">
+          <div class="flex items-center justify-between flex-wrap gap-md" style="margin-bottom:var(--space-xl);">
+            <h2>📚 Courses</h2>
+            <button class="btn btn-primary" onclick="openAddCourseModal()">+ Add Course</button>
+          </div>
+          <div class="grid grid-2 gap-xl" id="admin-courses-grid"></div>
+        </div>
+
+        <!-- ═══ CLASSES ═══ -->
+        <div class="portal-view" id="view-classes">
+          <div class="flex items-center justify-between flex-wrap gap-md" style="margin-bottom:var(--space-xl);">
+            <h2>🎥 Classes</h2>
+            <button class="btn btn-primary" onclick="openAddClassModal()">+ Schedule Class</button>
+          </div>
+          <div class="flex flex-col gap-md" id="admin-classes-list"></div>
+        </div>
+
+        <!-- ═══ ASSIGNMENTS ═══ -->
+        <div class="portal-view" id="view-assignments">
+          <div class="flex items-center justify-between flex-wrap gap-md" style="margin-bottom:var(--space-xl);">
+            <h2>📝 Assignments</h2>
+            <button class="btn btn-primary" onclick="openAddAssignmentModal()">+ Create Assignment</button>
+          </div>
+          <div class="flex flex-col gap-xl" id="admin-assignments-list"></div>
+        </div>
+
+        <!-- ═══ PAYMENTS ═══ -->
+        <div class="portal-view" id="view-payments">
+          <h2 style="margin-bottom:var(--space-xl);">💰 Payments</h2>
+          <div class="kpi-grid" style="margin-bottom:var(--space-xl);" id="payment-kpis"></div>
+          <div class="table-wrapper" id="payments-table"></div>
+        </div>
+
+        <!-- ═══ JOBS ═══ -->
+        <div class="portal-view" id="view-jobs">
+          <div class="flex items-center justify-between flex-wrap gap-md" style="margin-bottom:var(--space-xl);">
+            <h2>💼 Job Posts</h2>
+            <button class="btn btn-primary" onclick="openAddJobModal()">+ Post Job</button>
+          </div>
+          <div class="flex flex-col gap-md" id="admin-jobs-list"></div>
+        </div>
+
+        <!-- ═══ CONTACTS ═══ -->
+        <div class="portal-view" id="view-contacts">
+          <h2 style="margin-bottom:var(--space-xl);">📧 Contact Messages</h2>
+          <div class="flex flex-col gap-md" id="contacts-list"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ═══ MODALS ═══ -->
+  <!-- Add Student -->
+  <div class="modal-overlay" id="add-student-modal">
+    <div class="modal"><button class="modal-close">✕</button>
+      <h3 style="margin-bottom:var(--space-xl);">Add Student</h3>
+      <form id="add-student-form">
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Name *</label><input type="text" name="name" class="form-input" data-validate="required"></div>
+          <div class="form-group"><label class="form-label">Email *</label><input type="email" name="email" class="form-input" data-validate="required,email"></div>
+        </div>
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Phone</label><input type="tel" name="phone" class="form-input"></div>
+          <div class="form-group"><label class="form-label">College</label><input type="text" name="college" class="form-input"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Year</label>
+          <select name="year" class="form-select"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>Graduated</option></select>
+        </div>
+        <button type="submit" class="btn btn-primary w-full">Add Student</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Course -->
+  <div class="modal-overlay" id="add-course-modal">
+    <div class="modal"><button class="modal-close">✕</button>
+      <h3 style="margin-bottom:var(--space-xl);">Add Course</h3>
+      <form id="add-course-form">
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Title *</label><input type="text" name="title" class="form-input" data-validate="required"></div>
+          <div class="form-group"><label class="form-label">Category</label>
+            <select name="category" class="form-select"><option>Career</option><option>AI/ML</option><option>Web Dev</option><option>Cloud</option><option>Data Science</option></select>
+          </div>
+        </div>
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Duration</label><input type="text" name="duration" class="form-input" placeholder="e.g. 8 Weeks"></div>
+          <div class="form-group"><label class="form-label">Level</label>
+            <select name="level" class="form-select"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select>
+          </div>
+        </div>
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Price (₹) *</label><input type="number" name="price" class="form-input" data-validate="required"></div>
+          <div class="form-group"><label class="form-label">Instructor</label><input type="text" name="instructor" class="form-input"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Description</label><textarea name="description" class="form-textarea"></textarea></div>
+        <button type="submit" class="btn btn-primary w-full">Add Course</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Class -->
+  <div class="modal-overlay" id="add-class-modal">
+    <div class="modal"><button class="modal-close">✕</button>
+      <h3 style="margin-bottom:var(--space-xl);">Schedule Class</h3>
+      <form id="add-class-form">
+        <div class="form-group"><label class="form-label">Course *</label><select name="courseId" class="form-select" id="class-course-select" data-validate="required"></select></div>
+        <div class="form-group"><label class="form-label">Title *</label><input type="text" name="title" class="form-input" data-validate="required"></div>
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Date *</label><input type="date" name="date" class="form-input" data-validate="required"></div>
+          <div class="form-group"><label class="form-label">Time</label><input type="text" name="time" class="form-input" placeholder="e.g. 10:00 AM"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Instructor</label><input type="text" name="instructor" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Meeting Link</label><input type="url" name="meetingLink" class="form-input" placeholder="https://meet.google.com/..."></div>
+        <button type="submit" class="btn btn-primary w-full">Schedule</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Assignment -->
+  <div class="modal-overlay" id="add-asg-modal">
+    <div class="modal"><button class="modal-close">✕</button>
+      <h3 style="margin-bottom:var(--space-xl);">Create Assignment</h3>
+      <form id="add-asg-form">
+        <div class="form-group"><label class="form-label">Course *</label><select name="courseId" class="form-select" id="asg-course-select" data-validate="required"></select></div>
+        <div class="form-group"><label class="form-label">Title *</label><input type="text" name="title" class="form-input" data-validate="required"></div>
+        <div class="form-group"><label class="form-label">Due Date *</label><input type="date" name="dueDate" class="form-input" data-validate="required"></div>
+        <div class="form-group"><label class="form-label">Description</label><textarea name="description" class="form-textarea"></textarea></div>
+        <button type="submit" class="btn btn-primary w-full">Create</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Job -->
+  <div class="modal-overlay" id="add-job-modal">
+    <div class="modal"><button class="modal-close">✕</button>
+      <h3 style="margin-bottom:var(--space-xl);">Post Job</h3>
+      <form id="add-job-form">
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Company *</label><input type="text" name="company" class="form-input" data-validate="required"></div>
+          <div class="form-group"><label class="form-label">Role *</label><input type="text" name="role" class="form-input" data-validate="required"></div>
+        </div>
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Type</label>
+            <select name="type" class="form-select"><option>Internship</option><option>Job</option><option>Freelance</option></select>
+          </div>
+          <div class="form-group"><label class="form-label">Domain</label><input type="text" name="domain" class="form-input" placeholder="e.g. Web Dev"></div>
+        </div>
+        <div class="grid grid-2 gap-lg">
+          <div class="form-group"><label class="form-label">Location</label><input type="text" name="location" class="form-input"></div>
+          <div class="form-group"><label class="form-label">Stipend/Salary</label><input type="text" name="stipend" class="form-input"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Skills (comma-separated)</label><input type="text" name="skills" class="form-input" placeholder="React, Node.js, Python"></div>
+        <div class="form-group"><label class="form-label">Description</label><textarea name="description" class="form-textarea"></textarea></div>
+        <button type="submit" class="btn btn-primary w-full">Post Job</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+  <script src="js/api-client.js"></script>
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // ── Login ──
+    (async function() {
+      try {
+        const session = await ApiClient.getSessionStatus();
+        if (session.loggedIn && session.type === 'admin') { showPortal(); }
+      } catch (err) {
+        console.error("Session check failed", err);
+      }
+    })();
+
+    document.getElementById('admin-login-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const { valid, data } = OC2.Validate.form(this);
+      if (!valid) return;
+      try {
+        const res = await ApiClient.login(data.email, data.password, 'admin');
+        if (res.success) {
+          showPortal();
+        }
+      } catch (err) {
+        OC2.Toast.error('Invalid admin credentials.');
+      }
+    });
+
+    function showPortal() {
+      document.getElementById('login-view').style.display = 'none';
+      document.getElementById('portal-view').style.display = 'block';
+      document.getElementById('logout-btn').style.display = '';
+      document.getElementById('sidebar-toggle').style.display = '';
+      renderDashboard();
+    }
+
+    async function logout() {
+      try {
+        await ApiClient.logout();
+        window.location.reload();
+      } catch (err) {
+        window.location.reload();
+      }
+    }
+
+    // ── Sidebar Nav ──
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', () => switchView(link.dataset.view));
+    });
+    document.getElementById('sidebar-toggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    async function switchView(view) {
+      document.querySelectorAll('.sidebar-link').forEach(l => l.classList.toggle('active', l.dataset.view === view));
+      document.querySelectorAll('.portal-view').forEach(v => v.classList.remove('active'));
+      document.getElementById('view-' + view).classList.add('active');
+      document.getElementById('sidebar').classList.remove('open');
+      const renderers = { 
+        dashboard: renderDashboard, 
+        students: renderStudents, 
+        courses: renderCourses, 
+        classes: renderClasses, 
+        assignments: renderAssignments, 
+        payments: renderPayments, 
+        jobs: renderJobs, 
+        contacts: renderContacts 
+      };
+      if (renderers[view]) await renderers[view]();
+    }
+
+    // ── DASHBOARD ──
+    async function renderDashboard() {
+      try {
+        const data = await ApiClient.getAdminDashboard();
+        const kpis = data.kpis;
+        const enrollments = data.recentEnrollments;
+        const chart = data.chart;
+
+        document.getElementById('admin-kpis').innerHTML = `
+          <div class="kpi-card"><div class="kpi-icon purple">👥</div><div><div class="kpi-value">${kpis.totalStudents}</div><div class="kpi-label">Total Students</div></div></div>
+          <div class="kpi-card"><div class="kpi-icon cyan">📚</div><div><div class="kpi-value">${kpis.activeCourses}</div><div class="kpi-label">Active Courses</div></div></div>
+          <div class="kpi-card"><div class="kpi-icon green">💰</div><div><div class="kpi-value">${OC2.Utils.formatCurrency(kpis.totalRevenue)}</div><div class="kpi-label">Total Revenue</div></div></div>
+          <div class="kpi-card"><div class="kpi-icon amber">🎯</div><div><div class="kpi-value">${kpis.placementRate}%</div><div class="kpi-label">Placement Rate</div></div></div>
+        `;
+
+        // Chart
+        const months = ['Jan','Feb','Mar','Apr','May','Jun'];
+        const values = months.map(m => chart[m] || 0);
+        const maxVal = Math.max(...values, 1);
+        document.getElementById('enrollment-chart').innerHTML = months.map((m, i) => `
+          <div class="chart-col">
+            <div class="bar" style="height:${(values[i] / maxVal) * 100}%;"></div>
+            <span class="label">${m}</span>
+          </div>
+        `).join('');
+
+        // Recent enrollments
+        document.getElementById('recent-enrollments').innerHTML = `
+          <table class="table">
+            <thead><tr><th>Student</th><th>Course</th><th>Progress</th><th>Date</th></tr></thead>
+            <tbody>${enrollments.map(e => `
+              <tr>
+                <td>${e.student_name}</td>
+                <td>${e.course_title}</td>
+                <td>
+                  <div class="flex items-center gap-sm">
+                    <div class="progress-bar" style="width:100px;"><div class="progress-fill" style="width:${e.progress}%;"></div></div>
+                    <span class="text-sm">${e.progress}%</span>
+                  </div>
+                </td>
+                <td>${OC2.Utils.formatDate(e.start_date)}</td>
+              </tr>
+            `).join('')}</tbody>
+          </table>
+        `;
+      } catch (err) {
+        OC2.Toast.error("Failed to load dashboard data.");
+      }
+    }
+
+    // ── STUDENTS ──
+    async function renderStudents() {
+      try {
+        const search = (document.getElementById('student-search').value || '').toLowerCase();
+        let students = await ApiClient.getAdminStudents();
+        if (search) {
+          students = students.filter(s => 
+            s.name.toLowerCase().includes(search) || 
+            s.email.toLowerCase().includes(search) || 
+            (s.college && s.college.toLowerCase().includes(search))
+          );
+        }
+
+        document.getElementById('students-table').innerHTML = `
+          <table class="table">
+            <thead><tr><th></th><th>Name</th><th>Email</th><th>College</th><th>Year</th><th>Courses</th><th>Actions</th></tr></thead>
+            <tbody>${students.map(s => `
+              <tr>
+                <td><div class="avatar avatar-sm">${s.avatar}</div></td>
+                <td class="font-semibold">${s.name}</td>
+                <td>${s.email}</td>
+                <td>${s.college || 'N/A'}</td>
+                <td>${s.year || 'N/A'}</td>
+                <td><span class="badge badge-primary">${s.enrolledCoursesCount}</span></td>
+                <td><button class="btn btn-ghost btn-sm" style="color:var(--accent-rose);" onclick="deleteStudent('${s.id}')">Delete</button></td>
+              </tr>
+            `).join('')}</tbody>
+          </table>
+        `;
+      } catch (err) {
+        OC2.Toast.error("Failed to load students list.");
+      }
+    }
+
+    async function deleteStudent(id) {
+      if (confirm('Delete this student?')) {
+        try {
+          await ApiClient.deleteStudent(id);
+          OC2.Toast.success('Student deleted.');
+          await renderStudents();
+        } catch (err) {
+          OC2.Toast.error("Failed to delete student.");
+        }
+      }
+    }
+
+    function openAddStudentModal() { OC2.Modal.open('add-student-modal'); }
+
+    document.getElementById('add-student-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const { valid, data } = OC2.Validate.form(this);
+      if (!valid) { OC2.Toast.error('Fill required fields.'); return; }
+      try {
+        await ApiClient.addStudent(data);
+        OC2.Modal.close('add-student-modal');
+        OC2.Toast.success('Student added!');
+        this.reset();
+        await renderStudents();
+      } catch (err) {
+        OC2.Toast.error(err.message || "Failed to add student.");
+      }
+    });
+
+    // ── COURSES ──
+    async function renderCourses() {
+      try {
+        const courses = await ApiClient.getAdminCourses();
+        document.getElementById('admin-courses-grid').innerHTML = courses.map(c => `
+          <div class="card">
+            <div class="flex items-center justify-between" style="margin-bottom:var(--space-md);">
+              <span style="font-size:2rem;">${c.icon || '📦'}</span>
+              <span class="badge ${c.published ? 'badge-green' : 'badge-rose'}">${c.published ? 'Published' : 'Draft'}</span>
+            </div>
+            <h4 style="margin-bottom:var(--space-xs);">${c.title}</h4>
+            <p class="text-sm text-muted" style="margin-bottom:var(--space-md);">${c.category} · ${c.duration} · ${c.level}</p>
+            <div class="flex items-center justify-between" style="margin-bottom:var(--space-md);">
+              <span class="font-bold">${OC2.Utils.formatCurrency(c.price)}</span>
+              <span class="text-sm text-muted">${c.enrolled} enrolled</span>
+            </div>
+            <div class="flex gap-sm">
+              <button class="btn btn-ghost btn-sm" onclick="togglePublish('${c.id}')">${c.published ? 'Unpublish' : 'Publish'}</button>
+              <button class="btn btn-ghost btn-sm" style="color:var(--accent-rose);" onclick="deleteCourse('${c.id}')">Delete</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        OC2.Toast.error("Failed to load courses.");
+      }
+    }
+
+    async function togglePublish(id) {
+      try {
+        await ApiClient.toggleCoursePublish(id);
+        OC2.Toast.success('Course status updated!');
+        await renderCourses();
+      } catch (err) {
+        OC2.Toast.error("Failed to update status.");
+      }
+    }
+
+    async function deleteCourse(id) {
+      if (confirm('Delete this course?')) {
+        try {
+          await ApiClient.deleteCourse(id);
+          OC2.Toast.success('Course deleted.');
+          await renderCourses();
+        } catch (err) {
+          OC2.Toast.error("Failed to delete course.");
+        }
+      }
+    }
+
+    function openAddCourseModal() { OC2.Modal.open('add-course-modal'); }
+
+    document.getElementById('add-course-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const { valid, data } = OC2.Validate.form(this);
+      if (!valid) { OC2.Toast.error('Fill required fields.'); return; }
+      data.price = parseInt(data.price);
+      try {
+        await ApiClient.addCourse(data);
+        OC2.Modal.close('add-course-modal');
+        OC2.Toast.success('Course added!');
+        this.reset();
+        await renderCourses();
+      } catch (err) {
+        OC2.Toast.error("Failed to add course.");
+      }
+    });
+
+    // ── CLASSES ──
+    async function renderClasses() {
+      try {
+        const classes = await ApiClient.getAdminClasses();
+        document.getElementById('admin-classes-list').innerHTML = classes.map(c => `
+          <div class="card flex items-center gap-xl" style="flex-wrap:wrap;">
+            <div class="card-icon" style="flex-shrink:0;">🎥</div>
+            <div style="flex:1; min-width:200px;">
+              <h4>${c.title}</h4>
+              <p class="text-sm text-muted">${c.course_title}</p>
+            </div>
+            <div><span class="font-semibold">${c.date}</span><br><span class="text-sm text-muted">${c.time}</span></div>
+            <div><span class="text-sm text-muted">👤 ${c.instructor}</span></div>
+            <span class="badge badge-primary">${c.attendees.length} attendees</span>
+          </div>
+        `).join('') || '<p class="text-muted">No classes scheduled.</p>';
+      } catch (err) {
+        OC2.Toast.error("Failed to load classes.");
+      }
+    }
+
+    async function openAddClassModal() {
+      try {
+        const courses = await ApiClient.getAdminCourses();
+        document.getElementById('class-course-select').innerHTML = '<option value="">Select course...</option>' + courses.map(c => `<option value="${c.id}">${c.title}</option>`).join('');
+        OC2.Modal.open('add-class-modal');
+      } catch (err) {
+        OC2.Toast.error("Failed to fetch courses.");
+      }
+    }
+
+    document.getElementById('add-class-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const { valid, data } = OC2.Validate.form(this);
+      if (!valid) { OC2.Toast.error('Fill required fields.'); return; }
+      try {
+        await ApiClient.scheduleClass(data);
+        OC2.Modal.close('add-class-modal');
+        OC2.Toast.success('Class scheduled!');
+        this.reset();
+        await renderClasses();
+      } catch (err) {
+        OC2.Toast.error("Failed to schedule class.");
+      }
+    });
+
+    // ── ASSIGNMENTS ──
+    async function renderAssignments() {
+      try {
+        const assignments = await ApiClient.getAdminAssignments();
+        document.getElementById('admin-assignments-list').innerHTML = assignments.map(a => `
+          <div class="card">
+            <div class="flex items-center justify-between" style="margin-bottom:var(--space-md);">
+              <div>
+                <h4>${a.title}</h4>
+                <p class="text-sm text-muted">${a.course_title} · Due: ${OC2.Utils.formatDate(a.due_date)}</p>
+              </div>
+              <span class="badge badge-primary">${a.submissions.length} submissions</span>
+            </div>
+            <p style="font-size:0.9rem; margin-bottom:var(--space-md);">${a.description}</p>
+            ${a.submissions.length ? `
+              <div class="table-wrapper">
+                <table class="table">
+                  <thead><tr><th>Student</th><th>File</th><th>Submitted</th><th>Grade</th></tr></thead>
+                  <tbody>${a.submissions.map(sub => `
+                    <tr>
+                      <td>${sub.student_name}</td>
+                      <td class="font-mono text-sm">${sub.file_name}</td>
+                      <td>${OC2.Utils.formatDate(sub.submitted_at)}</td>
+                      <td>${sub.grade !== null ? `<span class="badge badge-green">${sub.grade}/100</span>` : '<span class="badge badge-amber">Pending</span>'}</td>
+                    </tr>
+                  `).join('')}</tbody>
+                </table>
+              </div>
+            ` : ''}
+          </div>
+        `).join('') || '<p class="text-muted">No assignments created.</p>';
+      } catch (err) {
+        OC2.Toast.error("Failed to load assignments.");
+      }
+    }
+
+    async function openAddAssignmentModal() {
+      try {
+        const courses = await ApiClient.getAdminCourses();
+        document.getElementById('asg-course-select').innerHTML = '<option value="">Select course...</option>' + courses.map(c => `<option value="${c.id}">${c.title}</option>`).join('');
+        OC2.Modal.open('add-asg-modal');
+      } catch (err) {
+        OC2.Toast.error("Failed to fetch courses.");
+      }
+    }
+
+    document.getElementById('add-asg-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const { valid, data } = OC2.Validate.form(this);
+      if (!valid) { OC2.Toast.error('Fill required fields.'); return; }
+      try {
+        await ApiClient.createAssignment(data);
+        OC2.Modal.close('add-asg-modal');
+        OC2.Toast.success('Assignment created!');
+        this.reset();
+        await renderAssignments();
+      } catch (err) {
+        OC2.Toast.error("Failed to create assignment.");
+      }
+    });
+
+    // ── PAYMENTS ──
+    async function renderPayments() {
+      try {
+        const payments = await ApiClient.getAdminPayments();
+        const total = payments.reduce((s, p) => s + p.amount, 0);
+        const completed = payments.filter(p => p.status === 'Completed');
+
+        document.getElementById('payment-kpis').innerHTML = `
+          <div class="kpi-card"><div class="kpi-icon green">💰</div><div><div class="kpi-value">${OC2.Utils.formatCurrency(total)}</div><div class="kpi-label">Total Revenue</div></div></div>
+          <div class="kpi-card"><div class="kpi-icon cyan">📊</div><div><div class="kpi-value">${payments.length}</div><div class="kpi-label">Transactions</div></div></div>
+          <div class="kpi-card"><div class="kpi-icon purple">✅</div><div><div class="kpi-value">${completed.length}</div><div class="kpi-label">Completed</div></div></div>
+        `;
+
+        document.getElementById('payments-table').innerHTML = `
+          <table class="table">
+            <thead><tr><th>Receipt</th><th>Student</th><th>Course</th><th>Amount</th><th>Method</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody>${payments.map(p => `
+              <tr>
+                <td class="font-mono">${p.receipt_no}</td>
+                <td>${p.student_name}</td>
+                <td>${p.course_title}</td>
+                <td class="font-semibold">${OC2.Utils.formatCurrency(p.amount)}</td>
+                <td>${p.method}</td>
+                <td>${OC2.Utils.formatDate(p.date)}</td>
+                <td><span class="badge badge-green">${p.status}</span></td>
+              </tr>
+            `).join('')}</tbody>
+          </table>
+        `;
+      } catch (err) {
+        OC2.Toast.error("Failed to load payments.");
+      }
+    }
+
+    // ── JOBS ──
+    async function renderJobs() {
+      try {
+        const jobs = await ApiClient.getAdminJobs();
+        document.getElementById('admin-jobs-list').innerHTML = jobs.map(j => `
+          <div class="card">
+            <div class="flex items-center justify-between" style="margin-bottom:var(--space-md);">
+              <div>
+                <h4>${j.role}</h4>
+                <p class="text-sm text-muted">${j.company} · ${j.location}</p>
+              </div>
+              <div class="flex items-center gap-sm">
+                <span class="badge badge-primary">${j.type}</span>
+                <span class="badge badge-amber">${j.applications.length} applications</span>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; margin-bottom:var(--space-md);">${j.description}</p>
+            <div class="flex gap-sm flex-wrap">${j.skills.map(s => `<span class="badge badge-outline">${s}</span>`).join('')}</div>
+            ${j.applications.length ? `
+              <div style="margin-top:var(--space-lg);">
+                <h5 style="margin-bottom:var(--space-sm);">Applications</h5>
+                <div class="table-wrapper">
+                  <table class="table">
+                    <thead><tr><th>Name</th><th>Email</th><th>Applied</th><th>AI Score</th><th>Status</th></tr></thead>
+                    <tbody>${j.applications.map(a => `
+                      <tr>
+                        <td>${a.student_name}</td>
+                        <td>${a.student_email}</td>
+                        <td>${OC2.Utils.formatDate(a.applied_at)}</td>
+                        <td>
+                          <span class="badge ${a.match_score >= 80 ? 'badge-green' : (a.match_score >= 50 ? 'badge-amber' : 'badge-rose')}">
+                            ${a.match_score}%
+                          </span>
+                        </td>
+                        <td><span class="badge badge-amber">${a.status}</span></td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" class="text-xs text-muted" style="padding-top:0; border-bottom:1px solid var(--border-subtle);">
+                          <div style="white-space: pre-line; background: var(--bg-primary); padding: var(--space-sm); border-radius: var(--radius-sm); margin-bottom: var(--space-sm);">
+                            ${a.match_explanation}
+                          </div>
+                        </td>
+                      </tr>
+                    `).join('')}</tbody>
+                  </table>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        `).join('') || '<p class="text-muted">No job posts.</p>';
+      } catch (err) {
+        OC2.Toast.error("Failed to load job listings.");
+      }
+    }
+
+    function openAddJobModal() { OC2.Modal.open('add-job-modal'); }
+
+    document.getElementById('add-job-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const { valid, data } = OC2.Validate.form(this);
+      if (!valid) { OC2.Toast.error('Fill required fields.'); return; }
+      try {
+        await ApiClient.postJob(data);
+        OC2.Modal.close('add-job-modal');
+        OC2.Toast.success('Job posted!');
+        this.reset();
+        await renderJobs();
+      } catch (err) {
+        OC2.Toast.error("Failed to post job.");
+      }
+    });
+
+    // ── CONTACTS ──
+    async function renderContacts() {
+      try {
+        const contacts = await ApiClient.getAdminContacts();
+        document.getElementById('contacts-list').innerHTML = contacts.map(c => `
+          <div class="card" style="border-left:4px solid ${c.read ? 'var(--border-color)' : 'var(--brand-primary)'};">
+            <div class="flex items-center justify-between" style="margin-bottom:var(--space-md);">
+              <div>
+                <h4>${c.name} ${!c.read ? '<span class="badge badge-primary" style="margin-left:8px;">New</span>' : ''}</h4>
+                <p class="text-sm text-muted">${c.email} · ${c.phone || 'No phone'} · ${OC2.Utils.formatDate(c.date)}</p>
+              </div>
+              <span class="badge badge-outline">${c.subject}</span>
+            </div>
+            <p style="font-size:0.95rem;">${c.message}</p>
+          </div>
+        `).join('') || '<p class="text-muted">No messages yet.</p>';
+      } catch (err) {
+        OC2.Toast.error("Failed to load contact messages.");
+      }
+    }
+
+    // Init Modals
+    ['add-student-modal','add-course-modal','add-class-modal','add-asg-modal','add-job-modal'].forEach(id => OC2.Modal.init(id));
+  </script>
+</body>
+</html>

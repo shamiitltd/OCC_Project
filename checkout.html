@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Offcampuscareer — Enroll and pay for your training program.">
+  <title>Checkout — Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    .checkout-layout { display:grid; grid-template-columns:1.4fr 1fr; gap:var(--space-2xl); align-items:start; }
+    .order-summary { position:sticky; top:calc(var(--nav-height) + var(--space-xl)); }
+    .payment-tab-btn { flex:1; padding:var(--space-md); text-align:center; border:1px solid var(--border-color); background:var(--bg-surface-alt); cursor:pointer; font-weight:600; font-size:0.9rem; color:var(--text-secondary); transition:all .25s; }
+    .payment-tab-btn:first-child { border-radius:var(--radius-md) 0 0 var(--radius-md); }
+    .payment-tab-btn:last-child { border-radius:0 var(--radius-md) var(--radius-md) 0; }
+    .payment-tab-btn.active { background:var(--brand-gradient-solid); color:#fff; border-color:transparent; }
+    .payment-tab-content { display:none; padding:var(--space-xl) 0; }
+    .payment-tab-content.active { display:block; animation:fadeIn .3s; }
+    .card-input-group { display:flex; gap:var(--space-md); }
+    .card-input-group > * { flex:1; }
+    .qr-placeholder { width:200px; height:200px; background:var(--bg-surface-alt); border:2px dashed var(--border-color); border-radius:var(--radius-lg); display:flex; align-items:center; justify-content:center; margin:var(--space-lg) auto; font-size:4rem; }
+    .processing-overlay { position:fixed; inset:0; z-index:5000; background:rgba(10,10,26,0.9); display:none; align-items:center; justify-content:center; flex-direction:column; gap:var(--space-xl); }
+    .processing-overlay.active { display:flex; }
+    @media (max-width:768px) { .checkout-layout { grid-template-columns:1fr; } .order-summary { position:static; } }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="navbar">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand"><img src="offcampuscareer logo.png" alt="OC2 Logo"><span class="nav-brand-text">Offcampus<span>career</span></span></a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="training.html">Training</a>
+        <a href="careers.html">Careers</a><a href="placement.html">Placement</a><a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════ PAGE HERO ═══════════ -->
+  <section class="page-hero" style="padding-bottom:var(--space-xl);">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <span class="section-label">// Checkout</span>
+      <h1 style="margin-top:var(--space-md);"><span class="text-gradient">Secure</span> Enrollment</h1>
+      <!-- Steps -->
+      <div class="checkout-steps" style="margin-top:var(--space-xl);" id="checkout-steps">
+        <div class="checkout-step active" data-step="1"><span class="step-number">1</span><span>Course</span></div>
+        <div class="step-divider"></div>
+        <div class="checkout-step" data-step="2"><span class="step-number">2</span><span>Details</span></div>
+        <div class="step-divider"></div>
+        <div class="checkout-step" data-step="3"><span class="step-number">3</span><span>Payment</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CHECKOUT BODY ═══════════ -->
+  <section class="section" style="padding-top:var(--space-lg);">
+    <div class="container">
+
+      <!-- ═══ SELECT COURSE VIEW ═══ -->
+      <div id="step-1">
+        <div class="section-header" style="margin-bottom:var(--space-xl);">
+          <h3>Select a <span class="text-gradient">Program</span></h3>
+        </div>
+        <div class="grid grid-3 gap-lg" id="course-select-grid"></div>
+      </div>
+
+      <!-- ═══ STUDENT DETAILS + PAYMENT VIEW ═══ -->
+      <div id="step-2-3" style="display:none;">
+        <div class="checkout-layout">
+          <!-- Left: Form -->
+          <div>
+            <!-- Student Info -->
+            <div class="card" style="margin-bottom:var(--space-xl);">
+              <h3 style="margin-bottom:var(--space-xl);">👤 Your Details</h3>
+              <form id="student-form">
+                <div class="grid grid-2 gap-lg">
+                  <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" name="name" class="form-input" placeholder="Your full name" data-validate="required">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" name="email" class="form-input" placeholder="you@example.com" data-validate="required,email">
+                  </div>
+                </div>
+                <div class="grid grid-2 gap-lg">
+                  <div class="form-group">
+                    <label class="form-label">Phone *</label>
+                    <input type="tel" name="phone" class="form-input" placeholder="+91 XXXXX XXXXX" data-validate="required">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">College *</label>
+                    <input type="text" name="college" class="form-input" placeholder="Your college name" data-validate="required">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Year</label>
+                  <select name="year" class="form-select">
+                    <option value="1st Year">1st Year</option><option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year" selected>3rd Year</option><option value="4th Year">4th Year</option>
+                    <option value="Graduated">Graduated</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="card">
+              <h3 style="margin-bottom:var(--space-xl);">💳 Payment Method</h3>
+              <div class="flex" style="margin-bottom:var(--space-md);">
+                <button class="payment-tab-btn active" data-pay="upi" onclick="switchPayTab('upi')">UPI</button>
+                <button class="payment-tab-btn" data-pay="card" onclick="switchPayTab('card')">Card</button>
+                <button class="payment-tab-btn" data-pay="netbanking" onclick="switchPayTab('netbanking')">Net Banking</button>
+              </div>
+
+              <!-- UPI -->
+              <div class="payment-tab-content active" id="pay-upi">
+                <div class="qr-placeholder">📱</div>
+                <p class="text-center text-muted text-sm" style="margin-bottom:var(--space-lg);">Scan QR or enter UPI ID below</p>
+                <div class="form-group">
+                  <label class="form-label">UPI ID</label>
+                  <input type="text" class="form-input" placeholder="yourname@upi" id="upi-id">
+                </div>
+              </div>
+
+              <!-- Card -->
+              <div class="payment-tab-content" id="pay-card">
+                <div class="form-group">
+                  <label class="form-label">Card Number</label>
+                  <input type="text" class="form-input" placeholder="1234 5678 9012 3456" id="card-number" maxlength="19">
+                </div>
+                <div class="card-input-group">
+                  <div class="form-group">
+                    <label class="form-label">Expiry</label>
+                    <input type="text" class="form-input" placeholder="MM/YY" id="card-expiry" maxlength="5">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">CVV</label>
+                    <input type="password" class="form-input" placeholder="•••" id="card-cvv" maxlength="3">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Net Banking -->
+              <div class="payment-tab-content" id="pay-netbanking">
+                <div class="form-group">
+                  <label class="form-label">Select Bank</label>
+                  <select class="form-select" id="bank-select">
+                    <option value="">Choose your bank...</option>
+                    <option value="SBI">State Bank of India</option>
+                    <option value="HDFC">HDFC Bank</option>
+                    <option value="ICICI">ICICI Bank</option>
+                    <option value="Axis">Axis Bank</option>
+                    <option value="Kotak">Kotak Mahindra Bank</option>
+                    <option value="PNB">Punjab National Bank</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-lg w-full" id="pay-btn" onclick="processPayment()">
+                Pay Now <span class="arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Order Summary -->
+          <div class="order-summary">
+            <div class="card">
+              <h4 style="margin-bottom:var(--space-xl);">🧾 Order Summary</h4>
+              <div id="order-details"></div>
+              <div style="border-top:1px solid var(--border-subtle); margin-top:var(--space-lg); padding-top:var(--space-lg);">
+                <div class="form-group">
+                  <label class="form-label">Discount Code</label>
+                  <div class="flex gap-sm">
+                    <input type="text" class="form-input" placeholder="Enter code" id="discount-code" style="flex:1;">
+                    <button class="btn btn-secondary btn-sm" onclick="applyDiscount()">Apply</button>
+                  </div>
+                </div>
+              </div>
+              <div id="order-total" style="border-top:2px solid var(--brand-primary); padding-top:var(--space-lg); margin-top:var(--space-md);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SUCCESS VIEW ═══ -->
+      <div id="step-success" style="display:none;">
+        <div class="payment-success">
+          <div class="success-icon">✅</div>
+          <h2 style="margin-bottom:var(--space-md);">Payment Successful!</h2>
+          <p style="max-width:500px; margin:0 auto var(--space-xl);" id="success-message"></p>
+          <div class="card" style="max-width:500px; margin:0 auto var(--space-xl); text-align:left;" id="receipt-card"></div>
+          <div class="flex gap-md justify-center flex-wrap">
+            <a href="student.html" class="btn btn-primary btn-lg">Go to Student Portal <span class="arrow">→</span></a>
+            <a href="training.html" class="btn btn-secondary btn-lg">Browse More Programs</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Processing Overlay -->
+  <div class="processing-overlay" id="processing-overlay">
+    <div class="spinner" style="width:60px; height:60px; border-width:4px;"></div>
+    <h3>Processing Payment...</h3>
+    <p class="text-muted">Please don't close this window</p>
+  </div>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="padding-top:0; border-top:none;">
+        <p>&copy; 2025 Offcampuscareer — SHAMIIT LLP. All Rights Reserved.</p>
+        <p class="text-sm text-muted">🔒 Secure checkout — your data is encrypted</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container"></div>
+  <script src="js/api-client.js"></script>
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let selectedCourse = null;
+    let discount = 0;
+    let currentPayMethod = 'UPI';
+
+    // Init: Check URL param for course
+    (async function() {
+      const courseId = OC2.Utils.getUrlParam('courseId');
+      if (courseId) {
+        try {
+          selectedCourse = await ApiClient.getCoursesPublic(courseId);
+          if (selectedCourse) {
+            goToStep2();
+            return;
+          }
+        } catch (err) {
+          console.error("Failed to load course details", err);
+        }
+      }
+      await renderCourseSelect();
+    })();
+
+    async function renderCourseSelect() {
+      try {
+        const courses = await ApiClient.getCoursesPublic();
+        const grid = document.getElementById('course-select-grid');
+        grid.innerHTML = courses.map(c => `
+          <div class="card" style="cursor:pointer;" onclick="selectCourse('${c.id}')">
+            <div style="font-size:2.5rem; margin-bottom:var(--space-md);">${c.icon}</div>
+            <span class="badge badge-primary" style="margin-bottom:var(--space-sm);">${c.category}</span>
+            <h4 style="margin-bottom:var(--space-sm);">${c.title}</h4>
+            <p class="text-sm" style="margin-bottom:var(--space-lg);">${c.duration} · ${c.level}</p>
+            <span style="font-family:'Outfit'; font-size:1.5rem; font-weight:800;">${OC2.Utils.formatCurrency(c.price)}</span>
+          </div>
+        `).join('');
+      } catch (err) {
+        OC2.Toast.error("Failed to load courses list.");
+      }
+    }
+
+    async function selectCourse(courseId) {
+      try {
+        selectedCourse = await ApiClient.getCoursesPublic(courseId);
+        if (selectedCourse) goToStep2();
+      } catch (err) {
+        OC2.Toast.error("Failed to load course details.");
+      }
+    }
+
+    function goToStep2() {
+      document.getElementById('step-1').style.display = 'none';
+      document.getElementById('step-2-3').style.display = 'block';
+      updateSteps(2);
+      renderOrderSummary();
+    }
+
+    function updateSteps(active) {
+      document.querySelectorAll('#checkout-steps .checkout-step').forEach(s => {
+        const step = parseInt(s.dataset.step);
+        s.classList.remove('active', 'completed');
+        if (step < active) s.classList.add('completed');
+        if (step === active) s.classList.add('active');
+      });
+    }
+
+    function renderOrderSummary() {
+      if (!selectedCourse) return;
+      const c = selectedCourse;
+      document.getElementById('order-details').innerHTML = `
+        <div class="flex gap-lg items-center" style="margin-bottom:var(--space-lg);">
+          <span style="font-size:2.5rem;">${c.icon}</span>
+          <div>
+            <h4>${c.title}</h4>
+            <p class="text-sm text-muted">${c.duration} · ${c.level}</p>
+          </div>
+        </div>
+        <div class="flex justify-between" style="margin-bottom:var(--space-sm);">
+          <span class="text-muted">Course Fee</span>
+          <span>${OC2.Utils.formatCurrency(c.price)}</span>
+        </div>
+        <div class="flex justify-between" style="margin-bottom:var(--space-sm);" id="discount-line" style="display:none;">
+          <span class="text-muted">Discount</span>
+          <span style="color:var(--accent-green);">-${OC2.Utils.formatCurrency(discount)}</span>
+        </div>
+        <div class="flex justify-between" style="margin-bottom:var(--space-sm);">
+          <span class="text-muted">GST (18%)</span>
+          <span>${OC2.Utils.formatCurrency(Math.round((c.price - discount) * 0.18))}</span>
+        </div>
+      `;
+      const total = Math.round((selectedCourse.price - discount) * 1.18);
+      document.getElementById('order-total').innerHTML = `
+        <div class="flex justify-between">
+          <span style="font-weight:700; font-size:1.1rem;">Total</span>
+          <span style="font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--brand-primary);">${OC2.Utils.formatCurrency(total)}</span>
+        </div>
+      `;
+    }
+
+    function applyDiscount() {
+      const code = document.getElementById('discount-code').value.trim().toUpperCase();
+      if (code === 'OC2FIRST' || code === 'WELCOME10') {
+        discount = Math.round(selectedCourse.price * 0.1);
+        OC2.Toast.success('10% discount applied!');
+      } else if (code === 'LAUNCH20') {
+        discount = Math.round(selectedCourse.price * 0.2);
+        OC2.Toast.success('20% discount applied!');
+      } else {
+        discount = 0;
+        OC2.Toast.error('Invalid discount code.');
+      }
+      renderOrderSummary();
+    }
+
+    function switchPayTab(tab) {
+      document.querySelectorAll('.payment-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.payment-tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelector(`[data-pay="${tab}"]`).classList.add('active');
+      document.getElementById(`pay-${tab}`).classList.add('active');
+      currentPayMethod = tab === 'upi' ? 'UPI' : tab === 'card' ? 'Card' : 'Net Banking';
+    }
+
+    async function processPayment() {
+      const form = document.getElementById('student-form');
+      const { valid, data } = OC2.Validate.form(form);
+      if (!valid) {
+        OC2.Toast.error('Please fill in all required student details.');
+        return;
+      }
+
+      // Show processing
+      updateSteps(3);
+      document.getElementById('processing-overlay').classList.add('active');
+
+      const total = Math.round((selectedCourse.price - discount) * 1.18);
+
+      try {
+        const res = await ApiClient.checkout({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          college: data.college,
+          year: data.year,
+          courseId: selectedCourse.id,
+          amount: total,
+          method: currentPayMethod
+        });
+
+        // Hide processing, show success
+        document.getElementById('processing-overlay').classList.remove('active');
+        document.getElementById('step-2-3').style.display = 'none';
+        document.getElementById('step-success').style.display = 'block';
+
+        document.getElementById('success-message').textContent = `Welcome, ${res.student.name}! You're now enrolled in ${selectedCourse.title}. Your student portal is ready.`;
+
+        document.getElementById('receipt-card').innerHTML = `
+          <div class="flex justify-between" style="margin-bottom:var(--space-sm);"><span class="text-muted">Receipt No</span><span class="font-mono">${res.payment.receiptNo}</span></div>
+          <div class="flex justify-between" style="margin-bottom:var(--space-sm);"><span class="text-muted">Course</span><span>${selectedCourse.title}</span></div>
+          <div class="flex justify-between" style="margin-bottom:var(--space-sm);"><span class="text-muted">Amount Paid</span><span class="font-bold" style="color:var(--accent-green);">${OC2.Utils.formatCurrency(res.payment.amount)}</span></div>
+          <div class="flex justify-between" style="margin-bottom:var(--space-sm);"><span class="text-muted">Method</span><span>${res.payment.method}</span></div>
+          <div class="flex justify-between"><span class="text-muted">Date</span><span>${OC2.Utils.formatDate(res.payment.date)}</span></div>
+        `;
+
+        // Confetti!
+        OC2.Confetti.burst();
+      } catch (err) {
+        document.getElementById('processing-overlay').classList.remove('active');
+        OC2.Toast.error(err.message || "Checkout failed. Please try again.");
+      }
+    }
+  </script>
+</body>
+</html>

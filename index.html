@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Offcampuscareer — India's #1 Open Career Platform. Learn, Mentor, Get Jobs, Crack Competitive Exams (JEE/NEET/UPSC). One platform for India's Youth. Learn Together, Work Together, Grow Together.">
+  <meta property="og:title" content="Offcampuscareer — Turning Learners into Earners">
+  <meta property="og:description" content="India's one-stop career platform for learning, mentorship, jobs, and competitive exam prep. An initiative of SHAMIIT LLP.">
+  <meta name="keywords" content="offcampus career, JEE preparation, UPSC coaching, online courses, job portal, mentorship, internship, freshers jobs">
+  <title>Offcampuscareer — Turning Learners into Earners | India's #1 Career Platform</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="navbar" id="main-nav" role="navigation" aria-label="Main Navigation">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand" aria-label="Offcampuscareer Home">
+        <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" loading="lazy">
+        <span class="nav-brand-text">Offcampus<span>career</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="nav-links" id="nav-links" role="menubar">
+        <a href="index.html" role="menuitem">Home</a>
+        <div class="nav-dropdown" role="none">
+          <a href="training.html" class="nav-dropdown-toggle" role="menuitem" aria-haspopup="true">
+            OCC TIP
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="training.html" class="nav-dropdown-item" role="menuitem"><span class="icon">📚</span>All Courses</a>
+            <a href="training.html#career" class="nav-dropdown-item" role="menuitem"><span class="icon">🚀</span>Job Bootcamp</a>
+            <a href="training.html#ai" class="nav-dropdown-item" role="menuitem"><span class="icon">🤖</span>AI Training</a>
+            <a href="training.html#webdev" class="nav-dropdown-item" role="menuitem"><span class="icon">💻</span>Web Development</a>
+          </div>
+        </div>
+        <a href="mentor.html" role="menuitem">OCC Mentor</a>
+        <a href="careers.html" role="menuitem">OCC Jobs</a>
+        <a href="exams.html" role="menuitem">OCC Exams</a>
+        <a href="corporate.html" role="menuitem">Corporate</a>
+        <a href="community.html" role="menuitem">Community</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <a href="student.html" class="btn btn-sm btn-secondary" id="nav-login-btn">Login</a>
+        <a href="checkout.html" class="btn btn-sm btn-primary">Enroll Free</a>
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true"></div>
+  <div class="nav-links-mobile" id="mobile-nav" role="dialog" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <span class="nav-brand-text" style="font-size:1rem;">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+      <button onclick="OC2.Navbar.closeMobileMenu()" aria-label="Close menu" style="background:none;border:none;color:var(--text-secondary);font-size:1.25rem;cursor:pointer;">✕</button>
+    </div>
+    <div class="mobile-section-title">Platform</div>
+    <a href="index.html">🏠 Home</a>
+    <a href="training.html">📚 OCC TIP — Training</a>
+    <a href="mentor.html">🎓 OCC Mentor</a>
+    <a href="careers.html">💼 OCC Jobs</a>
+    <a href="exams.html">📝 OCC Exams</a>
+    <div class="mobile-section-title">More</div>
+    <a href="corporate.html">🏢 Corporate</a>
+    <a href="community.html">👥 Community</a>
+    <a href="placement.html">🏆 Placements</a>
+    <a href="about.html">ℹ️ About Us</a>
+    <a href="contact.html">📞 Contact</a>
+    <div class="mobile-actions">
+      <a href="student.html" class="btn btn-secondary w-full" style="justify-content:center;">Student Login</a>
+      <a href="checkout.html" class="btn btn-primary w-full" style="justify-content:center;">Enroll Now →</a>
+    </div>
+  </div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero" aria-label="Hero Section">
+    <div class="hero-bg"></div>
+    <div class="grid-bg"></div>
+    <div class="particles" aria-hidden="true">
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content" style="max-width:760px;">
+        <span class="section-label">// An Initiative of SHAMIIT LLP</span>
+        <h1 style="margin-top:var(--space-md); line-height:1.15;">
+          <span class="text-gradient">One Platform</span>,<br>Infinite Possibilities for<br>India's Youth
+        </h1>
+        <p style="font-size:1.15rem; margin-top:var(--space-lg); max-width:600px;">
+          Learn from industry experts, get mentored by toppers & professionals, crack competitive exams, find your dream job — all in one place.
+        </p>
+        <!-- Tagline -->
+        <div class="flex gap-md flex-wrap" style="margin-top:var(--space-lg); font-weight:700; font-size:0.9rem; color:var(--text-muted);">
+          <span style="color:var(--module-tip);">📚 Learn Together</span>
+          <span style="color:var(--text-muted);">·</span>
+          <span style="color:var(--module-jobs);">💼 Work Together</span>
+          <span style="color:var(--text-muted);">·</span>
+          <span style="color:var(--module-mentor);">🚀 Grow Together</span>
+        </div>
+        <div class="hero-actions" style="margin-top:var(--space-2xl);">
+          <a href="checkout.html" class="btn btn-primary btn-xl">
+            Start for Free <span class="arrow">→</span>
+          </a>
+          <a href="mentor.html" class="btn btn-secondary btn-xl">
+            Find a Mentor
+          </a>
+        </div>
+        <!-- Quick Stats -->
+        <div class="flex gap-xl flex-wrap" style="margin-top:var(--space-2xl);">
+          <div>
+            <div style="font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--text-primary);">12,500+</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">Learners</div>
+          </div>
+          <div style="width:1px; background:var(--border-subtle);"></div>
+          <div>
+            <div style="font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--text-primary);">85+</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">Expert Mentors</div>
+          </div>
+          <div style="width:1px; background:var(--border-subtle);"></div>
+          <div>
+            <div style="font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--text-primary);">120+</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">Hiring Partners</div>
+          </div>
+          <div style="width:1px; background:var(--border-subtle);"></div>
+          <div>
+            <div style="font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--accent-green);">95%</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">Placement Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ MODULES SHOWCASE ═══════════ -->
+  <section class="section" id="modules" aria-label="Platform Modules">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">// Our Ecosystem</span>
+        <h2>Everything You Need to<br><span class="text-gradient">Build Your Career</span></h2>
+        <p>Six powerful modules, one unified platform — designed specifically for India's youth and aspirants.</p>
+      </div>
+      <div class="grid grid-3 gap-xl" id="modules-grid">
+        <a href="training.html" class="module-card module-tip-card reveal reveal-delay-1" aria-label="OCC TIP Training Module">
+          <div class="module-card-icon">📚</div>
+          <h3>OCC TIP</h3>
+          <p>Training & Industry Programs — Job Bootcamp, AI Training, Web Dev, Guaranteed Job Program</p>
+          <div class="flex items-center justify-between" style="margin-top:var(--space-md);">
+            <div class="module-stat">45+ Courses · 12K+ Learners</div>
+            <span style="color:rgba(255,255,255,0.6); font-size:1.25rem;">→</span>
+          </div>
+        </a>
+        <a href="mentor.html" class="module-card module-mentor-card reveal reveal-delay-2" aria-label="OCC Mentor Module">
+          <div class="module-card-icon">🎓</div>
+          <h3>OCC Mentor</h3>
+          <p>Connect with IITians, IAS Officers, Industry experts & professionals for 1:1 mentorship sessions</p>
+          <div class="flex items-center justify-between" style="margin-top:var(--space-md);">
+            <div class="module-stat">85+ Mentors · 5K+ Sessions</div>
+            <span style="color:rgba(255,255,255,0.6); font-size:1.25rem;">→</span>
+          </div>
+        </a>
+        <a href="careers.html" class="module-card module-jobs-card reveal reveal-delay-3" aria-label="OCC Jobs Module">
+          <div class="module-card-icon">💼</div>
+          <h3>OCC Jobs</h3>
+          <p>Freshers to experienced — internships, full-time jobs, freelance from 120+ top companies with ATS</p>
+          <div class="flex items-center justify-between" style="margin-top:var(--space-md);">
+            <div class="module-stat">500+ Active Jobs · 120+ Companies</div>
+            <span style="color:rgba(255,255,255,0.6); font-size:1.25rem;">→</span>
+          </div>
+        </a>
+        <a href="exams.html" class="module-card module-exams-card reveal reveal-delay-1" aria-label="OCC Exams Module">
+          <div class="module-card-icon">📝</div>
+          <h3>OCC Exams</h3>
+          <p>JEE, NEET, UPSC, GATE, CAT, SSC — complete prep resources, mentors, and mock tests for all competitive exams</p>
+          <div class="flex items-center justify-between" style="margin-top:var(--space-md);">
+            <div class="module-stat">6+ Exam Tracks · Free Resources</div>
+            <span style="color:rgba(255,255,255,0.6); font-size:1.25rem;">→</span>
+          </div>
+        </a>
+        <a href="corporate.html" class="module-card module-corporate-card reveal reveal-delay-2" aria-label="OCC Corporate Module">
+          <div class="module-card-icon">🏢</div>
+          <h3>OCC Corporate</h3>
+          <p>Companies, colleges, and universities can partner with us for hiring, campus drives, and co-created courses</p>
+          <div class="flex items-center justify-between" style="margin-top:var(--space-md);">
+            <div class="module-stat">50+ College Partners · Campus Drives</div>
+            <span style="color:rgba(255,255,255,0.6); font-size:1.25rem;">→</span>
+          </div>
+        </a>
+        <a href="community.html" class="module-card module-community-card reveal reveal-delay-3" aria-label="OCC Community Module">
+          <div class="module-card-icon">👥</div>
+          <h3>OCC Community</h3>
+          <p>Study groups, discussion forums, peer learning, success stories, events and hackathons — learn socially</p>
+          <div class="flex items-center justify-between" style="margin-top:var(--space-md);">
+            <div class="module-stat">8K+ Members · Active Daily</div>
+            <span style="color:rgba(255,255,255,0.6); font-size:1.25rem;">→</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ STATS BAR ═══════════ -->
+  <section class="section-sm" style="background:var(--bg-surface);" aria-label="Platform Statistics">
+    <div class="container">
+      <div class="stats-bar reveal">
+        <div class="stat-item">
+          <div class="stat-number" data-count="12500" data-suffix="+">0</div>
+          <div class="stat-label">Learners Trained</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="85" data-suffix="+">0</div>
+          <div class="stat-label">Expert Mentors</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="120" data-suffix="+">0</div>
+          <div class="stat-label">Hiring Partners</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="95" data-suffix="%">0</div>
+          <div class="stat-label">Placement Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FEATURED COURSES ═══════════ -->
+  <section class="section" id="programs" aria-label="Featured Programs">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label tip">// OCC TIP</span>
+        <h2>Industry-Ready Training<br><span class="text-gradient-tip">Programs for Every Goal</span></h2>
+        <p>From Job Bootcamp to AI Training to Competitive Exams — our programs are built by experts who've been there.</p>
+      </div>
+      <div class="grid grid-3 gap-xl" id="featured-courses">
+        <!-- Populated by JS -->
+        <div class="card"><div class="skeleton" style="height:200px;"></div></div>
+        <div class="card"><div class="skeleton" style="height:200px;"></div></div>
+        <div class="card"><div class="skeleton" style="height:200px;"></div></div>
+      </div>
+      <div class="text-center" style="margin-top:var(--space-2xl);">
+        <a href="training.html" class="btn btn-secondary btn-lg">View All Programs <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FEATURED MENTORS ═══════════ -->
+  <section class="section" style="background:var(--bg-surface);" aria-label="Featured Mentors">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label mentor">// OCC Mentor</span>
+        <h2>Learn from the <span class="text-gradient-mentor">Best Mentors</span></h2>
+        <p>IITians, IAS Officers, Senior Engineers, Industry Leaders — anyone can be a mentor on our platform.</p>
+      </div>
+      <div class="grid grid-4 gap-xl" id="featured-mentors">
+        <!-- Populated by JS -->
+      </div>
+      <div class="text-center" style="margin-top:var(--space-2xl);">
+        <a href="mentor.html" class="btn btn-mentor btn-lg">Explore All Mentors <span class="arrow">→</span></a>
+        <a href="mentor-portal.html" class="btn btn-ghost btn-lg" style="margin-left:var(--space-md);">Become a Mentor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ EXAM PREP SECTION ═══════════ -->
+  <section class="section" aria-label="Competitive Exams">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label exams">// OCC Exams</span>
+        <h2>Crack <span class="text-gradient-exams">Any Competitive Exam</span></h2>
+        <p>JEE, NEET, UPSC, GATE, CAT, SSC — comprehensive preparation with expert mentors and free resources.</p>
+      </div>
+      <div class="grid grid-3 gap-xl" id="exam-grid">
+        <!-- Populated by JS -->
+      </div>
+      <div class="text-center" style="margin-top:var(--space-2xl);">
+        <a href="exams.html" class="btn btn-exams btn-lg">Explore Exam Prep <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WHY OCC ═══════════ -->
+  <section class="section" style="background:var(--bg-surface);" aria-label="Why Offcampuscareer">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">// Why Offcampuscareer</span>
+        <h2>Why 12,500+ Students <span class="text-gradient">Choose Us</span></h2>
+        <p>We are not just a platform — we are India's most comprehensive career ecosystem for youth.</p>
+      </div>
+      <div class="grid grid-4 gap-xl">
+        <div class="card card-tip text-center reveal reveal-delay-1">
+          <div class="card-icon" style="margin:0 auto var(--space-md);">🤖</div>
+          <h4>AI-Powered Learning</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Adaptive curriculum that evolves with industry trends, your learning pace, and career goals.</p>
+        </div>
+        <div class="card card-mentor text-center reveal reveal-delay-2">
+          <div class="card-icon" style="margin:0 auto var(--space-md); background:rgba(6,182,212,0.1); color:var(--module-mentor);">🎓</div>
+          <h4>Open Mentorship</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Anyone can be a mentor. IITians, IAS officers, engineers — learn from people who've walked the path.</p>
+        </div>
+        <div class="card card-jobs text-center reveal reveal-delay-3">
+          <div class="card-icon" style="margin:0 auto var(--space-md); background:rgba(245,158,11,0.1); color:var(--module-jobs);">💼</div>
+          <h4>Real Job Opportunities</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Direct hiring partnerships with 120+ companies. Apply and track your application status in real time.</p>
+        </div>
+        <div class="card card-exams text-center reveal reveal-delay-4">
+          <div class="card-icon" style="margin:0 auto var(--space-md); background:rgba(52,211,153,0.1); color:var(--module-exams);">📝</div>
+          <h4>Exam Specialization</h4>
+          <p style="margin-top:var(--space-sm); font-size:0.9rem;">Dedicated resources for JEE, NEET, UPSC, GATE, and more — free study material, mock tests, and expert guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ HOW IT WORKS ═══════════ -->
+  <section class="section" aria-label="How It Works">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">// Simple as 1-2-3</span>
+        <h2>Your Journey Starts <span class="text-gradient">Here</span></h2>
+      </div>
+      <div class="grid grid-3 gap-xl">
+        <div class="card reveal reveal-delay-1" style="text-align:center;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--brand-gradient-solid); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Outfit'; font-weight:900; font-size:1.5rem; margin:0 auto var(--space-lg); box-shadow:0 4px 20px rgba(107,47,160,0.35);">1</div>
+          <h4 style="margin-bottom:var(--space-sm);">Create Your Free Account</h4>
+          <p style="font-size:0.9rem;">Sign up in 30 seconds. Tell us your goal — learn, mentor, hire, or crack an exam. We'll personalize your experience.</p>
+        </div>
+        <div class="card reveal reveal-delay-2" style="text-align:center;">
+          <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, #06B6D4, #818CF8); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Outfit'; font-weight:900; font-size:1.5rem; margin:0 auto var(--space-lg); box-shadow:0 4px 20px rgba(6,182,212,0.35);">2</div>
+          <h4 style="margin-bottom:var(--space-sm);">Pick Your Path</h4>
+          <p style="font-size:0.9rem;">Enroll in courses, book mentor sessions, explore job listings, or access free exam resources — all tailored to your domain.</p>
+        </div>
+        <div class="card reveal reveal-delay-3" style="text-align:center;">
+          <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, #34D399, #06B6D4); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Outfit'; font-weight:900; font-size:1.5rem; margin:0 auto var(--space-lg); box-shadow:0 4px 20px rgba(52,211,153,0.35);">3</div>
+          <h4 style="margin-bottom:var(--space-sm);">Learn, Earn & Grow</h4>
+          <p style="font-size:0.9rem;">Complete courses, get certified, get placed at top companies, or become a mentor yourself — the platform grows with you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ JOB LISTINGS PREVIEW ═══════════ -->
+  <section class="section" style="background:var(--bg-surface);" aria-label="Latest Jobs">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label jobs">// OCC Jobs</span>
+        <h2>Latest <span class="text-gradient-jobs">Job Opportunities</span></h2>
+        <p>Fresh opportunities from top companies — internships, full-time roles, and freelance gigs for Indian youth.</p>
+      </div>
+      <div class="grid grid-2 gap-xl" id="homepage-jobs">
+        <!-- Populated by JS -->
+      </div>
+      <div class="text-center" style="margin-top:var(--space-2xl);">
+        <a href="careers.html" class="btn btn-jobs btn-lg">Browse All Jobs <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TESTIMONIALS ═══════════ -->
+  <section class="section" id="testimonials" aria-label="Student Success Stories">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">// Student Stories</span>
+        <h2>Real Success Stories from<br><span class="text-gradient">Our Community</span></h2>
+      </div>
+      <div class="grid grid-3 gap-xl">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The Job Bootcamp completely changed my approach to interviews. Got placed at TCS Digital within 2 weeks of completing the program! The mock sessions were incredibly realistic."</p>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar">RS</div>
+            <div>
+              <div class="testimonial-author">Rahul Sharma</div>
+              <div class="testimonial-role">IIT Delhi → TCS Digital · ₹8 LPA</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The AI Training course gave me hands-on experience with real ML projects. The mentors are phenomenal — King Sir is always available for doubts at any hour!"</p>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar">PP</div>
+            <div>
+              <div class="testimonial-author">Priya Patel</div>
+              <div class="testimonial-role">NIT Trichy → Infosys AI Lab · ₹12 LPA</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"IAS Priya Verma Ma'am's UPSC guidance was transformative. Her strategy for answer writing and current affairs is second to none. Cleared Prelims in my first attempt!"</p>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar">AK</div>
+            <div>
+              <div class="testimonial-author">Ankur Kumar</div>
+              <div class="testimonial-role">From Village UP → UPSC Prelims Cleared</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ COMPANIES TICKER ═══════════ -->
+  <section class="section-sm" style="background:var(--bg-surface);" aria-label="Partner Companies">
+    <div class="container text-center" style="margin-bottom:var(--space-xl);">
+      <p class="text-muted" style="font-size:0.88rem; font-weight:600; text-transform:uppercase; letter-spacing:2px;">Our Students Work At</p>
+    </div>
+    <div class="logo-ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-item"><span class="icon">💙</span> TCS</div>
+        <div class="ticker-item"><span class="icon">🔵</span> Infosys</div>
+        <div class="ticker-item"><span class="icon">🟣</span> Wipro</div>
+        <div class="ticker-item"><span class="icon">🟠</span> Cognizant</div>
+        <div class="ticker-item"><span class="icon">🔴</span> HCL Tech</div>
+        <div class="ticker-item"><span class="icon">🌈</span> Google</div>
+        <div class="ticker-item"><span class="icon">🟡</span> Amazon</div>
+        <div class="ticker-item"><span class="icon">🔵</span> Microsoft</div>
+        <div class="ticker-item"><span class="icon">💚</span> Accenture</div>
+        <div class="ticker-item"><span class="icon">🟤</span> Deloitte</div>
+        <div class="ticker-item"><span class="icon">🔷</span> IBM</div>
+        <div class="ticker-item"><span class="icon">🟩</span> Capgemini</div>
+        <!-- Duplicate for seamless loop -->
+        <div class="ticker-item"><span class="icon">💙</span> TCS</div>
+        <div class="ticker-item"><span class="icon">🔵</span> Infosys</div>
+        <div class="ticker-item"><span class="icon">🟣</span> Wipro</div>
+        <div class="ticker-item"><span class="icon">🟠</span> Cognizant</div>
+        <div class="ticker-item"><span class="icon">🔴</span> HCL Tech</div>
+        <div class="ticker-item"><span class="icon">🌈</span> Google</div>
+        <div class="ticker-item"><span class="icon">🟡</span> Amazon</div>
+        <div class="ticker-item"><span class="icon">🔵</span> Microsoft</div>
+        <div class="ticker-item"><span class="icon">💚</span> Accenture</div>
+        <div class="ticker-item"><span class="icon">🟤</span> Deloitte</div>
+        <div class="ticker-item"><span class="icon">🔷</span> IBM</div>
+        <div class="ticker-item"><span class="icon">🟩</span> Capgemini</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BECOME A MENTOR CTA ═══════════ -->
+  <section class="section" aria-label="Become a Mentor">
+    <div class="container">
+      <div class="card-gradient-border reveal">
+        <div class="card-inner" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-2xl); align-items:center;">
+          <div>
+            <span class="section-label mentor">// Open to All</span>
+            <h2 style="margin-top:var(--space-md);">Share Your Knowledge,<br><span class="text-gradient-mentor">Become a Mentor</span></h2>
+            <p style="margin-top:var(--space-md);">Are you an IITian? IAS officer? Senior Engineer? Domain expert? You can publish courses and mentor thousands of students on our platform — and earn while doing it.</p>
+            <div class="flex gap-md flex-wrap" style="margin-top:var(--space-xl);">
+              <a href="mentor-portal.html" class="btn btn-mentor btn-lg">Start Mentoring <span class="arrow">→</span></a>
+              <a href="mentor.html" class="btn btn-ghost btn-lg">See Our Mentors</a>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-lg);">
+            <div class="card" style="text-align:center; padding:var(--space-lg);">
+              <div style="font-size:2rem; margin-bottom:var(--space-sm);">💰</div>
+              <div style="font-family:'Outfit'; font-size:1.25rem; font-weight:800; color:var(--text-primary);">Earn Income</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">From your courses & sessions</div>
+            </div>
+            <div class="card" style="text-align:center; padding:var(--space-lg);">
+              <div style="font-size:2rem; margin-bottom:var(--space-sm);">🌟</div>
+              <div style="font-family:'Outfit'; font-size:1.25rem; font-weight:800; color:var(--text-primary);">Build Brand</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Grow your personal brand</div>
+            </div>
+            <div class="card" style="text-align:center; padding:var(--space-lg);">
+              <div style="font-size:2rem; margin-bottom:var(--space-sm);">🚀</div>
+              <div style="font-family:'Outfit'; font-size:1.25rem; font-weight:800; color:var(--text-primary);">Reach Thousands</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Impact lakhs of students</div>
+            </div>
+            <div class="card" style="text-align:center; padding:var(--space-lg);">
+              <div style="font-size:2rem; margin-bottom:var(--space-sm);">📜</div>
+              <div style="font-family:'Outfit'; font-size:1.25rem; font-weight:800; color:var(--text-primary);">Full Support</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">We handle marketing & tech</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CTA BANNER ═══════════ -->
+  <section class="section" style="background:var(--brand-gradient-solid); position:relative; overflow:hidden;" aria-label="Call to Action">
+    <div class="grid-bg" style="opacity:0.08;" aria-hidden="true"></div>
+    <div class="container text-center" style="position:relative; z-index:1;">
+      <span style="display:inline-block; background:rgba(255,255,255,0.15); color:#fff; padding:6px 20px; border-radius:var(--radius-full); font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:var(--space-md);">Join 12,500+ Learners</span>
+      <h2 style="color:#fff; margin-bottom:var(--space-md);">Start Your Journey Today — It's Free</h2>
+      <p style="color:rgba(255,255,255,0.85); max-width:560px; margin:0 auto var(--space-xl); font-size:1.05rem;">
+        Whether you want to learn, teach, hire, or crack an exam — Offcampuscareer is your one-stop destination.
+      </p>
+      <div class="flex gap-md justify-center flex-wrap">
+        <a href="checkout.html" class="btn btn-xl" style="background:#fff; color:var(--brand-dark); font-weight:700;">
+          Enroll Now — Free Demo Class <span class="arrow">→</span>
+        </a>
+        <a href="contact.html" class="btn btn-xl btn-outline-white">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="flex items-center gap-sm">
+            <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" style="height:36px;" loading="lazy">
+            <span class="nav-brand-text">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+          </div>
+          <p>Turning Learners into Earners. An initiative of SHAMIIT (SHAMI INNOVATION AND TECHNOLOGIES LLP).</p>
+          <p style="margin-top:var(--space-sm);">📍 Dayanatpur, Near Noida International Airport, Noida, U.P.</p>
+          <div class="footer-module-links">
+            <span class="footer-module-tag badge-tip">TIP</span>
+            <span class="footer-module-tag badge-mentor">Mentor</span>
+            <span class="footer-module-tag badge-jobs">Jobs</span>
+            <span class="footer-module-tag badge-exams">Exams</span>
+            <span class="footer-module-tag badge-corporate">Corporate</span>
+          </div>
+        </div>
+        <div>
+          <h4>Platform</h4>
+          <a href="index.html">Home</a>
+          <a href="training.html">OCC TIP</a>
+          <a href="mentor.html">OCC Mentor</a>
+          <a href="careers.html">OCC Jobs</a>
+          <a href="exams.html">OCC Exams</a>
+          <a href="community.html">Community</a>
+        </div>
+        <div>
+          <h4>Programs</h4>
+          <a href="training.html">Job Bootcamp</a>
+          <a href="training.html">AI Training</a>
+          <a href="training.html">Web Development</a>
+          <a href="training.html">Guaranteed Job</a>
+          <a href="exams.html">JEE Prep</a>
+          <a href="exams.html">UPSC Prep</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="placement.html">Placements</a>
+          <a href="corporate.html">Corporate</a>
+          <a href="contact.html">Contact</a>
+          <a href="admin.html">Admin</a>
+        </div>
+        <div>
+          <h4>Portals</h4>
+          <a href="student.html">Student Portal</a>
+          <a href="mentor-portal.html">Mentor Portal</a>
+          <a href="corporate-portal.html">Corporate Portal</a>
+          <a href="admin.html">Admin Portal</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Offcampuscareer — SHAMIIT LLP. All Rights Reserved. Made with ❤️ for India's Youth.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/offcampuscareer/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Twitter/X">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" role="alert" aria-live="polite"></div>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // ── Populate Featured Courses ──
+    (function renderFeaturedCourses() {
+      const courses = AppState.getFeaturedCourses().slice(0, 6);
+      const grid = document.getElementById('featured-courses');
+      if (!grid || !courses.length) return;
+
+      const colorMap = { tip:'purple', mentor:'cyan', exams:'green' };
+      const badgeMap = { Career:'badge-primary', 'AI/ML':'badge-cyan', 'Web Dev':'badge-indigo', 'Engineering Entrance':'badge-exams', 'Government Exam':'badge-amber' };
+
+      grid.innerHTML = courses.map((c, i) => `
+        <div class="card card-gradient-border reveal reveal-delay-${(i%3)+1}" style="display:flex; flex-direction:column;">
+          <div class="card-inner" style="display:flex; flex-direction:column; height:100%;">
+            <div style="font-size:2.5rem; margin-bottom:var(--space-md);">${c.icon}</div>
+            <div class="flex items-center gap-sm flex-wrap" style="margin-bottom:var(--space-sm);">
+              <span class="badge ${badgeMap[c.category] || 'badge-primary'}">${c.category}</span>
+              <span class="badge badge-outline">${c.level}</span>
+            </div>
+            <h3 style="margin-bottom:var(--space-sm); font-size:1.1rem;">${c.title}</h3>
+            <p style="font-size:0.88rem; flex:1; margin-bottom:var(--space-lg);">${OC2.Utils.truncate(c.description, 110)}</p>
+            <div class="flex items-center justify-between" style="margin-bottom:var(--space-md);">
+              <div>
+                <span style="color:var(--accent-amber); font-size:0.85rem;">${OC2.Utils.generateStars(c.rating)}</span>
+                <span class="text-sm text-muted" style="margin-left:4px;">${c.rating}</span>
+              </div>
+              <span class="text-sm text-muted">⏱ ${c.duration}</span>
+            </div>
+            <div class="flex items-center gap-sm" style="margin-bottom:var(--space-md);">
+              <span class="text-sm text-muted">👤 ${c.instructor}</span>
+              <span class="text-sm text-muted">· ${OC2.Utils.numberShort(c.enrolled)}+ enrolled</span>
+            </div>
+            <div style="padding-top:var(--space-md); border-top:1px solid var(--border-subtle); display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; color:var(--text-primary);">${OC2.Utils.formatCurrency(c.price)}</span>
+              <a href="checkout.html?courseId=${c.id}" class="btn btn-primary btn-sm">Enroll <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      setTimeout(() => OC2.ScrollReveal.init(), 100);
+    })();
+
+    // ── Populate Featured Mentors ──
+    (function renderFeaturedMentors() {
+      const mentors = AppState.getMentors(true).slice(0, 4);
+      const grid = document.getElementById('featured-mentors');
+      if (!grid || !mentors.length) return;
+
+      grid.innerHTML = mentors.map((m, i) => `
+        <div class="mentor-card reveal reveal-delay-${i+1}">
+          <div class="mentor-avatar-wrap">
+            <div class="mentor-avatar">${m.initials}</div>
+            ${m.verified ? '<div class="mentor-badge">✓ Verified</div>' : ''}
+          </div>
+          <div class="mentor-name">${m.name}</div>
+          <div class="mentor-title">${m.title}</div>
+          <div class="mentor-domains">
+            ${m.domains.slice(0,2).map(d => `<span class="badge badge-outline" style="font-size:0.7rem;">${d}</span>`).join('')}
+          </div>
+          <div class="mentor-stats">
+            <div class="mentor-stat-item">
+              <div class="mentor-stat-value">${OC2.Utils.numberShort(m.students)}</div>
+              <div class="mentor-stat-label">Students</div>
+            </div>
+            <div class="mentor-stat-item">
+              <div class="mentor-stat-value">${OC2.Utils.numberShort(m.sessions)}</div>
+              <div class="mentor-stat-label">Sessions</div>
+            </div>
+            <div class="mentor-stat-item">
+              <div class="mentor-stat-value">${m.experience}</div>
+              <div class="mentor-stat-label">Experience</div>
+            </div>
+          </div>
+          <div class="mentor-rating">
+            <span class="stars">${OC2.Utils.generateStars(m.rating)}</span>
+            <span class="score">${m.rating}</span>
+            <span class="count">(${m.totalRatings})</span>
+          </div>
+          <div style="border-top:1px solid var(--border-subtle); padding-top:var(--space-md); display:flex; align-items:center; justify-content:space-between;">
+            <span style="font-weight:700; color:var(--text-primary); font-size:0.95rem;">${OC2.Utils.formatCurrency(m.price)}<span style="font-size:0.75rem; color:var(--text-muted);">${m.priceType}</span></span>
+            <a href="mentor.html?id=${m.id}" class="btn btn-mentor btn-sm">Book Session</a>
+          </div>
+        </div>
+      `).join('');
+      setTimeout(() => OC2.ScrollReveal.init(), 100);
+    })();
+
+    // ── Populate Exam Grid ──
+    (function renderExamGrid() {
+      const exams = AppState.getExamCategories().slice(0, 6);
+      const grid = document.getElementById('exam-grid');
+      if (!grid || !exams.length) return;
+
+      const colorMap = { cyan:'badge-mentor', rose:'badge-rose', amber:'badge-amber', indigo:'badge-indigo', orange:'badge-orange', green:'badge-exams' };
+      const bgMap = { cyan:'rgba(6,182,212,0.12)', rose:'rgba(244,63,94,0.12)', amber:'rgba(245,158,11,0.12)', indigo:'rgba(79,70,229,0.12)', orange:'rgba(234,88,12,0.12)', green:'rgba(52,211,153,0.12)' };
+      const colorMapText = { cyan:'var(--accent-cyan)', rose:'var(--accent-rose)', amber:'var(--accent-amber)', indigo:'var(--accent-indigo)', orange:'var(--accent-orange)', green:'var(--accent-green)' };
+
+      grid.innerHTML = exams.map((e, i) => `
+        <a href="exams.html?exam=${e.id}" class="exam-card reveal reveal-delay-${(i%3)+1}" style="text-decoration:none;">
+          <div class="exam-icon" style="background:${bgMap[e.color]}; color:${colorMapText[e.color]};">${e.icon}</div>
+          <div style="flex:1;">
+            <div class="flex items-center gap-sm flex-wrap" style="margin-bottom:var(--space-sm);">
+              <h3>${e.name}</h3>
+              <span class="badge ${colorMap[e.color]}">${e.difficulty}</span>
+            </div>
+            <p style="font-size:0.88rem; margin-bottom:var(--space-md);">${OC2.Utils.truncate(e.description, 100)}</p>
+            <div class="exam-meta">
+              <div class="exam-meta-item">👥 ${e.aspirants} Aspirants</div>
+              <div class="exam-meta-item">🏛️ ${e.conductedBy}</div>
+              <div class="exam-meta-item">📅 ${e.frequency}</div>
+            </div>
+          </div>
+        </a>
+      `).join('');
+      setTimeout(() => OC2.ScrollReveal.init(), 100);
+    })();
+
+    // ── Populate Homepage Jobs ──
+    (function renderHomepageJobs() {
+      const jobs = AppState.getJobs().slice(0, 4);
+      const grid = document.getElementById('homepage-jobs');
+      if (!grid || !jobs.length) return;
+
+      const typeColors = { Internship:'badge-exams', Job:'badge-primary', Freelance:'badge-mentor' };
+      const typeIcons = { Internship:'🎓', Job:'💼', Freelance:'🌐' };
+
+      grid.innerHTML = jobs.map((j, i) => `
+        <div class="job-card reveal reveal-delay-${(i%2)+1}">
+          <div class="job-card-header">
+            <div class="company-logo">${j.companyLogo || j.company[0]}</div>
+            <div style="flex:1;">
+              <div class="job-role">${j.role}</div>
+              <div class="job-company">${j.company} · ${j.location}</div>
+            </div>
+            <span class="badge ${typeColors[j.type] || 'badge-primary'}">${typeIcons[j.type]} ${j.type}</span>
+          </div>
+          <p style="font-size:0.88rem; margin-bottom:var(--space-md);">${OC2.Utils.truncate(j.description, 120)}</p>
+          <div class="job-skills">
+            ${j.skills.slice(0,4).map(s => `<span class="badge badge-outline">${s}</span>`).join('')}
+          </div>
+          <div class="job-footer">
+            <div>
+              <div class="job-salary">${j.stipend}</div>
+              <div class="job-posted">Posted ${OC2.Utils.formatDate(j.postedAt)}</div>
+            </div>
+            <a href="careers.html" class="btn btn-jobs btn-sm">Apply Now <span class="arrow">→</span></a>
+          </div>
+        </div>
+      `).join('');
+      setTimeout(() => OC2.ScrollReveal.init(), 100);
+    })();
+
+    // Check if logged in and update nav
+    (function checkSession() {
+      const session = AppState.getSession();
+      const loginBtn = document.getElementById('nav-login-btn');
+      if (session && loginBtn) {
+        loginBtn.textContent = 'Dashboard';
+        loginBtn.href = session.type === 'admin' ? 'admin.html' : 'student.html';
+      }
+    })();
+  </script>
+</body>
+</html>

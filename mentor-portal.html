@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OCC Mentor Portal — Manage your courses, sessions, students, and earnings. Your dashboard to teach, mentor, and grow on Offcampuscareer.">
+  <title>Mentor Portal | Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand">
+        <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" loading="lazy">
+        <span class="nav-brand-text">Offcampus<span>career</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <button class="btn btn-sm btn-secondary" id="logout-btn">Logout</button>
+        <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+
+  <!-- PORTAL LAYOUT -->
+  <div class="portal-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Mentor Portal Navigation">
+      <div class="sidebar-header">
+        <div class="flex items-center gap-md">
+          <div class="avatar avatar-md" id="mentor-avatar-img" style="background:linear-gradient(135deg,#06B6D4,#818CF8);">VP</div>
+          <div>
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text-primary);" id="mentor-sidebar-name">Mentor</div>
+            <div style="font-size:0.75rem; color:var(--module-mentor);">✓ Verified Mentor</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="sidebar-section-title">Overview</div>
+        <button class="sidebar-link active" data-view="dashboard">
+          <span class="icon">📊</span>Dashboard
+        </button>
+        <button class="sidebar-link" data-view="courses">
+          <span class="icon">📚</span>My Courses
+          <span class="badge badge-primary">3</span>
+        </button>
+        <button class="sidebar-link" data-view="sessions">
+          <span class="icon">📅</span>Sessions
+          <span class="badge badge-amber">5</span>
+        </button>
+        <button class="sidebar-link" data-view="students">
+          <span class="icon">👥</span>My Students
+        </button>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-title">Finance</div>
+        <button class="sidebar-link" data-view="earnings">
+          <span class="icon">💰</span>Earnings
+        </button>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-title">Tools</div>
+        <button class="sidebar-link" data-view="create-course">
+          <span class="icon">➕</span>Create Course
+        </button>
+        <button class="sidebar-link" data-view="reviews">
+          <span class="icon">⭐</span>Reviews
+        </button>
+        <button class="sidebar-link" data-view="profile">
+          <span class="icon">👤</span>Profile
+        </button>
+        <div class="sidebar-divider"></div>
+        <a href="index.html" class="sidebar-link">
+          <span class="icon">🌐</span>View Platform
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="portal-main">
+      <button class="burger sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar" style="display:none; margin-bottom:var(--space-md);"><span></span><span></span><span></span></button>
+
+      <!-- Dashboard View -->
+      <div class="portal-view active" id="view-dashboard">
+        <div class="welcome-banner" style="background:linear-gradient(135deg, #0E4C6A, #0891B2, #06B6D4);">
+          <div class="grid-bg"></div>
+          <div style="position:relative; z-index:1;">
+            <h2 id="mentor-welcome">Welcome back, Mentor! 🎓</h2>
+            <p>You have <strong id="pending-sessions">0</strong> pending session requests and <strong id="pending-reviews">0</strong> unread reviews.</p>
+          </div>
+        </div>
+        <div class="kpi-grid" id="mentor-kpi">
+          <div class="kpi-card">
+            <div class="kpi-icon cyan">👥</div>
+            <div><div class="kpi-value" id="kpi-students">0</div><div class="kpi-label">Total Students</div><div class="kpi-trend up">↑ 12% this month</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon purple">📚</div>
+            <div><div class="kpi-value" id="kpi-courses">0</div><div class="kpi-label">Active Courses</div><div class="kpi-trend up">↑ 2 new</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon green">💰</div>
+            <div><div class="kpi-value" id="kpi-earnings">₹0</div><div class="kpi-label">Total Earnings</div><div class="kpi-trend up">↑ 8% this month</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon amber">⭐</div>
+            <div><div class="kpi-value" id="kpi-rating">4.8</div><div class="kpi-label">Average Rating</div><div class="kpi-trend up">Based on 312 reviews</div></div>
+          </div>
+        </div>
+        <div class="grid grid-2 gap-xl" style="margin-top:var(--space-xl);">
+          <div class="card">
+            <div class="portal-header" style="margin-bottom:var(--space-lg);">
+              <h4>📅 Upcoming Sessions</h4>
+              <button class="btn btn-mentor btn-sm" onclick="switchView('sessions')">View All</button>
+            </div>
+            <div id="upcoming-sessions-list"></div>
+          </div>
+          <div class="card">
+            <div class="portal-header" style="margin-bottom:var(--space-lg);">
+              <h4>📊 Course Performance</h4>
+              <button class="btn btn-ghost btn-sm" onclick="switchView('courses')">View All</button>
+            </div>
+            <div id="course-performance-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Courses View -->
+      <div class="portal-view" id="view-courses">
+        <div class="portal-header">
+          <div><div class="portal-title">My Courses</div><div class="portal-subtitle">Manage your published and draft courses</div></div>
+          <button class="btn btn-mentor" onclick="switchView('create-course')">+ Create New Course</button>
+        </div>
+        <div id="mentor-courses-grid" class="grid grid-2 gap-xl"></div>
+      </div>
+
+      <!-- Sessions View -->
+      <div class="portal-view" id="view-sessions">
+        <div class="portal-header">
+          <div><div class="portal-title">Sessions</div><div class="portal-subtitle">Upcoming and past 1:1 mentoring sessions</div></div>
+        </div>
+        <div id="mentor-sessions-list" style="display:flex; flex-direction:column; gap:var(--space-lg);"></div>
+      </div>
+
+      <!-- Students View -->
+      <div class="portal-view" id="view-students">
+        <div class="portal-header">
+          <div><div class="portal-title">My Students</div><div class="portal-subtitle">Students enrolled in your courses</div></div>
+        </div>
+        <div class="table-wrapper"><table class="table" id="students-table">
+          <thead><tr><th>Student</th><th>Course</th><th>Progress</th><th>Joined</th><th>Action</th></tr></thead>
+          <tbody id="students-table-body"></tbody>
+        </table></div>
+      </div>
+
+      <!-- Earnings View -->
+      <div class="portal-view" id="view-earnings">
+        <div class="portal-header">
+          <div><div class="portal-title">Earnings</div><div class="portal-subtitle">Your revenue from courses and sessions</div></div>
+        </div>
+        <div class="kpi-grid" style="margin-bottom:var(--space-xl);">
+          <div class="kpi-card">
+            <div class="kpi-icon green">💰</div>
+            <div><div class="kpi-value" id="earn-total">₹0</div><div class="kpi-label">Total Earned</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon cyan">📅</div>
+            <div><div class="kpi-value" id="earn-month">₹0</div><div class="kpi-label">This Month</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon amber">⏳</div>
+            <div><div class="kpi-value">₹0</div><div class="kpi-label">Pending Payout</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom:var(--space-lg);">💳 Earnings Breakdown</h4>
+          <div id="earnings-breakdown-content">
+            <div class="empty-state"><div class="empty-icon">💰</div><h3>Earnings dashboard</h3><p>As you grow your student base, your earnings will appear here. Start by creating more courses!</p><button class="btn btn-mentor" onclick="switchView('create-course')">Create a Course</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Course View -->
+      <div class="portal-view" id="view-create-course">
+        <div class="portal-header">
+          <div><div class="portal-title">Create New Course</div><div class="portal-subtitle">Share your knowledge with thousands of students</div></div>
+        </div>
+        <div class="grid grid-2 gap-xl">
+          <div>
+            <form id="create-course-form" class="card">
+              <div class="form-group">
+                <label class="form-label required">Course Title</label>
+                <input type="text" class="form-input" placeholder="e.g. Advanced Python for AI" id="cc-title" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Category</label>
+                <select class="form-select" id="cc-category" required>
+                  <option>Career</option><option>AI/ML</option><option>Web Dev</option>
+                  <option>Data Science</option><option>Engineering Entrance</option>
+                  <option>Government Exam</option><option>Finance</option><option>Other</option>
+                </select>
+              </div>
+              <div class="grid grid-2 gap-md">
+                <div class="form-group">
+                  <label class="form-label required">Duration</label>
+                  <input type="text" class="form-input" placeholder="e.g. 8 Weeks" id="cc-duration" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required">Level</label>
+                  <select class="form-select" id="cc-level">
+                    <option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Price (₹)</label>
+                <input type="number" class="form-input" placeholder="0 for free" id="cc-price" min="0" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Description</label>
+                <textarea class="form-textarea" rows="4" placeholder="What will students learn? What makes this course unique?" id="cc-desc" required></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Course Modules (one per line)</label>
+                <textarea class="form-textarea" rows="5" placeholder="Module 1: Introduction&#10;Module 2: Core Concepts&#10;Module 3: Advanced Topics" id="cc-modules"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tags (comma-separated)</label>
+                <input type="text" class="form-input" placeholder="Python, AI, Machine Learning" id="cc-tags">
+              </div>
+              <button type="submit" class="btn btn-mentor w-full btn-lg" style="justify-content:center;">Publish Course →</button>
+            </form>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:var(--space-lg);">
+              <h4 style="margin-bottom:var(--space-lg);">💡 Tips for Success</h4>
+              <div style="display:flex; flex-direction:column; gap:var(--space-md);">
+                <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Write a clear, benefit-focused title</span></div>
+                <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Price between ₹999–₹9,999 for best conversion</span></div>
+                <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Include 6–10 well-structured modules</span></div>
+                <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Mention job outcomes and real-world projects</span></div>
+                <div class="flex items-center gap-md"><span style="color:var(--module-mentor);">→</span><span class="text-sm">Provide a certificate for course completion</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <h4 style="margin-bottom:var(--space-md);">📊 Earnings Calculator</h4>
+              <p class="text-sm" style="margin-bottom:var(--space-md);">Estimate your earnings at 100 enrollments:</p>
+              <div class="flex items-center gap-md" style="margin-bottom:var(--space-sm);">
+                <input type="number" class="form-input" placeholder="Price (₹)" id="earn-calc" style="flex:1;" oninput="calcEarnings(this.value)">
+                <span style="font-size:0.82rem; color:var(--text-muted); white-space:nowrap;">× 100 enrollments</span>
+              </div>
+              <div class="card" style="background:rgba(52,211,153,0.08); border-color:rgba(52,211,153,0.2); padding:var(--space-md);">
+                <span style="font-size:0.82rem; color:var(--text-muted);">You earn (80%):</span>
+                <div style="font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--accent-green);" id="earn-calc-result">₹0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews View -->
+      <div class="portal-view" id="view-reviews">
+        <div class="portal-header">
+          <div><div class="portal-title">Reviews & Ratings</div></div>
+        </div>
+        <div class="card" style="text-align:center; margin-bottom:var(--space-xl);">
+          <div style="font-family:'Outfit'; font-size:4rem; font-weight:900; color:var(--accent-amber);" id="avg-rating">4.8</div>
+          <div style="color:var(--accent-amber); font-size:1.5rem; margin:var(--space-sm) 0;">★★★★★</div>
+          <div style="color:var(--text-muted);">Based on <span id="review-count">312</span> reviews</div>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">⭐</div>
+          <h3>Reviews will appear here</h3>
+          <p>As students complete your courses and sessions, their reviews will be displayed here.</p>
+        </div>
+      </div>
+
+      <!-- Profile View -->
+      <div class="portal-view" id="view-profile">
+        <div class="portal-header">
+          <div><div class="portal-title">Mentor Profile</div><div class="portal-subtitle">Manage your public mentor profile</div></div>
+        </div>
+        <div class="grid grid-2 gap-xl">
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-xl);">Profile Settings</h4>
+            <form id="profile-form">
+              <div class="form-group">
+                <label class="form-label">Display Name</label>
+                <input type="text" class="form-input" id="profile-name" placeholder="Your name">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Professional Title</label>
+                <input type="text" class="form-input" id="profile-title" placeholder="e.g. Senior AI Engineer at Google">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Bio</label>
+                <textarea class="form-textarea" rows="4" id="profile-bio" placeholder="Tell students about your expertise and experience..."></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Session Price (₹)</label>
+                <input type="number" class="form-input" id="profile-price" placeholder="e.g. 499">
+              </div>
+              <div class="form-group">
+                <label class="form-label">LinkedIn URL</label>
+                <input type="url" class="form-input" id="profile-linkedin" placeholder="https://linkedin.com/in/yourprofile">
+              </div>
+              <button type="submit" class="btn btn-mentor">Save Profile</button>
+            </form>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:var(--space-lg);">
+              <h4 style="margin-bottom:var(--space-lg);">🔗 Your Public Profile</h4>
+              <p class="text-sm" style="margin-bottom:var(--space-md);">Share this link with students to let them find and book you:</p>
+              <div style="background:var(--bg-surface-alt); padding:var(--space-md); border-radius:var(--radius-md); font-family:'JetBrains Mono', monospace; font-size:0.82rem; color:var(--accent-cyan); word-break:break-all;">
+                offcampuscareer.com/mentor/<span id="mentor-slug">your-name</span>
+              </div>
+              <button class="btn btn-ghost btn-sm" style="margin-top:var(--space-sm);" onclick="OC2.Toast.success('Profile link copied!')">📋 Copy Link</button>
+            </div>
+            <div class="card">
+              <h4 style="margin-bottom:var(--space-md);">🏅 Mentor Badge</h4>
+              <div style="text-align:center; padding:var(--space-lg);">
+                <div class="avatar avatar-xl avatar-ring" style="background:linear-gradient(135deg,#06B6D4,#818CF8); margin:0 auto var(--space-md);" id="profile-avatar-display">VP</div>
+                <div style="font-weight:800; font-size:1.1rem; color:var(--text-primary);" id="profile-display-name">Your Name</div>
+                <div style="color:var(--module-mentor); font-size:0.88rem; margin-top:4px;">✓ Verified OCC Mentor</div>
+                <div style="color:var(--accent-amber); margin-top:var(--space-sm);">★★★★★ 4.8 (312 reviews)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Mentor Login Modal -->
+  <div class="modal-overlay" id="mentor-login-modal" style="display:flex;">
+    <div class="modal modal-sm">
+      <div class="modal-header text-center">
+        <div style="font-size:3rem; margin-bottom:var(--space-md);">🎓</div>
+        <h3>Mentor Portal Login</h3>
+        <p>Login to access your mentor dashboard</p>
+      </div>
+      <form id="mentor-login-form">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="your@email.com" id="ml-email" value="mentor@oc2.in">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="Password" id="ml-password" value="mentor123">
+        </div>
+        <p class="text-sm text-muted" style="margin-bottom:var(--space-lg);">Demo credentials: mentor@oc2.in / mentor123</p>
+        <button type="submit" class="btn btn-mentor w-full btn-lg" style="justify-content:center;">Login to Mentor Portal →</button>
+        <div class="text-center" style="display:flex; flex-direction:column; gap:var(--space-sm); margin-top:var(--space-lg);">
+          <p class="text-sm text-muted">Not a mentor yet? <a href="mentor.html#become-mentor" style="color:var(--module-mentor); font-weight:600;">Apply to become one</a></p>
+          <div class="divider" style="margin:var(--space-xs) 0;"></div>
+          <p class="text-xs text-muted">Switch portal: <a href="student.html" style="color:var(--brand-primary); font-weight:600;">Student Login</a> · <a href="corporate-portal.html" style="color:var(--module-corporate); font-weight:600;">Employer Login</a> · <a href="admin.html" style="color:var(--brand-primary); font-weight:600;">Admin Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" role="alert" aria-live="polite"></div>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let currentMentor = null;
+
+    // Mentor login
+    document.getElementById('mentor-login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('ml-email').value;
+      const pass = document.getElementById('ml-password').value;
+      // Demo auth — accept any mentor email
+      if (email && pass === 'mentor123') {
+        currentMentor = AppState.getMentors()[0]; // Use first mentor as demo
+        AppState.setSession('mentor', currentMentor.id);
+        document.getElementById('mentor-login-modal').style.display = 'none';
+        loadMentorPortal();
+        OC2.Toast.success(`Welcome back, ${currentMentor.name}! 🎓`);
+      } else {
+        OC2.Toast.error('Invalid credentials. Use mentor@oc2.in / mentor123');
+      }
+    });
+
+    function loadMentorPortal() {
+      if (!currentMentor) return;
+
+      // Update sidebar
+      document.getElementById('mentor-sidebar-name').textContent = currentMentor.name;
+      document.getElementById('mentor-avatar-img').textContent = currentMentor.initials;
+      document.getElementById('mentor-welcome').textContent = `Welcome back, ${currentMentor.name.split(' ')[0]}! 🎓`;
+      document.getElementById('pending-sessions').textContent = '3';
+      document.getElementById('pending-reviews').textContent = '8';
+
+      // Calculate actual course sales and session earnings
+      const allPayments = AppState.getPayments();
+      const mentorPayments = allPayments.filter(p => {
+        const course = AppState.getCourse(p.courseId);
+        return course && course.instructorId === currentMentor.id;
+      });
+      const totalCourseRevenue = mentorPayments.reduce((sum, p) => sum + p.amount, 0);
+      const mentorCourseShare = totalCourseRevenue * 0.8;
+      const mentorSessionEarnings = currentMentor.sessions * currentMentor.price * 0.8;
+      const finalTotalEarnings = mentorSessionEarnings + mentorCourseShare;
+      const displayMonthEarnings = Math.floor(finalTotalEarnings * 0.08);
+
+      // KPIs
+      document.getElementById('kpi-students').textContent = (currentMentor.students + mentorPayments.length).toLocaleString('en-IN');
+      document.getElementById('kpi-courses').textContent = currentMentor.courses.length;
+      document.getElementById('kpi-earnings').textContent = OC2.Utils.formatCurrency(finalTotalEarnings);
+      document.getElementById('kpi-rating').textContent = currentMentor.rating;
+      document.getElementById('earn-total').textContent = OC2.Utils.formatCurrency(finalTotalEarnings);
+      document.getElementById('earn-month').textContent = OC2.Utils.formatCurrency(displayMonthEarnings);
+      document.getElementById('avg-rating').textContent = currentMentor.rating;
+      document.getElementById('review-count').textContent = currentMentor.totalRatings;
+
+      // Earnings breakdown table
+      const earningsDiv = document.getElementById('earnings-breakdown-content');
+      if (mentorPayments.length) {
+        earningsDiv.innerHTML = `
+          <div class="table-wrapper">
+            <table class="table">
+              <thead><tr><th>Receipt No</th><th>Student</th><th>Course</th><th>Amount Paid</th><th>Mentor's Share (80%)</th><th>Date</th></tr></thead>
+              <tbody>${mentorPayments.map(p => {
+                const student = AppState.getStudent(p.studentId);
+                const course = AppState.getCourse(p.courseId);
+                return `
+                  <tr>
+                    <td class="font-mono text-sm">${p.receiptNo}</td>
+                    <td>${student ? student.name : 'Student'}</td>
+                    <td>${course ? course.title : 'Course'}</td>
+                    <td class="font-semibold">${OC2.Utils.formatCurrency(p.amount)}</td>
+                    <td class="font-semibold" style="color:var(--accent-green);">${OC2.Utils.formatCurrency(p.amount * 0.8)}</td>
+                    <td>${OC2.Utils.formatDate(p.date)}</td>
+                  </tr>
+                `;
+              }).join('')}</tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // Profile
+      document.getElementById('profile-name').value = currentMentor.name;
+      document.getElementById('profile-title').value = currentMentor.title;
+      document.getElementById('profile-bio').value = currentMentor.bio;
+      document.getElementById('profile-price').value = currentMentor.price;
+      document.getElementById('profile-linkedin').value = currentMentor.linkedin || '';
+      document.getElementById('profile-avatar-display').textContent = currentMentor.initials;
+      document.getElementById('profile-display-name').textContent = currentMentor.name;
+      document.getElementById('mentor-slug').textContent = OC2.Utils.slugify(currentMentor.name);
+
+      // Upcoming sessions
+      const classes = AppState.getClasses().slice(0, 3);
+      document.getElementById('upcoming-sessions-list').innerHTML = classes.map(c => {
+        const course = AppState.getCourse(c.courseId);
+        return `<div class="flex items-center gap-md" style="padding:var(--space-md) 0; border-bottom:1px solid var(--border-subtle);">
+          <div style="font-size:1.5rem;">📅</div>
+          <div style="flex:1;">
+            <div style="font-weight:600; font-size:0.9rem; color:var(--text-primary);">${c.title}</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">${c.date} · ${c.time} · ${c.platform}</div>
+          </div>
+          <a href="${c.meetingLink}" target="_blank" class="btn btn-exams btn-sm">Join</a>
+        </div>`;
+      }).join('') || '<p class="text-muted">No upcoming sessions</p>';
+
+      // Course performance
+      const courses = currentMentor.courses.map(id => AppState.getCourse(id)).filter(Boolean);
+      document.getElementById('course-performance-list').innerHTML = courses.map(c => `
+        <div class="course-card-mini" style="cursor:default;">
+          <div class="course-icon-sm">${c.icon}</div>
+          <div class="course-info">
+            <div class="course-title-sm">${c.title}</div>
+            <div class="course-meta-sm">${c.enrolled} enrolled · ⭐ ${c.rating}</div>
+          </div>
+          <span class="badge badge-exams">${c.level}</span>
+        </div>
+      `).join('') || '<p class="text-muted">No courses yet</p>';
+
+      // My Courses grid
+      document.getElementById('mentor-courses-grid').innerHTML = courses.map((c, i) => `
+        <div class="card">
+          <div class="flex items-center gap-md" style="margin-bottom:var(--space-md);">
+            <div style="font-size:2rem;">${c.icon}</div>
+            <div style="flex:1;"><h4 style="font-size:1rem;">${c.title}</h4><div class="text-sm text-muted">${c.category} · ${c.level}</div></div>
+            <span class="badge badge-exams">Active</span>
+          </div>
+          <div class="grid grid-3 gap-md" style="margin-bottom:var(--space-lg);">
+            <div style="text-align:center;"><div style="font-weight:800; color:var(--text-primary);">${c.enrolled}</div><div class="text-xs text-muted">Enrolled</div></div>
+            <div style="text-align:center;"><div style="font-weight:800; color:var(--text-primary);">⭐ ${c.rating}</div><div class="text-xs text-muted">Rating</div></div>
+            <div style="text-align:center;"><div style="font-weight:800; color:var(--accent-green);">${OC2.Utils.formatCurrency(c.enrolled * c.price * 0.8)}</div><div class="text-xs text-muted">Earned</div></div>
+          </div>
+          <div class="flex gap-sm">
+            <button class="btn btn-ghost btn-sm" onclick="OC2.Toast.info('Course editor coming soon!')">Edit</button>
+            <button class="btn btn-exams btn-sm" onclick="OC2.Toast.info('Analytics view coming soon!')">Analytics</button>
+          </div>
+        </div>
+      `).join('') || '<div class="card text-center"><p>No courses yet. <button class="btn btn-mentor btn-sm" onclick="switchView(\'create-course\')">Create one →</button></p></div>';
+
+      // Sessions list
+      const allClasses = AppState.getClasses();
+      document.getElementById('mentor-sessions-list').innerHTML = allClasses.map(c => {
+        const course = AppState.getCourse(c.courseId);
+        return `<div class="card">
+          <div class="flex items-center justify-between flex-wrap gap-md">
+            <div class="flex items-center gap-lg">
+              <div style="font-size:2.5rem;">📅</div>
+              <div>
+                <h4 style="margin-bottom:4px;">${c.title}</h4>
+                <div class="text-sm text-muted">Course: ${course?.title || 'N/A'}</div>
+                <div class="flex gap-md" style="margin-top:var(--space-sm);">
+                  <span class="badge badge-outline">📅 ${c.date}</span>
+                  <span class="badge badge-outline">⏰ ${c.time}</span>
+                  <span class="badge badge-outline">${c.platform}</span>
+                  <span class="badge badge-outline">👥 ${c.attendees.length} registered</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-sm">
+              <a href="${c.meetingLink}" target="_blank" class="btn btn-exams btn-sm">Start Session</a>
+              <button class="btn btn-ghost btn-sm" onclick="OC2.Toast.info('Session management coming soon!')">Manage</button>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      // Students table
+      const students = AppState.getStudents();
+      document.getElementById('students-table-body').innerHTML = students.map(s => {
+        const relevantEnrollment = AppState.getStudentEnrollments(s.id).find(e => currentMentor.courses.includes(e.courseId));
+        if (!relevantEnrollment) return '';
+        const course = AppState.getCourse(relevantEnrollment.courseId);
+        return `<tr>
+          <td><div class="flex items-center gap-md"><div class="avatar avatar-sm">${s.avatar}</div><span style="font-weight:600;">${s.name}</span></div></td>
+          <td>${course?.title || 'N/A'}</td>
+          <td>
+            <div class="progress-labeled" style="min-width:120px;">
+              <div class="progress-bar"><div class="progress-fill" style="width:${relevantEnrollment.progress}%;"></div></div>
+              <div class="progress-pct">${relevantEnrollment.progress}%</div>
+            </div>
+          </td>
+          <td>${OC2.Utils.formatDate(s.joinedAt)}</td>
+          <td><button class="btn btn-ghost btn-sm" onclick="OC2.Toast.info('Student messaging coming soon!')">Message</button></td>
+        </tr>`;
+      }).filter(Boolean).join('');
+
+      OC2.Portal.init();
+      OC2.Sidebar.init();
+    }
+
+    function switchView(viewId) {
+      document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.portal-view').forEach(v => v.classList.remove('active'));
+      const view = document.getElementById(`view-${viewId}`);
+      if (view) view.classList.add('active');
+      const link = document.querySelector(`.sidebar-link[data-view="${viewId}"]`);
+      if (link) link.classList.add('active');
+    }
+
+    function calcEarnings(price) {
+      const earn = Math.floor(parseFloat(price || 0) * 100 * 0.8);
+      document.getElementById('earn-calc-result').textContent = OC2.Utils.formatCurrency(earn);
+    }
+
+    // Create course form
+    document.getElementById('create-course-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('cc-title').value;
+      const category = document.getElementById('cc-category').value;
+      const duration = document.getElementById('cc-duration').value;
+      const level = document.getElementById('cc-level').value;
+      const price = parseFloat(document.getElementById('cc-price').value) || 0;
+      const description = document.getElementById('cc-desc').value;
+      const modulesRaw = document.getElementById('cc-modules').value;
+      const modules = modulesRaw.split('\n').map(m => m.trim()).filter(Boolean);
+      const tags = document.getElementById('cc-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+
+      if (!title || !description) { OC2.Toast.error('Please fill all required fields.'); return; }
+
+      const course = AppState.addCourse({
+        title, category, duration, level, price,
+        description, modules, tags,
+        icon: '📚', rating: 0, enrolled: 0, published: true, featured: false,
+        instructor: currentMentor?.name || 'Mentor', instructorId: currentMentor?.id || 'MENT000',
+        module: 'tip', language: 'Hindi/English', certificate: true
+      });
+
+      OC2.Toast.success(`✅ Course "${title}" published successfully!`);
+      OC2.Confetti.burst();
+      switchView('courses');
+      loadMentorPortal();
+    });
+
+    // Profile form
+    document.getElementById('profile-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      OC2.Toast.success('✅ Profile updated successfully!');
+    });
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      AppState.clearSession();
+      window.location.href = 'index.html';
+    });
+
+    // Init sidebar toggle
+    OC2.Sidebar.init();
+
+    // Check existing session
+    const session = AppState.getSession();
+    if (session && session.type === 'mentor') {
+      currentMentor = AppState.getMentor(session.userId) || AppState.getMentors()[0];
+      if (currentMentor) {
+        document.getElementById('mentor-login-modal').style.display = 'none';
+        loadMentorPortal();
+      }
+    }
+  </script>
+</body>
+</html>

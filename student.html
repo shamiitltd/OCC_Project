@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Dashboard — Track your courses, jobs, mentor sessions, and community activity on Offcampuscareer.">
+  <title>Student Dashboard | Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand">
+        <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" loading="lazy">
+        <span class="nav-brand-text">Offcampus<span>career</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <div class="relative">
+          <button class="notif-btn" id="notif-btn" aria-label="Notifications">🔔
+            <span class="notif-badge" id="notif-count">3</span>
+          </button>
+          <div class="notif-panel" id="notif-panel" aria-label="Notifications">
+            <div class="flex items-center justify-between" style="padding:var(--space-sm) var(--space-md); border-bottom:1px solid var(--border-subtle); margin-bottom:var(--space-sm);">
+              <span style="font-weight:700; font-size:0.9rem;">Notifications</span>
+              <button class="btn btn-ghost btn-sm" onclick="markAllRead()">Mark all read</button>
+            </div>
+            <div id="notif-list"></div>
+          </div>
+        </div>
+        <button class="btn btn-sm btn-secondary" id="logout-btn">Logout</button>
+        <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PORTAL LAYOUT -->
+  <div class="portal-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Student Dashboard Navigation">
+      <div class="sidebar-header">
+        <div class="flex items-center gap-md">
+          <div class="avatar avatar-md" id="student-avatar">--</div>
+          <div>
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text-primary);" id="sidebar-name">Loading...</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);" id="sidebar-college">-</div>
+          </div>
+        </div>
+        <!-- Profile Completeness -->
+        <div style="margin-top:var(--space-md);">
+          <div class="flex items-center justify-between" style="margin-bottom:4px;">
+            <span style="font-size:0.72rem; color:var(--text-muted);">Profile Completeness</span>
+            <span style="font-size:0.72rem; font-weight:700; color:var(--brand-primary);" id="profile-pct">0%</span>
+          </div>
+          <div class="progress-bar progress-sm"><div class="progress-fill" id="profile-bar" style="width:0%;"></div></div>
+        </div>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="sidebar-section-title">Dashboard</div>
+        <button class="sidebar-link active" data-view="overview"><span class="icon">📊</span>Overview</button>
+        <button class="sidebar-link" data-view="courses"><span class="icon">📚</span>My Courses <span class="badge badge-primary" id="enrolled-count">0</span></button>
+        <button class="sidebar-link" data-view="jobs"><span class="icon">💼</span>Jobs & Applications <span class="badge badge-amber" id="applied-count">0</span></button>
+        <button class="sidebar-link" data-view="mentors"><span class="icon">🎓</span>Mentorship</button>
+        <button class="sidebar-link" data-view="exams"><span class="icon">📝</span>Exam Prep</button>
+        <button class="sidebar-link" data-view="community"><span class="icon">👥</span>Community</button>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-title">Account</div>
+        <button class="sidebar-link" data-view="certificates"><span class="icon">🏆</span>Certificates</button>
+        <button class="sidebar-link" data-view="profile"><span class="icon">👤</span>Profile</button>
+        <div class="sidebar-divider"></div>
+        <a href="index.html" class="sidebar-link"><span class="icon">🌐</span>Explore Platform</a>
+        <a href="careers.html" class="sidebar-link"><span class="icon">💼</span>Browse Jobs</a>
+        <a href="mentor.html" class="sidebar-link"><span class="icon">🎓</span>Find a Mentor</a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="portal-main">
+      <button class="burger sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar" style="display:none; margin-bottom:var(--space-md);"><span></span><span></span><span></span></button>
+
+      <!-- Overview -->
+      <div class="portal-view active" id="view-overview">
+        <div class="welcome-banner">
+          <div class="grid-bg"></div>
+          <div style="position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--space-md);">
+            <div>
+              <h2 id="welcome-name">Welcome back! 👋</h2>
+              <p id="welcome-sub" style="color:rgba(255,255,255,0.85);">Keep up your learning streak!</p>
+            </div>
+            <a href="checkout.html" class="btn" style="background:rgba(255,255,255,0.15); color:#fff; backdrop-filter:blur(8px);">Explore More Courses →</a>
+          </div>
+        </div>
+        <div class="kpi-grid" id="overview-kpis">
+          <div class="kpi-card">
+            <div class="kpi-icon purple">📚</div>
+            <div><div class="kpi-value" id="kpi-enrolled">0</div><div class="kpi-label">Courses Enrolled</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon amber">💼</div>
+            <div><div class="kpi-value" id="kpi-applied">0</div><div class="kpi-label">Jobs Applied</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon green">🏆</div>
+            <div><div class="kpi-value" id="kpi-certs">0</div><div class="kpi-label">Certificates</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon cyan">📈</div>
+            <div><div class="kpi-value" id="kpi-avg-progress">0%</div><div class="kpi-label">Avg Progress</div></div>
+          </div>
+        </div>
+        <!-- Upcoming classes -->
+        <div class="grid grid-2 gap-xl" style="margin-top:var(--space-xl);">
+          <div class="card">
+            <div class="portal-header" style="margin-bottom:var(--space-lg);">
+              <h4>📅 Upcoming Classes</h4>
+              <a href="training.html" class="btn btn-ghost btn-sm">View All</a>
+            </div>
+            <div id="upcoming-classes"></div>
+          </div>
+          <div class="card">
+            <div class="portal-header" style="margin-bottom:var(--space-lg);">
+              <h4>💼 Job Recommendations</h4>
+              <a href="careers.html" class="btn btn-ghost btn-sm">Browse All</a>
+            </div>
+            <div id="job-recommendations"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Courses -->
+      <div class="portal-view" id="view-courses">
+        <div class="portal-header">
+          <div><div class="portal-title">My Courses</div><div class="portal-subtitle">Track your learning progress</div></div>
+          <a href="checkout.html" class="btn btn-primary">+ Enroll in More</a>
+        </div>
+        <div id="enrolled-courses-list" style="display:flex; flex-direction:column; gap:var(--space-lg);"></div>
+        <div class="empty-state hidden" id="no-courses">
+          <div class="empty-icon">📚</div>
+          <h3>No courses yet</h3>
+          <p>Explore our training programs and enroll in one today!</p>
+          <a href="training.html" class="btn btn-primary">Browse Courses</a>
+        </div>
+      </div>
+
+      <!-- Jobs -->
+      <div class="portal-view" id="view-jobs">
+        <div class="portal-header">
+          <div><div class="portal-title">Jobs & Applications</div><div class="portal-subtitle">Track your job applications</div></div>
+          <a href="careers.html" class="btn btn-jobs">Browse More Jobs →</a>
+        </div>
+        <!-- Applied Jobs -->
+        <div class="card" style="margin-bottom:var(--space-xl);">
+          <h4 style="margin-bottom:var(--space-lg);">📋 Applied Jobs</h4>
+          <div id="applied-jobs-list">
+            <div class="empty-state">
+              <div class="empty-icon">💼</div>
+              <h3>No applications yet</h3>
+              <p>Start applying to jobs and track your application status here.</p>
+              <a href="careers.html" class="btn btn-jobs">Browse Jobs</a>
+            </div>
+          </div>
+        </div>
+        <!-- Recommended Jobs -->
+        <h4 style="margin-bottom:var(--space-xl);">⭐ Recommended for You</h4>
+        <div id="recommended-jobs-list" style="display:flex; flex-direction:column; gap:var(--space-lg);"></div>
+      </div>
+
+      <!-- Mentors -->
+      <div class="portal-view" id="view-mentors">
+        <div class="portal-header">
+          <div><div class="portal-title">Mentorship</div><div class="portal-subtitle">Connect with industry experts</div></div>
+          <a href="mentor.html" class="btn btn-mentor">Find a Mentor →</a>
+        </div>
+        <div class="card" style="margin-bottom:var(--space-xl);">
+          <h4 style="margin-bottom:var(--space-lg);">📅 My Sessions</h4>
+          <div id="student-sessions-list">
+            <div class="empty-state">
+              <div class="empty-icon">🎓</div>
+              <h3>No sessions booked yet</h3>
+              <p>Book a 1:1 session with one of our expert mentors!</p>
+              <a href="mentor.html" class="btn btn-mentor">Find a Mentor</a>
+            </div>
+          </div>
+        </div>
+        <!-- Featured Mentors -->
+        <h4 style="margin-bottom:var(--space-xl);">⭐ Featured Mentors</h4>
+        <div class="grid grid-4 gap-xl" id="featured-mentors-student"></div>
+      </div>
+
+      <!-- Exam Prep -->
+      <div class="portal-view" id="view-exams">
+        <div class="portal-header">
+          <div><div class="portal-title">Exam Prep</div><div class="portal-subtitle">Resources for competitive exams</div></div>
+          <a href="exams.html" class="btn btn-exams">Full Exam Hub →</a>
+        </div>
+        <div class="grid grid-3 gap-xl" id="exam-categories-list"></div>
+      </div>
+
+      <!-- Community -->
+      <div class="portal-view" id="view-community">
+        <div class="portal-header">
+          <div><div class="portal-title">Community</div><div class="portal-subtitle">Connect with fellow learners</div></div>
+          <a href="community.html" class="btn" style="background:linear-gradient(135deg,#818CF8,#9B5FD0); color:#fff;">Open Community →</a>
+        </div>
+        <div id="community-preview" style="display:flex; flex-direction:column; gap:var(--space-lg);"></div>
+      </div>
+
+      <!-- Certificates -->
+      <div class="portal-view" id="view-certificates">
+        <div class="portal-header">
+          <div><div class="portal-title">Certificates</div><div class="portal-subtitle">Your earned certificates</div></div>
+        </div>
+        <div id="cert-list" class="grid grid-3 gap-xl"></div>
+        <div class="empty-state hidden" id="no-certs">
+          <div class="empty-icon">🏆</div>
+          <h3>No certificates yet</h3>
+          <p>Complete your enrolled courses to earn certificates.</p>
+          <a href="training.html" class="btn btn-primary">Browse Courses</a>
+        </div>
+      </div>
+
+      <!-- Profile -->
+      <div class="portal-view" id="view-profile">
+        <div class="portal-header">
+          <div><div class="portal-title">My Profile</div><div class="portal-subtitle">Update your information</div></div>
+        </div>
+        <div class="grid grid-2 gap-xl">
+          <div class="card">
+            <h4 style="margin-bottom:var(--space-xl);">Personal Information</h4>
+            <form id="profile-form">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" id="pf-name">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" id="pf-email" readonly style="opacity:0.6;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone</label>
+                <input type="tel" class="form-input" id="pf-phone">
+              </div>
+              <div class="form-group">
+                <label class="form-label">College / University</label>
+                <input type="text" class="form-input" id="pf-college">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Year of Study</label>
+                <select class="form-select" id="pf-year">
+                  <option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>Passed Out</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Stream / Degree</label>
+                <input type="text" class="form-input" id="pf-stream">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+            </form>
+          </div>
+          <div>
+            <div class="card">
+              <div class="text-center" style="margin-bottom:var(--space-xl);">
+                <div class="avatar avatar-2xl" id="profile-avatar-big" style="margin:0 auto var(--space-md);">--</div>
+                <h4 id="profile-name-display">Your Name</h4>
+                <div class="text-muted text-sm" id="profile-college-display">College</div>
+              </div>
+              <h4 style="margin-bottom:var(--space-md);">📊 Activity</h4>
+              <div style="display:flex; flex-direction:column; gap:var(--space-md);">
+                <div class="flex items-center justify-between"><span class="text-sm text-muted">Courses Enrolled</span><span style="font-weight:700;" id="act-enrolled">0</span></div>
+                <div class="flex items-center justify-between"><span class="text-sm text-muted">Certificates Earned</span><span style="font-weight:700;" id="act-certs">0</span></div>
+                <div class="flex items-center justify-between"><span class="text-sm text-muted">Jobs Applied</span><span style="font-weight:700;" id="act-applied">0</span></div>
+                <div class="flex items-center justify-between"><span class="text-sm text-muted">Member Since</span><span style="font-weight:700;" id="act-joined">-</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay" id="login-modal" style="display:flex;">
+    <div class="modal modal-sm">
+      <div class="modal-header text-center">
+        <div style="font-size:3rem; margin-bottom:var(--space-md);">👨‍🎓</div>
+        <h3>Student Dashboard</h3>
+        <p>Login to access your personalized dashboard</p>
+      </div>
+      <div style="display:flex; gap:var(--space-md); margin-bottom:var(--space-xl);" id="demo-accounts">
+        <button class="btn btn-secondary btn-sm" style="flex:1;" onclick="quickLogin('rahul@demo.com')">Demo: Rahul</button>
+        <button class="btn btn-secondary btn-sm" style="flex:1;" onclick="quickLogin('priya@demo.com')">Demo: Priya</button>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="student@email.com" id="login-email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="Password" id="login-password">
+          <div class="form-hint">Demo password: demo123</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-full btn-lg" style="justify-content:center;">Login →</button>
+        <div class="divider"></div>
+        <div class="text-center" style="display:flex; flex-direction:column; gap:var(--space-sm);">
+          <p class="text-sm text-muted">New student? <a href="checkout.html" style="color:var(--brand-primary); font-weight:600;">Enroll in a course</a> to register</p>
+          <div class="divider" style="margin:var(--space-xs) 0;"></div>
+          <p class="text-xs text-muted">Are you a partner? <a href="mentor-portal.html" style="color:var(--module-mentor); font-weight:600;">Mentor Login</a> · <a href="corporate-portal.html" style="color:var(--module-corporate); font-weight:600;">Employer Login</a> · <a href="admin.html" style="color:var(--brand-primary); font-weight:600;">Admin Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <style>
+    .player-layout { display: flex; }
+    .player-content { flex: 1.4; padding: var(--space-xl); }
+    .player-sidebar { flex: 1; background: var(--bg-surface-alt); border-left: 1px solid var(--border-subtle); padding: var(--space-xl); display: flex; flex-direction: column; max-height: 550px; overflow-y: auto; }
+    .video-container { background: #000; aspect-ratio: 16/9; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: var(--space-md); overflow: hidden; }
+    
+    .certificate-border { width: 100%; border: 8px double var(--brand-primary); padding: var(--space-2xl); background: #12122c; position: relative; color: #fff; text-align: center; box-sizing: border-box; }
+    
+    @media (max-width: 768px) {
+      .player-layout { flex-direction: column; }
+      .player-sidebar { border-left: none !important; border-top: 1px solid var(--border-subtle); max-height: none !important; }
+    }
+  </style>
+
+  <!-- COURSE PLAYER MODAL -->
+  <div class="modal-overlay" id="player-modal">
+    <div class="modal modal-lg" style="max-width:900px; padding:0; overflow:hidden;">
+      <button class="modal-close" onclick="OC2.Modal.close('player-modal')" aria-label="Close" style="top:15px; right:15px; z-index:10;">✕</button>
+      <div class="player-layout">
+        <!-- Left: Video & Details -->
+        <div class="player-content">
+          <div class="video-container">
+            <div style="font-size:4rem; color:var(--brand-primary); z-index:1;">🎥</div>
+            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:var(--space-sm);">
+              <span style="font-weight:700; color:#fff; font-size:1.1rem;" id="player-video-title">Module Video</span>
+              <span style="font-size:0.8rem; color:var(--text-muted);">OCC TIP Learning Player</span>
+            </div>
+          </div>
+          <h3 id="player-course-title">Course Title</h3>
+          <p class="text-sm text-muted" style="margin-top:4px;" id="player-instructor">Instructor: --</p>
+          <div class="divider" style="margin:var(--space-md) 0;"></div>
+          <p id="player-course-desc" style="font-size:0.9rem; line-height:1.6; color:var(--text-secondary);"></p>
+        </div>
+        <!-- Right: Syllabus Sidebar -->
+        <div class="player-sidebar">
+          <h4 style="margin-bottom:var(--space-md);">Syllabus Modules</h4>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:var(--space-lg);" id="player-progress-text">0 of 0 completed</div>
+          <div id="player-modules-list" style="display:flex; flex-direction:column; gap:var(--space-sm);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATE MODAL -->
+  <div class="modal-overlay" id="cert-modal">
+    <div class="modal modal-lg" style="max-width:800px; padding:0; overflow:hidden;">
+      <button class="modal-close" onclick="OC2.Modal.close('cert-modal')" aria-label="Close" style="top:15px; right:15px; z-index:10;">✕</button>
+      <div style="padding:var(--space-2xl); background:#0c0c1d; display:flex; align-items:center; justify-content:center;">
+        <!-- The Certificate Design -->
+        <div class="certificate-border">
+          <div style="position:absolute; top:15px; left:15px; font-size:1.5rem; color:var(--brand-primary);">★</div>
+          <div style="position:absolute; top:15px; right:15px; font-size:1.5rem; color:var(--brand-primary);">★</div>
+          <div style="position:absolute; bottom:15px; left:15px; font-size:1.5rem; color:var(--brand-primary);">★</div>
+          <div style="position:absolute; bottom:15px; right:15px; font-size:1.5rem; color:var(--brand-primary);">★</div>
+          
+          <div style="font-size:2rem; margin-bottom:var(--space-sm);">🏆</div>
+          <h2 style="font-family:'Outfit', sans-serif; font-weight:900; letter-spacing:2px; color:var(--text-primary); margin-bottom:var(--space-xs);">CERTIFICATE OF COMPLETION</h2>
+          <span style="font-size:0.75rem; color:var(--brand-primary); font-weight:700; letter-spacing:1px; text-transform:uppercase;">Offcampuscareer TIP</span>
+          
+          <div style="margin:var(--space-xl) 0;">
+            <p class="text-sm text-muted">This is proudly presented to</p>
+            <h1 style="font-family:'Outfit', sans-serif; font-weight:800; color:#fff; margin:var(--space-sm) 0;" id="cert-student-name">Student Name</h1>
+            <p class="text-sm text-muted">for successfully completing the industry-certified training program in</p>
+            <h3 style="color:var(--accent-cyan); margin:var(--space-sm) 0;" id="cert-course-title">Course Title</h3>
+          </div>
+          
+          <div class="flex justify-between items-end flex-wrap gap-md" style="margin-top:var(--space-2xl); padding-top:var(--space-lg); border-top:1px solid var(--border-subtle);">
+            <div style="text-align:left;">
+              <div style="font-size:0.72rem; color:var(--text-muted);">Verification Code</div>
+              <div style="font-family:monospace; font-size:0.8rem; color:var(--brand-primary);" id="cert-code">OCC-XXXX-XXXX</div>
+            </div>
+            <div>
+              <div style="font-family:'Outfit', sans-serif; font-size:1rem; font-weight:700; color:#fff;">Vinay Prem Upadhyay</div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">Founder, SHAMIIT LLP</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.72rem; color:var(--text-muted);">Date of Issue</div>
+              <div style="font-size:0.8rem; color:#fff;" id="cert-date">--/--/----</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:var(--space-md) var(--space-xl); background:var(--bg-surface-alt); display:flex; justify-content:flex-end; gap:var(--space-sm); border-top:1px solid var(--border-subtle);">
+        <button class="btn btn-ghost" onclick="OC2.Modal.close('cert-modal')">Close</button>
+        <button class="btn btn-primary" onclick="OC2.Toast.success('PDF download started (mock)!')">Download PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" role="alert" aria-live="polite"></div>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let currentStudent = null;
+
+    function quickLogin(email) {
+      document.getElementById('login-email').value = email;
+      document.getElementById('login-password').value = 'demo123';
+    }
+
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const student = AppState.getStudentByEmail(email);
+      if (student && student.password === password) {
+        currentStudent = student;
+        AppState.setSession('student', student.id);
+        document.getElementById('login-modal').style.display = 'none';
+        loadDashboard();
+        OC2.Toast.success(`Welcome back, ${student.name.split(' ')[0]}! 👋`);
+      } else {
+        OC2.Toast.error('Invalid credentials. Try rahul@demo.com / demo123');
+      }
+    });
+
+    function loadDashboard() {
+      if (!currentStudent) return;
+      const s = currentStudent;
+      const enrollments = AppState.getStudentEnrollments(s.id);
+      const appliedJobs = s.appliedJobs || [];
+      const certs = enrollments.filter(e => e.certificateIssued);
+      const avgProgress = enrollments.length ? Math.round(enrollments.reduce((sum, e) => sum + e.progress, 0) / enrollments.length) : 0;
+
+      // Sidebar
+      document.getElementById('student-avatar').textContent = s.avatar;
+      document.getElementById('sidebar-name').textContent = s.name;
+      document.getElementById('sidebar-college').textContent = s.college;
+      document.getElementById('profile-pct').textContent = `${s.profileComplete}%`;
+      document.getElementById('profile-bar').style.width = `${s.profileComplete}%`;
+      document.getElementById('enrolled-count').textContent = enrollments.length;
+      document.getElementById('applied-count').textContent = appliedJobs.length;
+
+      // Welcome
+      const hour = new Date().getHours();
+      const greet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+      document.getElementById('welcome-name').textContent = `${greet}, ${s.name.split(' ')[0]}! 👋`;
+      document.getElementById('welcome-sub').textContent = avgProgress > 0 ? `You're ${avgProgress}% through your courses. Keep going!` : 'Start your learning journey today!';
+
+      // KPIs
+      document.getElementById('kpi-enrolled').textContent = enrollments.length;
+      document.getElementById('kpi-applied').textContent = appliedJobs.length;
+      document.getElementById('kpi-certs').textContent = certs.length;
+      document.getElementById('kpi-avg-progress').textContent = `${avgProgress}%`;
+
+      // Upcoming classes
+      const classes = AppState.getClasses().filter(c => s.enrolledCourses.includes(c.courseId)).slice(0, 3);
+      document.getElementById('upcoming-classes').innerHTML = classes.map(c => `
+        <div style="padding:var(--space-md) 0; border-bottom:1px solid var(--border-subtle);">
+          <div style="font-weight:600; font-size:0.9rem; color:var(--text-primary);">${c.title}</div>
+          <div style="font-size:0.78rem; color:var(--text-muted); margin-top:4px;">📅 ${c.date} · ⏰ ${c.time} · ${c.platform}</div>
+          <a href="${c.meetingLink}" target="_blank" class="btn btn-exams btn-sm" style="margin-top:var(--space-sm);">Join Class</a>
+        </div>
+      `).join('') || '<p class="text-muted">No upcoming classes</p>';
+
+      // Job recommendations
+      const jobs = AppState.getJobs().slice(0, 3);
+      document.getElementById('job-recommendations').innerHTML = jobs.map(j => `
+        <div style="padding:var(--space-md) 0; border-bottom:1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between">
+            <div>
+              <div style="font-weight:600; font-size:0.9rem; color:var(--text-primary);">${j.role}</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">${j.company} · ${j.location}</div>
+            </div>
+            <a href="careers.html" class="btn btn-jobs btn-sm">Apply</a>
+          </div>
+        </div>
+      `).join('');
+
+      // Courses
+      const enrolledDiv = document.getElementById('enrolled-courses-list');
+      const noCourses = document.getElementById('no-courses');
+      if (!enrollments.length) {
+        enrolledDiv.innerHTML = '';
+        noCourses.classList.remove('hidden');
+      } else {
+        noCourses.classList.add('hidden');
+        enrolledDiv.innerHTML = enrollments.map(e => {
+          const course = AppState.getCourse(e.courseId);
+          if (!course) return '';
+          const assignments = AppState.getCourseAssignments(course.id);
+          const submitted = assignments.filter(a => a.submissions.some(sub => sub.studentId === s.id)).length;
+          return `
+            <div class="card">
+              <div class="flex items-start gap-lg flex-wrap">
+                <div style="font-size:3rem;">${course.icon}</div>
+                <div style="flex:1; min-width:200px;">
+                  <div class="flex items-center gap-md flex-wrap" style="margin-bottom:var(--space-sm);">
+                    <h4>${course.title}</h4>
+                    <span class="badge ${e.certificateIssued ? 'badge-exams' : 'badge-outline'}">${e.certificateIssued ? '🏆 Certified' : course.category}</span>
+                  </div>
+                  <div class="flex gap-xl flex-wrap" style="margin-bottom:var(--space-md);">
+                    <span class="text-sm text-muted">⏱ ${course.duration}</span>
+                    <span class="text-sm text-muted">📦 ${e.completedModules.length}/${course.modules?.length || 0} modules</span>
+                    <span class="text-sm text-muted">📝 ${submitted}/${assignments.length} assignments</span>
+                  </div>
+                  <div class="progress-labeled" style="margin-bottom:var(--space-lg);">
+                    <div class="progress-bar"><div class="progress-fill" style="width:${e.progress}%;"></div></div>
+                    <div class="progress-pct">${e.progress}%</div>
+                  </div>
+                  <div class="flex gap-sm flex-wrap">
+                    <button class="btn btn-primary btn-sm" onclick="openCoursePlayer('${course.id}')">Continue Learning</button>
+                    ${e.certificateIssued ? `<button class="btn btn-exams btn-sm" onclick="showCertificate('${course.id}')">View Certificate</button>` : ''}
+                    <button class="btn btn-ghost btn-sm" onclick="openCoursePlayer('${course.id}')">View Modules</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).filter(Boolean).join('');
+      }
+
+      // Applied Jobs
+      if (appliedJobs.length) {
+        document.getElementById('applied-jobs-list').innerHTML = `
+          <div class="table-wrapper">
+            <table class="table">
+              <thead><tr><th>Job</th><th>Company</th><th>Status</th><th>Applied</th><th>Pipeline</th></tr></thead>
+              <tbody>${appliedJobs.map(aj => {
+                const job = AppState.getJob(aj.jobId);
+                if (!job) return '';
+                const statusColors = { 'Under Review':'badge-amber', 'Shortlisted':'badge-exams', 'Interview':'badge-primary', 'Rejected':'badge-rose', 'Offered':'badge-success' };
+                return `<tr>
+                  <td style="font-weight:600;">${job.role}</td>
+                  <td>${job.company}</td>
+                  <td><span class="badge ${statusColors[aj.status]||'badge-outline'}">${aj.status}</span></td>
+                  <td>${OC2.Utils.formatDate(aj.appliedAt)}</td>
+                  <td><a href="careers.html" class="btn btn-ghost btn-sm">View</a></td>
+                </tr>`;
+              }).filter(Boolean).join('')}</tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // Recommended Jobs
+      document.getElementById('recommended-jobs-list').innerHTML = AppState.getJobs().slice(0, 4).map(j => `
+        <div class="job-card">
+          <div class="job-card-header">
+            <div class="company-logo">${j.companyLogo||j.company[0]}</div>
+            <div style="flex:1;"><div class="job-role">${j.role}</div><div class="job-company">${j.company} · ${j.location}</div></div>
+            <span class="badge ${j.type==='Internship'?'badge-exams':'badge-primary'}">${j.type}</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="job-salary">${j.stipend}</span>
+            <a href="careers.html" class="btn btn-jobs btn-sm">Apply →</a>
+          </div>
+        </div>
+      `).join('');
+
+      // Mentors
+      const mentors = AppState.getMentors(true).slice(0, 4);
+      document.getElementById('featured-mentors-student').innerHTML = mentors.map(m => `
+        <div class="mentor-card">
+          <div class="mentor-avatar-wrap">
+            <div class="mentor-avatar">${m.initials}</div>
+            ${m.verified ? '<div class="mentor-badge">✓</div>' : ''}
+          </div>
+          <div class="mentor-name">${m.name}</div>
+          <div class="mentor-title">${m.title}</div>
+          <div class="mentor-rating">
+            <span class="stars">${OC2.Utils.generateStars(m.rating)}</span>
+            <span class="score">${m.rating}</span>
+          </div>
+          <div style="margin-top:var(--space-md); display:flex; gap:var(--space-sm);">
+            <span style="font-family:'Outfit'; font-size:1rem; font-weight:800; color:var(--text-primary);">${OC2.Utils.formatCurrency(m.price)}</span>
+            <span class="text-sm text-muted">${m.priceType}</span>
+          </div>
+          <a href="mentor.html" class="btn btn-mentor btn-sm w-full" style="justify-content:center; margin-top:var(--space-sm);">Book Session</a>
+        </div>
+      `).join('');
+
+      // Exams
+      const exams = AppState.getExamCategories().slice(0, 6);
+      const bgMap = { cyan:'rgba(6,182,212,0.12)', rose:'rgba(244,63,94,0.12)', amber:'rgba(245,158,11,0.12)', indigo:'rgba(79,70,229,0.12)', orange:'rgba(234,88,12,0.12)', green:'rgba(52,211,153,0.12)' };
+      const colorMapText = { cyan:'var(--accent-cyan)', rose:'var(--accent-rose)', amber:'var(--accent-amber)', indigo:'var(--accent-indigo)', orange:'var(--accent-orange)', green:'var(--accent-green)' };
+      document.getElementById('exam-categories-list').innerHTML = exams.map(e => `
+        <a href="exams.html?exam=${e.id}" class="card" style="display:block; text-decoration:none;">
+          <div style="font-size:2.5rem; margin-bottom:var(--space-md);">${e.icon}</div>
+          <h4 style="margin-bottom:var(--space-sm);">${e.name}</h4>
+          <p style="font-size:0.88rem;">${OC2.Utils.truncate(e.description, 80)}</p>
+          <div class="flex gap-sm" style="margin-top:var(--space-md);">
+            <span class="badge badge-exams">${e.difficulty}</span>
+            <span class="badge badge-outline">${e.aspirants} Aspirants</span>
+          </div>
+        </a>
+      `).join('');
+
+      // Community
+      const posts = AppState.getCommunityPosts().slice(0, 3);
+      document.getElementById('community-preview').innerHTML = posts.map(p => `
+        <div class="post-card">
+          <div class="post-header">
+            <div class="avatar avatar-sm">${p.authorAvatar || p.authorName.slice(0,2).toUpperCase()}</div>
+            <div><div class="post-author-name">${p.authorName}</div><div class="post-time">${OC2.Utils.formatRelativeTime(p.postedAt)}</div></div>
+          </div>
+          <div class="post-title">${p.title}</div>
+          <div class="post-excerpt">${OC2.Utils.truncate(p.content, 150)}</div>
+          <div class="post-footer">
+            <div class="post-actions"><span class="post-action">👍 ${p.likes}</span><span class="post-action">💬 ${p.comments}</span></div>
+            <a href="community.html" class="btn btn-ghost btn-sm">View →</a>
+          </div>
+        </div>
+      `).join('');
+
+      // Certificates
+      const certDiv = document.getElementById('cert-list');
+      const noCerts = document.getElementById('no-certs');
+      if (!certs.length) {
+        certDiv.innerHTML = '';
+        noCerts.classList.remove('hidden');
+      } else {
+        noCerts.classList.add('hidden');
+        certDiv.innerHTML = certs.map(e => {
+          const course = AppState.getCourse(e.courseId);
+          return course ? `
+            <div class="cert-card">
+              <div style="font-size:3rem; margin-bottom:var(--space-md);">🏆</div>
+              <div class="section-label exams" style="margin-bottom:var(--space-md);">Certificate of Completion</div>
+              <h4 style="margin-bottom:var(--space-sm);">${course.title}</h4>
+              <p class="text-sm text-muted">Issued by Offcampuscareer · SHAMIIT LLP</p>
+              <button class="btn btn-exams btn-sm" style="margin-top:var(--space-lg);" onclick="showCertificate('${course.id}')">View Certificate</button>
+            </div>
+          ` : '';
+        }).filter(Boolean).join('');
+      }
+
+      // Profile form
+      document.getElementById('pf-name').value = s.name;
+      document.getElementById('pf-email').value = s.email;
+      document.getElementById('pf-phone').value = s.phone || '';
+      document.getElementById('pf-college').value = s.college || '';
+      document.getElementById('pf-stream').value = s.stream || '';
+      document.getElementById('profile-avatar-big').textContent = s.avatar;
+      document.getElementById('profile-name-display').textContent = s.name;
+      document.getElementById('profile-college-display').textContent = s.college;
+      document.getElementById('act-enrolled').textContent = enrollments.length;
+      document.getElementById('act-certs').textContent = certs.length;
+      document.getElementById('act-applied').textContent = appliedJobs.length;
+      document.getElementById('act-joined').textContent = OC2.Utils.formatDate(s.joinedAt);
+
+      // Notifications
+      const notifs = AppState.getNotifications(s.id);
+      const unread = notifs.filter(n => !n.read).length;
+      document.getElementById('notif-count').textContent = unread;
+      document.getElementById('notif-list').innerHTML = notifs.slice(0, 5).map(n => `
+        <div class="notif-item ${n.read ? '' : 'unread'}" onclick="AppState.markNotifRead('${n.id}')">
+          <div class="notif-item-icon" style="background:${n.type==='class'?'rgba(6,182,212,0.15)':n.type==='job'?'rgba(245,158,11,0.15)':'rgba(155,95,208,0.15)'}">
+            ${n.type==='class'?'📅':n.type==='job'?'💼':'📝'}
+          </div>
+          <div class="notif-item-text">
+            <div class="notif-item-msg">${n.message}</div>
+            <div class="notif-item-time">${OC2.Utils.formatRelativeTime(n.createdAt)}</div>
+          </div>
+        </div>
+      `).join('') || '<p class="text-sm text-muted" style="padding:var(--space-md);">No notifications</p>';
+
+      // Mentor Sessions
+      const mySessionsDiv = document.getElementById('student-sessions-list');
+      const mentorSessions = s.mentorSessions || [];
+      if (mentorSessions.length) {
+        mySessionsDiv.innerHTML = `
+          <div class="table-wrapper">
+            <table class="table">
+              <thead><tr><th>Mentor</th><th>Topic</th><th>Date</th><th>Time</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody>${mentorSessions.map(ms => `
+                <tr>
+                  <td style="font-weight:600;">${ms.mentorName}<br><span class="text-xs text-muted">${ms.mentorTitle}</span></td>
+                  <td>${ms.topic}</td>
+                  <td>${OC2.Utils.formatDate(ms.date)}</td>
+                  <td>${ms.time}</td>
+                  <td><span class="badge badge-exams">${ms.status}</span></td>
+                  <td><a href="${ms.meetingLink}" target="_blank" class="btn btn-primary btn-sm">Join Meet</a></td>
+                </tr>
+              `).join('')}</tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      OC2.Modal.init('player-modal');
+      OC2.Modal.init('cert-modal');
+      OC2.Portal.init();
+      OC2.Sidebar.init();
+    }
+
+    function markAllRead() {
+      const notifs = AppState.get('notifications') || [];
+      notifs.forEach(n => n.read = true);
+      AppState.set('notifications', notifs);
+      document.getElementById('notif-count').textContent = '0';
+      OC2.Toast.success('All notifications marked as read.');
+      document.getElementById('notif-panel').classList.remove('open');
+    }
+
+    // Profile save
+    document.getElementById('profile-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      AppState.updateStudent(currentStudent.id, {
+        name: document.getElementById('pf-name').value,
+        phone: document.getElementById('pf-phone').value,
+        college: document.getElementById('pf-college').value,
+        stream: document.getElementById('pf-stream').value,
+        profileComplete: 100
+      });
+      OC2.Toast.success('✅ Profile updated successfully!');
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      AppState.clearSession();
+      window.location.href = 'index.html';
+    });
+
+    function openCoursePlayer(courseId) {
+      const course = AppState.getCourse(courseId);
+      if (!course) return;
+      const enroll = AppState.getStudentEnrollments(currentStudent.id).find(e => e.courseId === courseId);
+      if (!enroll) return;
+      
+      document.getElementById('player-course-title').textContent = course.title;
+      document.getElementById('player-instructor').textContent = `Instructor: ${course.instructor}`;
+      document.getElementById('player-course-desc').textContent = course.description;
+      
+      renderPlayerModules(course, enroll);
+      
+      OC2.Modal.open('player-modal');
+    }
+
+    function renderPlayerModules(course, enroll) {
+      const completed = enroll.completedModules || [];
+      const listDiv = document.getElementById('player-modules-list');
+      document.getElementById('player-progress-text').textContent = `${completed.length} of ${course.modules.length} modules completed`;
+      
+      listDiv.innerHTML = course.modules.map((m, idx) => {
+        const isChecked = completed.includes(m);
+        return `
+          <label class="flex items-center gap-md" style="padding:var(--space-sm) var(--space-md); background:var(--bg-primary); border-radius:var(--radius-sm); border:1px solid var(--border-subtle); cursor:pointer; font-size:0.85rem;">
+            <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleModuleCompletion('${enroll.id}', '${course.id}', '${m}', this)">
+            <span style="color:${isChecked ? 'var(--text-muted)' : 'var(--text-primary)'}; text-decoration:${isChecked ? 'line-through' : 'none'};">${m}</span>
+          </label>
+        `;
+      }).join('');
+    }
+
+    function toggleModuleCompletion(enrollmentId, courseId, moduleName, checkbox) {
+      const enrollments = AppState.getEnrollments();
+      const enroll = enrollments.find(e => e.id === enrollmentId);
+      if (!enroll) return;
+      
+      if (!enroll.completedModules) enroll.completedModules = [];
+      
+      if (checkbox.checked) {
+        if (!enroll.completedModules.includes(moduleName)) {
+          enroll.completedModules.push(moduleName);
+        }
+      } else {
+        enroll.completedModules = enroll.completedModules.filter(m => m !== moduleName);
+      }
+      
+      const course = AppState.getCourse(courseId);
+      enroll.progress = Math.round((enroll.completedModules.length / course.modules.length) * 100);
+      
+      if (enroll.progress === 100) {
+        enroll.certificateIssued = true;
+        OC2.Toast.success(`🏆 Congratulations! You have completed "${course.title}" and earned your certificate!`);
+        OC2.Confetti.burst();
+      } else {
+        enroll.certificateIssued = false;
+      }
+      
+      AppState.set('enrollments', enrollments);
+      
+      // Update sidebar/dashboard counts and text
+      loadDashboard();
+      
+      // Update player progress header
+      document.getElementById('player-progress-text').textContent = `${enroll.completedModules.length} of ${course.modules.length} completed`;
+      
+      // Toggle strike-through and text color locally
+      const labelText = checkbox.nextElementSibling;
+      if (checkbox.checked) {
+        labelText.style.color = 'var(--text-muted)';
+        labelText.style.textDecoration = 'line-through';
+      } else {
+        labelText.style.color = 'var(--text-primary)';
+        labelText.style.textDecoration = 'none';
+      }
+    }
+
+    function showCertificate(courseId) {
+      const course = AppState.getCourse(courseId);
+      if (!course) return;
+      const enroll = AppState.getStudentEnrollments(currentStudent.id).find(e => e.courseId === courseId);
+      if (!enroll || !enroll.certificateIssued) return;
+      
+      document.getElementById('cert-student-name').textContent = currentStudent.name;
+      document.getElementById('cert-course-title').textContent = course.title.toUpperCase();
+      document.getElementById('cert-date').textContent = OC2.Utils.formatDate(enroll.startDate);
+      document.getElementById('cert-code').textContent = `OCC-${enroll.id.toUpperCase()}-${courseId.toUpperCase()}`;
+      
+      OC2.Modal.open('cert-modal');
+    }
+
+    // Check existing session
+    const session = AppState.getSession();
+    if (session && session.type === 'student') {
+      currentStudent = AppState.getStudent(session.userId);
+      if (currentStudent) {
+        document.getElementById('login-modal').style.display = 'none';
+        loadDashboard();
+      }
+    }
+  </script>
+</body>
+</html>

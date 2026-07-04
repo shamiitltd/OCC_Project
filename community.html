@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OCC Community — Join India's largest student & aspirant community. Discuss, share success stories, find study partners, and grow together on Offcampuscareer.">
+  <title>OCC Community — Learn Together | Offcampuscareer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container flex items-center justify-between" style="height:100%;">
+      <a href="index.html" class="nav-brand">
+        <img src="offcampuscareer logo.png" alt="Offcampuscareer" loading="lazy">
+        <span class="nav-brand-text">Offcampus<span>career</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="training.html">OCC TIP</a>
+        <a href="mentor.html">OCC Mentor</a>
+        <a href="careers.html">OCC Jobs</a>
+        <a href="exams.html">OCC Exams</a>
+        <a href="corporate.html">Corporate</a>
+        <a href="community.html" class="active">Community</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <a href="student.html" class="btn btn-sm btn-secondary">Login</a>
+        <button class="btn btn-sm" style="background:linear-gradient(135deg,#818CF8,#9B5FD0); color:#fff;" id="new-post-btn">+ New Post</button>
+        <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <div class="nav-links-mobile" id="mobile-nav">
+    <div class="mobile-nav-header">
+      <span class="nav-brand-text" style="font-size:1rem;">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+      <button onclick="OC2.Navbar.closeMobileMenu()" style="background:none;border:none;color:var(--text-secondary);font-size:1.25rem;cursor:pointer;">✕</button>
+    </div>
+    <a href="index.html">🏠 Home</a>
+    <a href="training.html">📚 OCC TIP</a>
+    <a href="mentor.html">🎓 OCC Mentor</a>
+    <a href="careers.html">💼 OCC Jobs</a>
+    <a href="exams.html">📝 OCC Exams</a>
+    <a href="corporate.html">🏢 Corporate</a>
+    <a href="community.html" class="active">👥 Community</a>
+    <div class="mobile-actions">
+      <a href="student.html" class="btn btn-secondary w-full" style="justify-content:center;">Student Login</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero" style="padding-bottom:var(--space-2xl); background:radial-gradient(ellipse at 30% 30%, rgba(129,140,248,0.12) 0%, transparent 60%);">
+    <div class="grid-bg"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <span class="section-label community">// OCC Community</span>
+      <h1 style="margin-top:var(--space-md);">Learn Together,<br><span class="text-gradient-community">Grow Together</span></h1>
+      <p>India's largest community for students and aspirants. Share your journey, help others, and build your network.</p>
+      <div class="flex gap-xl justify-center flex-wrap" style="margin-top:var(--space-2xl);">
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-community);">8K+</div><div style="font-size:0.82rem;color:var(--text-muted);">Active Members</div></div>
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-community);">500+</div><div style="font-size:0.82rem;color:var(--text-muted);">Discussions</div></div>
+        <div style="text-align:center;"><div style="font-family:'Outfit';font-size:1.75rem;font-weight:900;color:var(--module-community);">50+</div><div style="font-size:0.82rem;color:var(--text-muted);">Study Groups</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY CONTENT -->
+  <div class="container" style="padding-top:var(--space-2xl); padding-bottom:var(--space-4xl);">
+    <div style="display:grid; grid-template-columns:280px 1fr; gap:var(--space-2xl);">
+
+      <!-- Sidebar -->
+      <div>
+        <!-- Categories -->
+        <div class="card" style="margin-bottom:var(--space-lg);">
+          <h4 style="margin-bottom:var(--space-lg);">📋 Categories</h4>
+          <div style="display:flex; flex-direction:column; gap:var(--space-xs);">
+            <button class="sidebar-link active" onclick="filterCategory('All')"><span class="icon">🌐</span>All Posts</button>
+            <button class="sidebar-link" onclick="filterCategory('Success Story')"><span class="icon">🏆</span>Success Stories</button>
+            <button class="sidebar-link" onclick="filterCategory('Study Help')"><span class="icon">📚</span>Study Help</button>
+            <button class="sidebar-link" onclick="filterCategory('Question')"><span class="icon">❓</span>Questions</button>
+            <button class="sidebar-link" onclick="filterCategory('Resource')"><span class="icon">📦</span>Resources</button>
+            <button class="sidebar-link" onclick="filterCategory('Career')"><span class="icon">💼</span>Career Advice</button>
+          </div>
+        </div>
+        <!-- Quick Links -->
+        <div class="card" style="margin-bottom:var(--space-lg);">
+          <h4 style="margin-bottom:var(--space-lg);">⚡ Quick Access</h4>
+          <div style="display:flex; flex-direction:column; gap:var(--space-xs);">
+            <a href="exams.html" class="sidebar-link" style="text-decoration:none;"><span class="icon">📝</span>JEE/NEET Resources</a>
+            <a href="mentor.html" class="sidebar-link" style="text-decoration:none;"><span class="icon">🎓</span>Find a Mentor</a>
+            <a href="careers.html" class="sidebar-link" style="text-decoration:none;"><span class="icon">💼</span>Browse Jobs</a>
+            <a href="training.html" class="sidebar-link" style="text-decoration:none;"><span class="icon">🚀</span>Explore Courses</a>
+          </div>
+        </div>
+        <!-- Study Groups -->
+        <div class="card">
+          <h4 style="margin-bottom:var(--space-lg);">👥 Study Groups</h4>
+          <div style="display:flex; flex-direction:column; gap:var(--space-sm);">
+            <div class="flex items-center justify-between">
+              <div>
+                <div style="font-size:0.88rem; font-weight:600; color:var(--text-primary);">JEE Aspirants 2026</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">234 members</div>
+              </div>
+              <button class="btn btn-sm btn-ghost" onclick="OC2.Toast.info('Study group joining coming soon!')">Join</button>
+            </div>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between">
+              <div>
+                <div style="font-size:0.88rem; font-weight:600; color:var(--text-primary);">UPSC 2026 Batch</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">567 members</div>
+              </div>
+              <button class="btn btn-sm btn-ghost" onclick="OC2.Toast.info('Study group joining coming soon!')">Join</button>
+            </div>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between">
+              <div>
+                <div style="font-size:0.88rem; font-weight:600; color:var(--text-primary);">Full Stack Learners</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">389 members</div>
+              </div>
+              <button class="btn btn-sm btn-ghost" onclick="OC2.Toast.info('Study group joining coming soon!')">Join</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Feed -->
+      <div>
+        <!-- Search & Filter -->
+        <div class="flex gap-md items-center" style="margin-bottom:var(--space-xl);">
+          <div class="search-bar" style="flex:1;">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="community-search" placeholder="Search discussions..." aria-label="Search discussions">
+          </div>
+          <select class="form-select" id="sort-filter" style="max-width:180px;" aria-label="Sort posts">
+            <option value="recent">Most Recent</option>
+            <option value="likes">Most Liked</option>
+            <option value="views">Most Viewed</option>
+          </select>
+        </div>
+
+        <!-- Pinned posts indicator -->
+        <div class="flex items-center gap-sm" style="margin-bottom:var(--space-md);">
+          <span class="badge badge-community">📌 Pinned</span>
+          <span style="font-size:0.82rem; color:var(--text-muted);">Featured discussions from our community</span>
+        </div>
+
+        <!-- Posts -->
+        <div id="posts-feed" style="display:flex; flex-direction:column; gap:var(--space-lg);">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Load More -->
+        <div class="text-center" style="margin-top:var(--space-2xl);">
+          <button class="btn btn-secondary" onclick="OC2.Toast.info('More posts loading feature coming soon!')">Load More Posts</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW POST MODAL -->
+  <div class="modal-overlay" id="new-post-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="OC2.Modal.close('new-post-modal')" aria-label="Close">✕</button>
+      <div class="modal-header">
+        <h3>Create a New Post</h3>
+        <p style="color:var(--text-muted);">Share with the OCC Community</p>
+      </div>
+      <form id="post-form">
+        <div class="form-group">
+          <label class="form-label required">Your Name</label>
+          <input type="text" class="form-input" placeholder="Enter your name" id="post-author" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Category</label>
+          <select class="form-select" id="post-category" required>
+            <option value="">Select category...</option>
+            <option value="Success Story">🏆 Success Story</option>
+            <option value="Study Help">📚 Study Help</option>
+            <option value="Question">❓ Question</option>
+            <option value="Resource">📦 Resource</option>
+            <option value="Career">💼 Career Advice</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Title</label>
+          <input type="text" class="form-input" placeholder="A clear, descriptive title for your post" id="post-title" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Content</label>
+          <textarea class="form-textarea" rows="5" placeholder="Share your thoughts, questions, or resources..." id="post-content" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tags (comma-separated)</label>
+          <input type="text" class="form-input" placeholder="JEE, UPSC, Career, etc." id="post-tags">
+        </div>
+        <button type="submit" class="btn btn-primary w-full btn-lg" style="justify-content:center;">Publish Post →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="flex items-center justify-between flex-wrap gap-md">
+        <div class="flex items-center gap-sm">
+          <img src="offcampuscareer logo.png" alt="Offcampuscareer Logo" style="height:32px;" loading="lazy">
+          <span class="nav-brand-text">Offcampus<span style="color:var(--brand-primary);">career</span></span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--text-muted);">© 2026 Offcampuscareer · SHAMIIT LLP</p>
+      </div>
+    </div>
+  </footer>
+  <div class="toast-container" role="alert" aria-live="polite"></div>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let allPosts = [];
+    let currentCategory = 'All';
+
+    const catBadge = { 'Success Story':'badge-exams', 'Study Help':'badge-indigo', 'Question':'badge-amber', 'Resource':'badge-community', 'Career':'badge-jobs' };
+    const catIcon = { 'Success Story':'🏆', 'Study Help':'📚', 'Question':'❓', 'Resource':'📦', 'Career':'💼' };
+
+    function renderPosts(posts) {
+      const feed = document.getElementById('posts-feed');
+      if (!posts.length) {
+        feed.innerHTML = `<div class="empty-state"><div class="empty-icon">💬</div><h3>No posts yet</h3><p>Be the first to post in this category!</p><button class="btn btn-primary" onclick="OC2.Modal.open('new-post-modal')">Create Post</button></div>`;
+        return;
+      }
+      feed.innerHTML = posts.map((p, i) => `
+        <div class="post-card reveal reveal-delay-${(i%3)+1}">
+          <div class="post-header">
+            <div class="avatar avatar-sm">${p.authorAvatar || p.authorName.slice(0,2).toUpperCase()}</div>
+            <div>
+              <div class="post-author-name">${p.authorName}</div>
+              <div class="post-time">${OC2.Utils.formatRelativeTime(p.postedAt)}</div>
+            </div>
+            ${p.pinned ? '<span class="badge badge-community" style="margin-left:auto; font-size:0.7rem;">📌 Pinned</span>' : ''}
+            <span class="badge ${catBadge[p.category]||'badge-primary'}" style="font-size:0.7rem; ${p.pinned ? '' : 'margin-left:auto;'}">${catIcon[p.category]||'📝'} ${p.category}</span>
+          </div>
+          <div class="post-title">${p.title}</div>
+          <div class="post-excerpt">${OC2.Utils.truncate(p.content, 200)}</div>
+          <div class="post-footer">
+            <div class="post-actions">
+              <button class="post-action" onclick="likePost('${p.id}', this)" aria-label="Like post">
+                👍 <span class="like-count">${p.likes}</span>
+              </button>
+              <span class="post-action">💬 ${p.comments} Comments</span>
+              <span class="post-action">👀 ${p.views} Views</span>
+            </div>
+            <div class="post-tags">
+              ${(p.tags||[]).slice(0,3).map(t => `<span class="chip" style="font-size:0.72rem;">${t}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+      setTimeout(() => OC2.ScrollReveal.init(), 100);
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.sidebar-link[onclick]').forEach(b => b.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = document.getElementById('community-search').value.toLowerCase();
+      const sort = document.getElementById('sort-filter').value;
+      let filtered = allPosts.filter(p => {
+        const matchCat = currentCategory === 'All' || p.category === currentCategory;
+        const matchQ = !q || p.title.toLowerCase().includes(q) || p.content.toLowerCase().includes(q);
+        return matchCat && matchQ;
+      });
+      if (sort === 'likes') filtered.sort((a,b) => b.likes - a.likes);
+      else if (sort === 'views') filtered.sort((a,b) => b.views - a.views);
+      renderPosts(filtered);
+    }
+
+    function likePost(postId, btn) {
+      const post = AppState.likePost(postId);
+      if (post) {
+        const countEl = btn.querySelector('.like-count');
+        if (countEl) countEl.textContent = post.likes;
+        btn.style.color = 'var(--accent-green)';
+        OC2.Toast.success('❤️ Post liked!');
+      }
+    }
+
+    // Init
+    allPosts = AppState.getCommunityPosts();
+    // Sort pinned first
+    allPosts.sort((a,b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+    renderPosts(allPosts);
+    OC2.Modal.init('new-post-modal');
+
+    document.getElementById('new-post-btn').addEventListener('click', () => OC2.Modal.open('new-post-modal'));
+    document.getElementById('community-search').addEventListener('input', OC2.Utils.debounce(applyFilters, 300));
+    document.getElementById('sort-filter').addEventListener('change', applyFilters);
+
+    // New post form
+    document.getElementById('post-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const author = document.getElementById('post-author').value;
+      const category = document.getElementById('post-category').value;
+      const title = document.getElementById('post-title').value;
+      const content = document.getElementById('post-content').value;
+      if (!author || !category || !title || !content) { OC2.Toast.error('Please fill all required fields.'); return; }
+      const tags = document.getElementById('post-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+      const post = AppState.addCommunityPost({
+        authorName: author, authorAvatar: author.slice(0,2).toUpperCase(),
+        category, title, content, tags
+      });
+      allPosts.unshift(post);
+      renderPosts(allPosts);
+      OC2.Modal.close('new-post-modal');
+      OC2.Toast.success('✅ Post published successfully!');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
