@@ -7,8 +7,9 @@
 import AppState from './app-state.js';
 
 const ApiClient = {
-  baseUrl: 'api',
-  useLocalFallback: true, // Auto-fallback active
+  baseUrl: '/api',
+  useLocalFallback: false, // Auto-fallback inactive (using PHP backend)
+
 
   async request(endpoint, method = 'GET', data = null) {
     if (!this.useLocalFallback) {
