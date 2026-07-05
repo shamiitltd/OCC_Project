@@ -1,0 +1,27 @@
+# =====================================================================
+# OCC Upload Script - Uploads all files to tip.offcampuscareer.com
+# Run this from E:\Offcampuscareer\v2\
+# Requires: WinSCP installed OR FileZilla
+# =====================================================================
+# 
+# SFTP Details:
+#   Host: 187.127.158.6
+#   Port: 22
+#   Username: user
+#   Password: naresh@SHAMIIT1
+#   Webroot: /home/user/web/tip.offcampuscareer.com/public_html/
+#
+# =====================================================================
+
+# WinSCP Script (save as upload.ws and run with winscp /script=upload.ws)
+# 
+# option batch abort
+# option confirm off
+# open sftp://user:naresh@SHAMIIT1@187.127.158.6:22
+# synchronize remote occ-web-app\dist /home/user/web/tip.offcampuscareer.com/public_html
+# put api /home/user/web/tip.offcampuscareer.com/public_html/api/
+# put db /home/user/web/tip.offcampuscareer.com/public_html/db/
+# put resumes /home/user/web/tip.offcampuscareer.com/public_html/resumes/
+# put .htaccess /home/user/web/tip.offcampuscareer.com/public_html/.htaccess
+# close
+# exit

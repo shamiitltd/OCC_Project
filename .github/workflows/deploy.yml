@@ -3,7 +3,7 @@ name: Build and Deploy Web App to VPS
 on:
   push:
     branches:
-      - OCC_Projects
+      - main # Triggers when code is pushed to main branch
 
 jobs:
   build-and-deploy:
@@ -29,23 +29,71 @@ jobs:
           cd occ-web-app
           npm run build
 
-      - name: Deploy Built React App to VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_SSH_HOST }}
-          username: ${{ secrets.VPS_SSH_USERNAME }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: 22
-          source: "occ-web-app/dist/*"
-          target: "/var/www/html"
-          strip_components: 2
+      - name: Prepare Deployment Package
+        run: |
+          # Create a temporary deployment directory
+          mkdir deploy_package
+          
+          # Copy React built frontend files from dist/
+          cp -r occ-web-app/dist/* deploy_package/
+          
+          # Copy PHP Backend APIs
+          cp -r api deploy_package/
+          
+          # Copy Database schema and utilities
+          cp -r db deploy_package/
+          
+          # Copy critical Apache configuration
+          cp .htaccess deploy_package/
+          
+          # Create empty placeholder directories for uploads
+          mkdir -p deploy_package/resumes
+          
+          # Copy root static assets (logos, quotes, pdfs, etc.)
+          cp *.png deploy_package/ 2>/dev/null || true
+          cp *.jpg deploy_package/ 2>/dev/null || true
+          cp *.jpeg deploy_package/ 2>/dev/null || true
+          cp *.svg deploy_package/ 2>/dev/null || true
+          cp *.pdf deploy_package/ 2>/dev/null || true
+          
+          # Clean up unnecessary config or setup files that shouldn't be public in prod
+          # Note: We keep init_db.php for the user to run once, but they should delete it later.
 
-      - name: Deploy PHP Backend and Root Assets to VPS
+      - name: Copy Files to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.VPS_SSH_HOST }}
-          username: ${{ secrets.VPS_SSH_USERNAME }}
+          host: ${{ secrets.VPS_SSH_HOST || '187.127.158.6' }}
+          username: ${{ secrets.VPS_SSH_USERNAME || 'user' }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          port: 22
-          source: "api/**,db/**,*.png,*.jpg,*.jpeg,*.svg"
-          target: "/var/www/html"
+          password: ${{ secrets.VPS_SSH_PASSWORD }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          source: "deploy_package/**/*"
+          target: "/home/user/web/tip.offcampuscareer.com/public_html"
+          strip_components: 1 # Removes the "deploy_package" parent folder from destination path
+          rm: false # Overwrites matching files, leaves others (e.g. database/resumes uploads intact)
+
+      - name: Set Permissions on VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        if: always() # Attempt permissions fix even if upload steps had issues
+        with:
+          host: ${{ secrets.VPS_SSH_HOST || '187.127.158.6' }}
+          username: ${{ secrets.VPS_SSH_USERNAME || 'user' }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_SSH_PASSWORD }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          script: |
+            WEBROOT="/home/user/web/tip.offcampuscareer.com/public_html"
+            
+            # Make sure critical directories exist and have proper owner/permissions
+            mkdir -p "$WEBROOT/resumes"
+            mkdir -p "$WEBROOT/db"
+            
+            # Writable directories for Apache/PHP-FPM
+            chmod 755 "$WEBROOT/db"
+            chmod 755 "$WEBROOT/resumes"
+            
+            # Ensure .php files and .htaccess are secure
+            chmod 644 "$WEBROOT/api/"*.php 2>/dev/null || true
+            chmod 644 "$WEBROOT/.htaccess" 2>/dev/null || true
+            
+            echo "Deployment Permissions Configured Successfully!"

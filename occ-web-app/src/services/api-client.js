@@ -60,6 +60,24 @@ const ApiClient = {
         return { success: true };
       }
       
+      if (action === 'signup') {
+        const studentId = 'STU' + Math.floor(Math.random() * 1000000);
+        const newStu = {
+          id: studentId,
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          phone: data.phone,
+          college: data.college,
+          year: data.year,
+          role: 'student',
+          joinedAt: new Date().toISOString().split('T')[0]
+        };
+        AppState.addStudent(newStu);
+        AppState.setSession('student', studentId);
+        return { success: true, session: { type: 'student', userId: studentId }, user: newStu };
+      }
+      
       if (action === 'status') {
         const session = AppState.getSession();
         return session ? { loggedIn: true, type: session.type, userId: session.userId } : { loggedIn: false };
@@ -260,6 +278,10 @@ const ApiClient = {
   /* ── Auth API ── */
   async login(email, password, type = 'student') {
     return this.request(`auth.php?action=login`, 'POST', { email, password, type });
+  },
+
+  async signup(signupData) {
+    return this.request(`auth.php?action=signup`, 'POST', signupData);
   },
 
   async logout() {

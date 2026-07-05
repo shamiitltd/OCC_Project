@@ -36,6 +36,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             sendResponse(["error" => "Invalid email or password."], 401);
         }
+    } elseif ($action === 'signup') {
+        $name = trim($input['name'] ?? '');
+        $email = trim($input['email'] ?? '');
+        $password = trim($input['password'] ?? '');
+        $phone = trim($input['phone'] ?? '');
+        $college = trim($input['college'] ?? '');
+        $year = trim($input['year'] ?? '3rd Year');
+
+        if (empty($name) || empty($email) || empty($password)) {
+            sendResponse(["error" => "Name, email, and password are required."], 400);
+        }
+
+        // Check if email already exists
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        if ($stmt->fetchColumn() > 0) {
+            sendResponse(["error" => "Email address is already registered."], 409);
+        }
+
+        $id = generateId('STU');
+        $role = 'student';
+        $avatar = strtoupper(substr($name, 0, 2));
+
+        $stmt = $pdo->prepare("INSERT INTO users (id, name, email, password, phone, college, year, role, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$id, $name, $email, $password, $phone, $college, $year, $role, $avatar]);
+
+        // Get user details
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->execute([$id]);
+        $user = $stmt->fetch();
+        unset($user['password']);
+
+        $_SESSION['session_type'] = $role;
+        $_SESSION['user_id'] = $id;
+
+        sendResponse([
+            "success" => true,
+            "message" => "Registered successfully.",
+            "user" => $user
+        ]);
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($action === 'logout') {

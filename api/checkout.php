@@ -56,7 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $startDate = date('Y-m-d');
         $completedModules = json_encode([]);
         
-        $stmtEnroll = $pdo->prepare("INSERT OR IGNORE INTO enrollments (id, student_id, course_id, progress, start_date, completed_modules, certificate_issued) VALUES (?, ?, ?, 0, ?, ?, 0)");
+        $stmtEnroll = $pdo->prepare("INSERT IGNORE INTO enrollments (id, student_id, course_id, progress, start_date, completed_modules, certificate_issued) VALUES (?, ?, ?, 0, ?, ?, 0)");
+
         $stmtEnroll->execute([$enrollmentId, $studentId, $courseId, $startDate, $completedModules]);
 
         // 3. Create payment
