@@ -13,6 +13,7 @@ import CommunityPage from './pages/CommunityPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import CheckoutPage from './pages/CheckoutPage';
+import PlacementPage from './pages/PlacementPage';
 import './App.css';
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/placement" element={<PlacementPage />} />
           </Route>
 
           {/* Portal Routes (with Sidebar) */}
@@ -41,3 +43,4 @@ export default function App() {
     </AppProvider>
   );
 }
+
