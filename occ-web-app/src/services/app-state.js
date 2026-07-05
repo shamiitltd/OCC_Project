@@ -284,131 +284,135 @@ const AppState = {
 
     /* ── Students ── */
     students: [
-      { id:'STU001', name:'Rahul Sharma', email:'rahul@demo.com', password:'demo123', phone:'9876543210', college:'IIT Delhi', year:'3rd Year', stream:'Computer Science', avatar:'RS', enrolledCourses:['CRS001','CRS003'], appliedJobs:[], mentorSessions:[], communityPosts:[], joinedAt:'2025-01-15', profileComplete: 80 },
-      { id:'STU002', name:'Priya Patel', email:'priya@demo.com', password:'demo123', phone:'9876543211', college:'NIT Trichy', year:'4th Year', stream:'Electronics', avatar:'PP', enrolledCourses:['CRS002','CRS004'], appliedJobs:[], mentorSessions:[], communityPosts:[], joinedAt:'2025-02-10', profileComplete: 90 },
-      { id:'STU003', name:'Amit Kumar', email:'amit@demo.com', password:'demo123', phone:'9876543212', college:'BITS Pilani', year:'2nd Year', stream:'Mechanical', avatar:'AK', enrolledCourses:['CRS003'], appliedJobs:[], mentorSessions:[], communityPosts:[], joinedAt:'2025-03-05', profileComplete: 60 },
-      { id:'STU004', name:'Sneha Gupta', email:'sneha@demo.com', password:'demo123', phone:'9876543213', college:'VIT Vellore', year:'4th Year', stream:'Computer Science', avatar:'SG', enrolledCourses:['CRS001','CRS005','CRS006'], appliedJobs:[], mentorSessions:[], communityPosts:[], joinedAt:'2025-03-20', profileComplete: 95 }
+      { id: 'STU001', name: 'Rahul Sharma', email: 'rahul@demo.com', password: 'demo123', phone: '9876543210', college: 'IIT Delhi', year: '3rd Year', stream: 'Computer Science', avatar: 'RS', enrolledCourses: ['CRS001', 'CRS003'], appliedJobs: [], mentorSessions: [], communityPosts: [], joinedAt: '2025-01-15', profileComplete: 80 },
+      { id: 'STU002', name: 'Priya Patel', email: 'priya@demo.com', password: 'demo123', phone: '9876543211', college: 'NIT Trichy', year: '4th Year', stream: 'Electronics', avatar: 'PP', enrolledCourses: ['CRS002', 'CRS004'], appliedJobs: [], mentorSessions: [], communityPosts: [], joinedAt: '2025-02-10', profileComplete: 90 },
+      { id: 'STU003', name: 'Amit Kumar', email: 'amit@demo.com', password: 'demo123', phone: '9876543212', college: 'BITS Pilani', year: '2nd Year', stream: 'Mechanical', avatar: 'AK', enrolledCourses: ['CRS003'], appliedJobs: [], mentorSessions: [], communityPosts: [], joinedAt: '2025-03-05', profileComplete: 60 },
+      { id: 'STU004', name: 'Sneha Gupta', email: 'sneha@demo.com', password: 'demo123', phone: '9876543213', college: 'VIT Vellore', year: '4th Year', stream: 'Computer Science', avatar: 'SG', enrolledCourses: ['CRS001', 'CRS005', 'CRS006'], appliedJobs: [], mentorSessions: [], communityPosts: [], joinedAt: '2025-03-20', profileComplete: 95 }
     ],
 
     /* ── Enrollments ── */
     enrollments: [
-      { id:'ENR001', studentId:'STU001', courseId:'CRS001', progress:75, startDate:'2025-01-20', completedModules:['Aptitude & Reasoning','Communication Skills','Resume Building','Mock Interviews','Group Discussions','HR Round Prep'], certificateIssued:false },
-      { id:'ENR002', studentId:'STU001', courseId:'CRS003', progress:40, startDate:'2025-02-01', completedModules:['HTML5 & CSS3 Mastery','JavaScript Deep Dive','React.js Frontend'], certificateIssued:false },
-      { id:'ENR003', studentId:'STU002', courseId:'CRS002', progress:100, startDate:'2025-02-15', completedModules:['Python for AI','Data Science Fundamentals','Machine Learning Algorithms','Deep Learning & Neural Nets','Natural Language Processing','Computer Vision','Model Deployment','Capstone AI Project'], certificateIssued:true },
-      { id:'ENR004', studentId:'STU002', courseId:'CRS004', progress:60, startDate:'2025-03-01', completedModules:['Foundation Tech Skills','DSA & Problem Solving','Full Stack Development','AI/ML Essentials'], certificateIssued:false },
-      { id:'ENR005', studentId:'STU003', courseId:'CRS003', progress:25, startDate:'2025-03-10', completedModules:['HTML5 & CSS3 Mastery','JavaScript Deep Dive'], certificateIssued:false },
-      { id:'ENR006', studentId:'STU004', courseId:'CRS001', progress:100, startDate:'2025-03-25', completedModules:['Aptitude & Reasoning','Communication Skills','Resume Building','Mock Interviews','Group Discussions','HR Round Prep','Company-Specific Prep','Final Assessment'], certificateIssued:true },
-      { id:'ENR007', studentId:'STU004', courseId:'CRS005', progress:80, startDate:'2025-04-01', completedModules:['Resume Fundamentals','ATS Optimization','Achievement Statements','Portfolio & Cover Letter'], certificateIssued:false },
-      { id:'ENR008', studentId:'STU004', courseId:'CRS006', progress:100, startDate:'2025-04-10', completedModules:['Profile Overhaul','Headline & Summary','Content Strategy','Networking & Outreach','Analytics & Growth'], certificateIssued:true }
+      { id: 'ENR001', studentId: 'STU001', courseId: 'CRS001', progress: 75, startDate: '2025-01-20', completedModules: ['Aptitude & Reasoning', 'Communication Skills', 'Resume Building', 'Mock Interviews', 'Group Discussions', 'HR Round Prep'], certificateIssued: false },
+      { id: 'ENR002', studentId: 'STU001', courseId: 'CRS003', progress: 40, startDate: '2025-02-01', completedModules: ['HTML5 & CSS3 Mastery', 'JavaScript Deep Dive', 'React.js Frontend'], certificateIssued: false },
+      { id: 'ENR003', studentId: 'STU002', courseId: 'CRS002', progress: 100, startDate: '2025-02-15', completedModules: ['Python for AI', 'Data Science Fundamentals', 'Machine Learning Algorithms', 'Deep Learning & Neural Nets', 'Natural Language Processing', 'Computer Vision', 'Model Deployment', 'Capstone AI Project'], certificateIssued: true },
+      { id: 'ENR004', studentId: 'STU002', courseId: 'CRS004', progress: 60, startDate: '2025-03-01', completedModules: ['Foundation Tech Skills', 'DSA & Problem Solving', 'Full Stack Development', 'AI/ML Essentials'], certificateIssued: false },
+      { id: 'ENR005', studentId: 'STU003', courseId: 'CRS003', progress: 25, startDate: '2025-03-10', completedModules: ['HTML5 & CSS3 Mastery', 'JavaScript Deep Dive'], certificateIssued: false },
+      { id: 'ENR006', studentId: 'STU004', courseId: 'CRS001', progress: 100, startDate: '2025-03-25', completedModules: ['Aptitude & Reasoning', 'Communication Skills', 'Resume Building', 'Mock Interviews', 'Group Discussions', 'HR Round Prep', 'Company-Specific Prep', 'Final Assessment'], certificateIssued: true },
+      { id: 'ENR007', studentId: 'STU004', courseId: 'CRS005', progress: 80, startDate: '2025-04-01', completedModules: ['Resume Fundamentals', 'ATS Optimization', 'Achievement Statements', 'Portfolio & Cover Letter'], certificateIssued: false },
+      { id: 'ENR008', studentId: 'STU004', courseId: 'CRS006', progress: 100, startDate: '2025-04-10', completedModules: ['Profile Overhaul', 'Headline & Summary', 'Content Strategy', 'Networking & Outreach', 'Analytics & Growth'], certificateIssued: true }
     ],
 
     /* ── Live Classes ── */
     classes: [
-      { id:'CLS001', courseId:'CRS001', title:'Aptitude Masterclass — Advanced', date:'2026-07-10', time:'10:00 AM', instructor:'Vinay Prem Upadhyay', meetingLink:'https://meet.google.com/abc-defg-hij', platform:'Google Meet', attendees:['STU001','STU004'] },
-      { id:'CLS002', courseId:'CRS002', title:'Deep Learning: CNNs Deep Dive', date:'2026-07-11', time:'2:00 PM', instructor:'King Upadhyay', meetingLink:'https://meet.google.com/klm-nopq-rst', platform:'Google Meet', attendees:['STU002'] },
-      { id:'CLS003', courseId:'CRS003', title:'React.js Hooks Workshop', date:'2026-07-12', time:'11:00 AM', instructor:'Akash Dash', meetingLink:'https://meet.google.com/uvw-xyza-bcd', platform:'Google Meet', attendees:['STU001','STU003'] },
-      { id:'CLS004', courseId:'CRS004', title:'System Design: URL Shortener', date:'2026-07-13', time:'4:00 PM', instructor:'Monika Upadhyay', meetingLink:'https://meet.google.com/efg-hijk-lmn', platform:'Google Meet', attendees:['STU002'] },
-      { id:'CLS005', courseId:'CRS008', title:'UPSC GS1 — History Deep Dive', date:'2026-07-15', time:'9:00 AM', instructor:'IAS Priya Verma', meetingLink:'https://meet.google.com/opq-rstu-vwx', platform:'Google Meet', attendees:[] }
+      { id: 'CLS001', courseId: 'CRS001', title: 'Aptitude Masterclass — Advanced', date: '2026-07-10', time: '10:00 AM', instructor: 'Vinay Prem Upadhyay', meetingLink: 'https://meet.google.com/abc-defg-hij', platform: 'Google Meet', attendees: ['STU001', 'STU004'] },
+      { id: 'CLS002', courseId: 'CRS002', title: 'Deep Learning: CNNs Deep Dive', date: '2026-07-11', time: '2:00 PM', instructor: 'King Upadhyay', meetingLink: 'https://meet.google.com/klm-nopq-rst', platform: 'Google Meet', attendees: ['STU002'] },
+      { id: 'CLS003', courseId: 'CRS003', title: 'React.js Hooks Workshop', date: '2026-07-12', time: '11:00 AM', instructor: 'Akash Dash', meetingLink: 'https://meet.google.com/uvw-xyza-bcd', platform: 'Google Meet', attendees: ['STU001', 'STU003'] },
+      { id: 'CLS004', courseId: 'CRS004', title: 'System Design: URL Shortener', date: '2026-07-13', time: '4:00 PM', instructor: 'Monika Upadhyay', meetingLink: 'https://meet.google.com/efg-hijk-lmn', platform: 'Google Meet', attendees: ['STU002'] },
+      { id: 'CLS005', courseId: 'CRS008', title: 'UPSC GS1 — History Deep Dive', date: '2026-07-15', time: '9:00 AM', instructor: 'IAS Priya Verma', meetingLink: 'https://meet.google.com/opq-rstu-vwx', platform: 'Google Meet', attendees: [] }
     ],
 
     /* ── Assignments ── */
     assignments: [
-      { id:'ASG001', courseId:'CRS001', title:'Mock Interview Recording', dueDate:'2026-07-25', description:'Record a 10-minute mock interview and upload the video link.', submissions:[
-        { studentId:'STU001', submittedAt:'2026-07-10', fileName:'mock_interview_rahul.mp4', grade:85 },
-        { studentId:'STU004', submittedAt:'2026-07-12', fileName:'mock_interview_sneha.mp4', grade:92 }
-      ]},
-      { id:'ASG002', courseId:'CRS002', title:'Build a CNN Classifier', dueDate:'2026-07-28', description:'Build a CNN model to classify CIFAR-10 images with >85% accuracy.', submissions:[
-        { studentId:'STU002', submittedAt:'2026-07-18', fileName:'cnn_classifier_priya.ipynb', grade:95 }
-      ]},
-      { id:'ASG003', courseId:'CRS003', title:'Full Stack Todo App', dueDate:'2026-08-02', description:'Build a complete Todo app with React frontend and Node.js backend with MongoDB.', submissions:[] }
+      {
+        id: 'ASG001', courseId: 'CRS001', title: 'Mock Interview Recording', dueDate: '2026-07-25', description: 'Record a 10-minute mock interview and upload the video link.', submissions: [
+          { studentId: 'STU001', submittedAt: '2026-07-10', fileName: 'mock_interview_rahul.mp4', grade: 85 },
+          { studentId: 'STU004', submittedAt: '2026-07-12', fileName: 'mock_interview_sneha.mp4', grade: 92 }
+        ]
+      },
+      {
+        id: 'ASG002', courseId: 'CRS002', title: 'Build a CNN Classifier', dueDate: '2026-07-28', description: 'Build a CNN model to classify CIFAR-10 images with >85% accuracy.', submissions: [
+          { studentId: 'STU002', submittedAt: '2026-07-18', fileName: 'cnn_classifier_priya.ipynb', grade: 95 }
+        ]
+      },
+      { id: 'ASG003', courseId: 'CRS003', title: 'Full Stack Todo App', dueDate: '2026-08-02', description: 'Build a complete Todo app with React frontend and Node.js backend with MongoDB.', submissions: [] }
     ],
 
     /* ── Jobs ── */
     jobs: [
       {
-        id:'JOB001', company:'TCS', companyLogo:'T', role:'Software Developer Intern',
-        type:'Internship', domain:'Web Dev', location:'Mumbai', mode:'Hybrid',
-        stipend:'₹15,000/month', salaryRange:[10000, 20000],
-        skills:['JavaScript','React','Node.js'], experience:'Fresher',
-        description:'6-month internship with TCS Digital team. Work on enterprise web applications using modern JS frameworks. Chance of PPO based on performance.',
-        applications:[], postedAt:'2026-06-20', deadline:'2026-07-31', status:'Active',
+        id: 'JOB001', company: 'TCS', companyLogo: 'T', role: 'Software Developer Intern',
+        type: 'Internship', domain: 'Web Dev', location: 'Mumbai', mode: 'Hybrid',
+        stipend: '₹15,000/month', salaryRange: [10000, 20000],
+        skills: ['JavaScript', 'React', 'Node.js'], experience: 'Fresher',
+        description: '6-month internship with TCS Digital team. Work on enterprise web applications using modern JS frameworks. Chance of PPO based on performance.',
+        applications: [], postedAt: '2026-06-20', deadline: '2026-07-31', status: 'Active',
         aboutCompany: 'Tata Consultancy Services (TCS) is India\'s largest IT services company.',
         perks: ['Stipend', 'PPO Opportunity', 'Certificate', 'Mentorship'],
         process: ['Online Test', 'Technical Interview', 'HR Interview']
       },
       {
-        id:'JOB002', company:'Infosys', companyLogo:'I', role:'AI/ML Engineer',
-        type:'Job', domain:'AI/ML', location:'Bangalore', mode:'On-site',
-        stipend:'₹8,00,000/year', salaryRange:[700000, 900000],
-        skills:['Python','TensorFlow','NLP','AWS'], experience:'0-2 years',
-        description:'Full-time role in Infosys AI lab. Develop ML models for enterprise solutions. Work with cutting-edge AI research teams.',
-        applications:[], postedAt:'2026-06-22', deadline:'2026-08-15', status:'Active',
+        id: 'JOB002', company: 'Infosys', companyLogo: 'I', role: 'AI/ML Engineer',
+        type: 'Job', domain: 'AI/ML', location: 'Bangalore', mode: 'On-site',
+        stipend: '₹8,00,000/year', salaryRange: [700000, 900000],
+        skills: ['Python', 'TensorFlow', 'NLP', 'AWS'], experience: '0-2 years',
+        description: 'Full-time role in Infosys AI lab. Develop ML models for enterprise solutions. Work with cutting-edge AI research teams.',
+        applications: [], postedAt: '2026-06-22', deadline: '2026-08-15', status: 'Active',
         aboutCompany: 'Infosys is a global leader in next-generation digital services and consulting.',
         perks: ['Health Insurance', 'WFH Option', 'Learning Budget', 'Stock Options'],
         process: ['Resume Shortlist', 'Online Assessment', 'Technical Interview x2', 'HR Interview']
       },
       {
-        id:'JOB003', company:'Wipro', companyLogo:'W', role:'Full Stack Developer',
-        type:'Job', domain:'Web Dev', location:'Hyderabad', mode:'Hybrid',
-        stipend:'₹6,50,000/year', salaryRange:[600000, 700000],
-        skills:['React','Node.js','MongoDB','Docker'], experience:'0-1 year',
-        description:'Build and maintain full-stack web applications for global clients. Agile team, great mentorship for freshers.',
-        applications:[], postedAt:'2026-06-25', deadline:'2026-07-30', status:'Active',
+        id: 'JOB003', company: 'Wipro', companyLogo: 'W', role: 'Full Stack Developer',
+        type: 'Job', domain: 'Web Dev', location: 'Hyderabad', mode: 'Hybrid',
+        stipend: '₹6,50,000/year', salaryRange: [600000, 700000],
+        skills: ['React', 'Node.js', 'MongoDB', 'Docker'], experience: '0-1 year',
+        description: 'Build and maintain full-stack web applications for global clients. Agile team, great mentorship for freshers.',
+        applications: [], postedAt: '2026-06-25', deadline: '2026-07-30', status: 'Active',
         aboutCompany: 'Wipro is a leading global IT, consulting, and business process services company.',
         perks: ['Health Insurance', 'Flexible Hours', 'Learning Platform', 'Annual Bonus'],
         process: ['Online Test', 'Technical Interview', 'Manager Round', 'HR']
       },
       {
-        id:'JOB004', company:'Cognizant', companyLogo:'C', role:'Data Analyst Intern',
-        type:'Internship', domain:'Data Science', location:'Chennai', mode:'On-site',
-        stipend:'₹12,000/month', salaryRange:[10000, 15000],
-        skills:['Python','SQL','Excel','Power BI'], experience:'Fresher',
-        description:'3-month internship analyzing business data and creating dashboards. Great exposure to enterprise data analytics.',
-        applications:[], postedAt:'2026-06-28', deadline:'2026-07-25', status:'Active',
+        id: 'JOB004', company: 'Cognizant', companyLogo: 'C', role: 'Data Analyst Intern',
+        type: 'Internship', domain: 'Data Science', location: 'Chennai', mode: 'On-site',
+        stipend: '₹12,000/month', salaryRange: [10000, 15000],
+        skills: ['Python', 'SQL', 'Excel', 'Power BI'], experience: 'Fresher',
+        description: '3-month internship analyzing business data and creating dashboards. Great exposure to enterprise data analytics.',
+        applications: [], postedAt: '2026-06-28', deadline: '2026-07-25', status: 'Active',
         aboutCompany: 'Cognizant is one of the world\'s leading professional services companies.',
         perks: ['Stipend', 'Certificate', 'PPO Opportunity', 'Training'],
         process: ['Resume Review', 'Technical Interview', 'HR Round']
       },
       {
-        id:'JOB005', company:'HCL Tech', companyLogo:'H', role:'Cloud Engineer',
-        type:'Job', domain:'Cloud', location:'Noida', mode:'On-site',
-        stipend:'₹7,50,000/year', salaryRange:[700000, 800000],
-        skills:['AWS','Docker','Kubernetes','Linux','Terraform'], experience:'0-2 years',
-        description:'Manage cloud infrastructure and deploy scalable applications. Work on AWS/Azure cloud solutions for enterprise clients.',
-        applications:[], postedAt:'2026-06-30', deadline:'2026-08-01', status:'Active',
+        id: 'JOB005', company: 'HCL Tech', companyLogo: 'H', role: 'Cloud Engineer',
+        type: 'Job', domain: 'Cloud', location: 'Noida', mode: 'On-site',
+        stipend: '₹7,50,000/year', salaryRange: [700000, 800000],
+        skills: ['AWS', 'Docker', 'Kubernetes', 'Linux', 'Terraform'], experience: '0-2 years',
+        description: 'Manage cloud infrastructure and deploy scalable applications. Work on AWS/Azure cloud solutions for enterprise clients.',
+        applications: [], postedAt: '2026-06-30', deadline: '2026-08-01', status: 'Active',
         aboutCompany: 'HCL Technologies is a global technology company with presence in 60+ countries.',
         perks: ['Health Insurance', 'Work from Home', 'Annual Bonus', 'Cloud Certifications'],
         process: ['Online Assessment', 'Technical Interview x2', 'HR Interview']
       },
       {
-        id:'JOB006', company:'Offcampuscareer', companyLogo:'O', role:'Frontend Developer',
-        type:'Freelance', domain:'Web Dev', location:'Remote', mode:'Remote',
-        stipend:'₹500/hour', salaryRange:[400, 700],
-        skills:['HTML','CSS','JavaScript','React','Figma'], experience:'Fresher',
-        description:'Freelance opportunity to build landing pages, dashboards, and UI components. Flexible hours, remote work, great portfolio building.',
-        applications:[], postedAt:'2026-07-01', deadline:'2026-07-20', status:'Active',
+        id: 'JOB006', company: 'Offcampuscareer', companyLogo: 'O', role: 'Frontend Developer',
+        type: 'Freelance', domain: 'Web Dev', location: 'Remote', mode: 'Remote',
+        stipend: '₹500/hour', salaryRange: [400, 700],
+        skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Figma'], experience: 'Fresher',
+        description: 'Freelance opportunity to build landing pages, dashboards, and UI components. Flexible hours, remote work, great portfolio building.',
+        applications: [], postedAt: '2026-07-01', deadline: '2026-07-20', status: 'Active',
         aboutCompany: 'Offcampuscareer is a leading ed-tech and career platform for Indian youth.',
         perks: ['Flexible Hours', 'Portfolio Building', 'Mentorship', 'Certificate'],
         process: ['Portfolio Review', 'Quick Task', 'Video Call']
       },
       {
-        id:'JOB007', company:'Google', companyLogo:'G', role:'Software Engineer (STEP Intern)',
-        type:'Internship', domain:'Tech', location:'Hyderabad/Bangalore', mode:'Hybrid',
-        stipend:'₹1,50,000/month', salaryRange:[120000, 200000],
-        skills:['Python','Java','Data Structures','Algorithms','System Design'], experience:'Fresher (3rd/4th year)',
-        description:'Google\'s STEP Internship program for undergraduate students. Work on real Google products under senior engineers.',
-        applications:[], postedAt:'2026-07-01', deadline:'2026-08-31', status:'Active',
+        id: 'JOB007', company: 'Google', companyLogo: 'G', role: 'Software Engineer (STEP Intern)',
+        type: 'Internship', domain: 'Tech', location: 'Hyderabad/Bangalore', mode: 'Hybrid',
+        stipend: '₹1,50,000/month', salaryRange: [120000, 200000],
+        skills: ['Python', 'Java', 'Data Structures', 'Algorithms', 'System Design'], experience: 'Fresher (3rd/4th year)',
+        description: 'Google\'s STEP Internship program for undergraduate students. Work on real Google products under senior engineers.',
+        applications: [], postedAt: '2026-07-01', deadline: '2026-08-31', status: 'Active',
         aboutCompany: 'Google is a multinational technology company specializing in internet-related services.',
         perks: ['Stipend', 'PPO Opportunity', 'Google swag', 'Free food & transport', 'Mentorship'],
         process: ['Online Coding Test', 'Technical Interview x2', 'Team Match']
       },
       {
-        id:'JOB008', company:'Startups', companyLogo:'S', role:'Product Manager (Associate)',
-        type:'Job', domain:'Product Management', location:'Gurugram', mode:'Hybrid',
-        stipend:'₹8-12 LPA', salaryRange:[800000, 1200000],
-        skills:['Product Thinking', 'SQL', 'Figma', 'Agile', 'Analytics'], experience:'0-2 years',
-        description:'Join a high-growth Series B startup as Associate PM. Work directly with the founding team on product roadmap and user research.',
-        applications:[], postedAt:'2026-07-02', deadline:'2026-07-31', status:'Active',
+        id: 'JOB008', company: 'Startups', companyLogo: 'S', role: 'Product Manager (Associate)',
+        type: 'Job', domain: 'Product Management', location: 'Gurugram', mode: 'Hybrid',
+        stipend: '₹8-12 LPA', salaryRange: [800000, 1200000],
+        skills: ['Product Thinking', 'SQL', 'Figma', 'Agile', 'Analytics'], experience: '0-2 years',
+        description: 'Join a high-growth Series B startup as Associate PM. Work directly with the founding team on product roadmap and user research.',
+        applications: [], postedAt: '2026-07-02', deadline: '2026-07-31', status: 'Active',
         aboutCompany: 'High-growth fintech startup revolutionizing payments for Bharat.',
         perks: ['ESOPs', 'Flexible Hours', 'Fast Growth', 'Health Insurance'],
         process: ['Resume Review', 'Case Study', 'Interview Rounds x3']
@@ -417,82 +421,82 @@ const AppState = {
 
     /* ── Corporate Partners ── */
     corporates: [
-      { id:'CORP001', company:'TCS', logo:'T', industry:'IT Services', size:'500K+', location:'Pan-India', contact:'tcs@oc2.in', partnerType:'Hiring Partner', requirements:'Full Stack, AI/ML, Cloud', activeJobs: 3, placedStudents: 45 },
-      { id:'CORP002', company:'Infosys', logo:'I', industry:'IT Services', size:'300K+', location:'Pan-India', contact:'infosys@oc2.in', partnerType:'Campus Partner', requirements:'Python, Java, Cloud', activeJobs: 2, placedStudents: 38 },
-      { id:'CORP003', company:'Wipro', logo:'W', industry:'IT Services', size:'200K+', location:'Pan-India', contact:'wipro@oc2.in', partnerType:'Hiring Partner', requirements:'Web Dev, Testing, Cloud', activeJobs: 2, placedStudents: 29 },
-      { id:'CORP004', company:'Google', logo:'G', industry:'Technology', size:'100K+', location:'Hyderabad/Bangalore', contact:'google@oc2.in', partnerType:'Internship Partner', requirements:'DSA, ML, System Design', activeJobs: 1, placedStudents: 5 },
-      { id:'CORP005', company:'Startups Network', logo:'S', industry:'Startups', size:'Varies', location:'Pan-India/Remote', contact:'startups@oc2.in', partnerType:'Ecosystem Partner', requirements:'All domains', activeJobs: 5, placedStudents: 22 }
+      { id: 'CORP001', company: 'TCS', logo: 'T', industry: 'IT Services', size: '500K+', location: 'Pan-India', contact: 'tcs@oc2.in', partnerType: 'Hiring Partner', requirements: 'Full Stack, AI/ML, Cloud', activeJobs: 3, placedStudents: 45 },
+      { id: 'CORP002', company: 'Infosys', logo: 'I', industry: 'IT Services', size: '300K+', location: 'Pan-India', contact: 'infosys@oc2.in', partnerType: 'Campus Partner', requirements: 'Python, Java, Cloud', activeJobs: 2, placedStudents: 38 },
+      { id: 'CORP003', company: 'Wipro', logo: 'W', industry: 'IT Services', size: '200K+', location: 'Pan-India', contact: 'wipro@oc2.in', partnerType: 'Hiring Partner', requirements: 'Web Dev, Testing, Cloud', activeJobs: 2, placedStudents: 29 },
+      { id: 'CORP004', company: 'Google', logo: 'G', industry: 'Technology', size: '100K+', location: 'Hyderabad/Bangalore', contact: 'google@oc2.in', partnerType: 'Internship Partner', requirements: 'DSA, ML, System Design', activeJobs: 1, placedStudents: 5 },
+      { id: 'CORP005', company: 'Startups Network', logo: 'S', industry: 'Startups', size: 'Varies', location: 'Pan-India/Remote', contact: 'startups@oc2.in', partnerType: 'Ecosystem Partner', requirements: 'All domains', activeJobs: 5, placedStudents: 22 }
     ],
 
     /* ── College Partners ── */
     colleges: [
-      { id:'COL001', name:'IIT Delhi', type:'IIT', location:'New Delhi', students: 12000, partnerSince:'2024', collaborationType:'Placement + Training' },
-      { id:'COL002', name:'NIT Trichy', type:'NIT', location:'Trichy, TN', students: 8000, partnerSince:'2024', collaborationType:'Training' },
-      { id:'COL003', name:'VIT Vellore', type:'Deemed', location:'Vellore, TN', students: 35000, partnerSince:'2025', collaborationType:'Campus Drives' },
-      { id:'COL004', name:'BITS Pilani', type:'Deemed', location:'Pilani, RJ', students: 9000, partnerSince:'2025', collaborationType:'Placement + Training' },
-      { id:'COL005', name:'DTU Delhi', type:'State', location:'New Delhi', students: 12000, partnerSince:'2025', collaborationType:'Training' },
-      { id:'COL006', name:'IIIT Hyderabad', type:'IIIT', location:'Hyderabad', students: 3000, partnerSince:'2024', collaborationType:'Research + Placement' }
+      { id: 'COL001', name: 'IIT Delhi', type: 'IIT', location: 'New Delhi', email: 'iitdelhi@oc2.in', students: 12000, partnerSince: '2024', collaborationType: 'Placement + Training', placedStudents: 45, activeDrives: 3 },
+      { id: 'COL002', name: 'NIT Trichy', type: 'NIT', location: 'Trichy, TN', email: 'nittrichy@oc2.in', students: 8000, partnerSince: '2024', collaborationType: 'Training', placedStudents: 32, activeDrives: 2 },
+      { id: 'COL003', name: 'VIT Vellore', type: 'Deemed', location: 'Vellore, TN', email: 'vitvellore@oc2.in', students: 35000, partnerSince: '2025', collaborationType: 'Campus Drives', placedStudents: 28, activeDrives: 4 },
+      { id: 'COL004', name: 'BITS Pilani', type: 'Deemed', location: 'Pilani, RJ', email: 'bitspilani@oc2.in', students: 9000, partnerSince: '2025', collaborationType: 'Placement + Training', placedStudents: 38, activeDrives: 5 },
+      { id: 'COL005', name: 'DTU Delhi', type: 'State', location: 'New Delhi', email: 'dtudelhi@oc2.in', students: 12000, partnerSince: '2025', collaborationType: 'Training', placedStudents: 20, activeDrives: 2 },
+      { id: 'COL006', name: 'IIIT Hyderabad', type: 'IIIT', location: 'Hyderabad', email: 'iiith@oc2.in', students: 3000, partnerSince: '2024', collaborationType: 'Research + Placement', placedStudents: 25, activeDrives: 3 }
     ],
 
     /* ── Community Posts ── */
     communityPosts: [
       {
-        id:'POST001', authorId:'STU001', authorName:'Rahul Sharma', authorAvatar:'RS',
-        category:'Success Story', title:'Got placed at TCS Digital after Job Bootcamp!',
-        content:'I completed the Job Bootcamp 2 months ago and just received my offer letter from TCS Digital! The mock interview sessions were incredibly helpful. Thank you OCC team!',
-        tags:['Success', 'TCS', 'Job Bootcamp', 'Placement'],
-        likes:145, comments:28, views:892,
-        postedAt:'2026-06-28', pinned:true
+        id: 'POST001', authorId: 'STU001', authorName: 'Rahul Sharma', authorAvatar: 'RS',
+        category: 'Success Story', title: 'Got placed at TCS Digital after Job Bootcamp!',
+        content: 'I completed the Job Bootcamp 2 months ago and just received my offer letter from TCS Digital! The mock interview sessions were incredibly helpful. Thank you OCC team!',
+        tags: ['Success', 'TCS', 'Job Bootcamp', 'Placement'],
+        likes: 145, comments: 28, views: 892,
+        postedAt: '2026-06-28', pinned: true
       },
       {
-        id:'POST002', authorId:'STU002', authorName:'Priya Patel', authorAvatar:'PP',
-        category:'Study Help', title:'Best resources for JEE Physics - Mechanics chapter',
-        content:'Sharing my notes and resource list for JEE Physics Mechanics. These helped me score 95+ in mock tests. Comment if you need the PDF links!',
-        tags:['JEE', 'Physics', 'Resources', 'Study Tips'],
-        likes:89, comments:34, views:1240,
-        postedAt:'2026-06-30', pinned:false
+        id: 'POST002', authorId: 'STU002', authorName: 'Priya Patel', authorAvatar: 'PP',
+        category: 'Study Help', title: 'Best resources for JEE Physics - Mechanics chapter',
+        content: 'Sharing my notes and resource list for JEE Physics Mechanics. These helped me score 95+ in mock tests. Comment if you need the PDF links!',
+        tags: ['JEE', 'Physics', 'Resources', 'Study Tips'],
+        likes: 89, comments: 34, views: 1240,
+        postedAt: '2026-06-30', pinned: false
       },
       {
-        id:'POST003', authorId:'STU003', authorName:'Amit Kumar', authorAvatar:'AK',
-        category:'Question', title:'How to approach UPSC GS1 History preparation from scratch?',
-        content:'I am a working professional starting UPSC prep. What is the best approach for GS1 History? Should I follow NCERT first or directly go to standard books?',
-        tags:['UPSC', 'GS1', 'History', 'Beginner'],
-        likes:52, comments:41, views:780,
-        postedAt:'2026-07-01', pinned:false
+        id: 'POST003', authorId: 'STU003', authorName: 'Amit Kumar', authorAvatar: 'AK',
+        category: 'Question', title: 'How to approach UPSC GS1 History preparation from scratch?',
+        content: 'I am a working professional starting UPSC prep. What is the best approach for GS1 History? Should I follow NCERT first or directly go to standard books?',
+        tags: ['UPSC', 'GS1', 'History', 'Beginner'],
+        likes: 52, comments: 41, views: 780,
+        postedAt: '2026-07-01', pinned: false
       },
       {
-        id:'POST004', authorId:'STU004', authorName:'Sneha Gupta', authorAvatar:'SG',
-        category:'Resource', title:'Free AI/ML learning roadmap for 2026',
-        content:'Compiled a complete roadmap for learning AI/ML from scratch to job-ready. Includes free resources, paid courses, projects to build, and companies to target.',
-        tags:['AI/ML', 'Roadmap', 'Resources', 'Career'],
-        likes:234, comments:67, views:3450,
-        postedAt:'2026-07-02', pinned:true
+        id: 'POST004', authorId: 'STU004', authorName: 'Sneha Gupta', authorAvatar: 'SG',
+        category: 'Resource', title: 'Free AI/ML learning roadmap for 2026',
+        content: 'Compiled a complete roadmap for learning AI/ML from scratch to job-ready. Includes free resources, paid courses, projects to build, and companies to target.',
+        tags: ['AI/ML', 'Roadmap', 'Resources', 'Career'],
+        likes: 234, comments: 67, views: 3450,
+        postedAt: '2026-07-02', pinned: true
       }
     ],
 
     /* ── Payments ── */
     payments: [
-      { id:'PAY001', studentId:'STU001', courseId:'CRS001', amount:9999, method:'UPI', date:'2025-01-20', status:'Completed', receiptNo:'OCC-R-001' },
-      { id:'PAY002', studentId:'STU001', courseId:'CRS003', amount:12999, method:'Card', date:'2025-02-01', status:'Completed', receiptNo:'OCC-R-002' },
-      { id:'PAY003', studentId:'STU002', courseId:'CRS002', amount:14999, method:'UPI', date:'2025-02-15', status:'Completed', receiptNo:'OCC-R-003' },
-      { id:'PAY004', studentId:'STU002', courseId:'CRS004', amount:29999, method:'Net Banking', date:'2025-03-01', status:'Completed', receiptNo:'OCC-R-004' },
-      { id:'PAY005', studentId:'STU004', courseId:'CRS001', amount:9999, method:'Card', date:'2025-03-25', status:'Completed', receiptNo:'OCC-R-005' },
-      { id:'PAY006', studentId:'STU004', courseId:'CRS005', amount:1999, method:'UPI', date:'2025-04-01', status:'Completed', receiptNo:'OCC-R-006' },
-      { id:'PAY007', studentId:'STU004', courseId:'CRS006', amount:1499, method:'UPI', date:'2025-04-10', status:'Completed', receiptNo:'OCC-R-007' }
+      { id: 'PAY001', studentId: 'STU001', courseId: 'CRS001', amount: 9999, method: 'UPI', date: '2025-01-20', status: 'Completed', receiptNo: 'OCC-R-001' },
+      { id: 'PAY002', studentId: 'STU001', courseId: 'CRS003', amount: 12999, method: 'Card', date: '2025-02-01', status: 'Completed', receiptNo: 'OCC-R-002' },
+      { id: 'PAY003', studentId: 'STU002', courseId: 'CRS002', amount: 14999, method: 'UPI', date: '2025-02-15', status: 'Completed', receiptNo: 'OCC-R-003' },
+      { id: 'PAY004', studentId: 'STU002', courseId: 'CRS004', amount: 29999, method: 'Net Banking', date: '2025-03-01', status: 'Completed', receiptNo: 'OCC-R-004' },
+      { id: 'PAY005', studentId: 'STU004', courseId: 'CRS001', amount: 9999, method: 'Card', date: '2025-03-25', status: 'Completed', receiptNo: 'OCC-R-005' },
+      { id: 'PAY006', studentId: 'STU004', courseId: 'CRS005', amount: 1999, method: 'UPI', date: '2025-04-01', status: 'Completed', receiptNo: 'OCC-R-006' },
+      { id: 'PAY007', studentId: 'STU004', courseId: 'CRS006', amount: 1499, method: 'UPI', date: '2025-04-10', status: 'Completed', receiptNo: 'OCC-R-007' }
     ],
 
     /* ── Contact Messages ── */
     contacts: [
-      { id:'CON001', name:'Rajesh Kumar', email:'rajesh@example.com', phone:'9988776655', subject:'Course Inquiry', message:'I want to know more about the Guaranteed Job Program. What is the refund policy?', date:'2026-06-20', read:false },
-      { id:'CON002', name:'Priti Singh', email:'priti@example.com', phone:'9988776656', subject:'Partnership', message:'We are a college in UP and want to collaborate for campus placements.', date:'2026-06-22', read:true },
-      { id:'CON003', name:'Rajiv Kumar', email:'rajiv@xyz.com', phone:'9876543200', subject:'Corporate Hiring', message:'We are looking to hire 50 freshers in the AI/ML domain. Can you help us connect with your students?', date:'2026-06-28', read:false }
+      { id: 'CON001', name: 'Rajesh Kumar', email: 'rajesh@example.com', phone: '9988776655', subject: 'Course Inquiry', message: 'I want to know more about the Guaranteed Job Program. What is the refund policy?', date: '2026-06-20', read: false },
+      { id: 'CON002', name: 'Priti Singh', email: 'priti@example.com', phone: '9988776656', subject: 'Partnership', message: 'We are a college in UP and want to collaborate for campus placements.', date: '2026-06-22', read: true },
+      { id: 'CON003', name: 'Rajiv Kumar', email: 'rajiv@xyz.com', phone: '9876543200', subject: 'Corporate Hiring', message: 'We are looking to hire 50 freshers in the AI/ML domain. Can you help us connect with your students?', date: '2026-06-28', read: false }
     ],
 
     /* ── Notifications ── */
     notifications: [
-      { id:'NOT001', userId:'STU001', type:'class', title:'Live Class Tomorrow', message:'Aptitude Masterclass starts at 10 AM tomorrow. Join on time!', read:false, createdAt:'2026-07-09T18:00:00' },
-      { id:'NOT002', userId:'STU001', type:'assignment', title:'Assignment Due Soon', message:'Mock Interview Recording is due in 3 days. Please submit on time.', read:false, createdAt:'2026-07-08T10:00:00' },
-      { id:'NOT003', userId:'STU001', type:'job', title:'New Job Match', message:'TCS Software Developer Intern matches your profile! Apply now.', read:true, createdAt:'2026-07-07T12:00:00' }
+      { id: 'NOT001', userId: 'STU001', type: 'class', title: 'Live Class Tomorrow', message: 'Aptitude Masterclass starts at 10 AM tomorrow. Join on time!', read: false, createdAt: '2026-07-09T18:00:00' },
+      { id: 'NOT002', userId: 'STU001', type: 'assignment', title: 'Assignment Due Soon', message: 'Mock Interview Recording is due in 3 days. Please submit on time.', read: false, createdAt: '2026-07-08T10:00:00' },
+      { id: 'NOT003', userId: 'STU001', type: 'job', title: 'New Job Match', message: 'TCS Software Developer Intern matches your profile! Apply now.', read: true, createdAt: '2026-07-07T12:00:00' }
     ],
 
     /* ── Settings ── */
@@ -540,7 +544,7 @@ const AppState = {
         if (!data.colleges) { data.colleges = this._defaults.colleges; }
         if (!data.notifications) { data.notifications = this._defaults.notifications; }
         this.save(data);
-      } catch(e) {
+      } catch (e) {
         this.save(this._defaults);
       }
     }
@@ -594,7 +598,7 @@ const AppState = {
   addStudent(student) {
     const students = this.getStudents();
     student.id = this.generateId('STU');
-    student.avatar = student.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
+    student.avatar = student.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
     student.enrolledCourses = [];
     student.appliedJobs = [];
     student.communityPosts = [];
@@ -680,7 +684,7 @@ const AppState = {
       const student = this.getStudent(application.studentId);
       if (student && !student.appliedJobs) student.appliedJobs = [];
       if (student) {
-        student.appliedJobs.push({ jobId, applicationId: application.id, status:'Under Review', appliedAt: application.appliedAt });
+        student.appliedJobs.push({ jobId, applicationId: application.id, status: 'Under Review', appliedAt: application.appliedAt });
         this.updateStudent(application.studentId, { appliedJobs: student.appliedJobs });
       }
     }
@@ -752,7 +756,7 @@ const AppState = {
   /* ── Checkout & Integration ── */
   checkout(data) {
     const { name, email, phone, college, year, courseId, amount, method } = data;
-    
+
     // Find or create student
     let student = this.getStudentByEmail(email);
     if (!student) {
@@ -766,10 +770,10 @@ const AppState = {
       });
     }
     const studentId = student.id;
-    
+
     // Enroll in course
     this.enrollStudent(studentId, courseId);
-    
+
     // Add payment record
     const payment = this.addPayment({
       studentId,
@@ -777,10 +781,10 @@ const AppState = {
       amount: parseFloat(amount) || 0,
       method: method || 'UPI'
     });
-    
+
     // Log the student in
     this.setSession('student', studentId);
-    
+
     return {
       success: true,
       student: {
@@ -808,7 +812,7 @@ const AppState = {
         this.set('jobs', jobs);
       }
     }
-    
+
     // 2. Update on Student Profile (if not guest)
     if (studentId && !studentId.startsWith('GUEST_')) {
       const students = this.getStudents();
@@ -826,7 +830,7 @@ const AppState = {
   bookMentorSession(mentorId, bookingData) {
     const mentor = this.getMentor(mentorId);
     if (!mentor) return null;
-    
+
     const session = {
       id: this.generateId('CLS'),
       courseId: mentor.courses && mentor.courses.length ? mentor.courses[0] : 'CRS001',
@@ -839,12 +843,12 @@ const AppState = {
       platform: 'Google Meet',
       attendees: [bookingData.studentId || 'STU001']
     };
-    
+
     // Save to classes
     const classes = this.getClasses();
     classes.push(session);
     this.set('classes', classes);
-    
+
     // Save to student mentorSessions
     const studentId = bookingData.studentId;
     if (studentId && !studentId.startsWith('GUEST_')) {

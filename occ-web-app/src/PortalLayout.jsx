@@ -6,6 +6,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import CorporatePortal from './pages/CorporatePortal';
 import MentorPortal from './pages/MentorPortal';
 import AdminPortal from './pages/AdminPortal';
+import InstitutePortal from './pages/InstitutePortal';
 
 export default function PortalLayout() {
     const { session, currentUser, logout, theme, toggleTheme } = useAppContext();
@@ -52,6 +53,34 @@ export default function PortalLayout() {
                 </>
             );
         }
+        if (session.type === 'institute') {
+            return (
+                <>
+                    <div className="sidebar-link active">🏫 Institute Portal</div>
+                    <Link to="/" className="sidebar-link">🏠 Public Home</Link>
+                    <Link to="/corporate" className="sidebar-link">🏢 Corporate Partners</Link>
+                    <Link to="/careers" className="sidebar-link">💼 Careers Board</Link>
+                </>
+            );
+        }
+    };
+
+    const getDashboardTitle = () => {
+        switch (session.type) {
+            case 'student': return 'Student Learning Dashboard';
+            case 'corporate': return 'Employer Recruiter Portal';
+            case 'mentor': return 'Mentor Workspace';
+            case 'admin': return 'Platform Admin Workspace';
+            case 'institute': return 'Institute Partner Portal';
+            default: return 'Dashboard';
+        }
+    };
+
+    const getDisplayName = () => {
+        if (currentUser) {
+            return currentUser.company || currentUser.name || currentUser.college || currentUser.label;
+        }
+        return 'User';
     };
 
     return (
@@ -64,7 +93,7 @@ export default function PortalLayout() {
 
                 <div style={{ padding: '0 var(--space-sm) var(--space-lg)', borderBottom: '1px solid var(--border-subtle)', marginBottom: 'var(--space-lg)' }}>
                     <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                        {currentUser.company || currentUser.name}
+                        {getDisplayName()}
                     </div>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '2px', textTransform: 'capitalize' }}>
                         Active {session.type} Account
@@ -88,12 +117,7 @@ export default function PortalLayout() {
             <main className="portal-main">
                 <header className="portal-header">
                     <div>
-                        <div className="portal-title">
-                            {session.type === 'student' && 'Student Learning Dashboard'}
-                            {session.type === 'corporate' && 'Employer Recruiter Portal'}
-                            {session.type === 'mentor' && 'Mentor Workspace'}
-                            {session.type === 'admin' && 'Platform Admin Workspace'}
-                        </div>
+                        <div className="portal-title">{getDashboardTitle()}</div>
                         <div className="portal-subtitle">
                             Manage credentials, track items, and update settings
                         </div>
@@ -109,6 +133,7 @@ export default function PortalLayout() {
                 {session.type === 'corporate' && <CorporatePortal />}
                 {session.type === 'mentor' && <MentorPortal />}
                 {session.type === 'admin' && <AdminPortal />}
+                {session.type === 'institute' && <InstitutePortal />}
             </main>
         </div>
     );

@@ -22,6 +22,9 @@ export const AppProvider = ({ children }) => {
         setCurrentUser(corps.find(c => c.id === activeSession.userId) || corps[0]);
       } else if (activeSession.type === 'admin') {
         setCurrentUser({ id: 'ADM001', name: 'System Admin', role: 'Administrator' });
+      } else if (activeSession.type === 'institute') {
+        const colleges = AppState.getColleges();
+        setCurrentUser(colleges.find(c => c.id === activeSession.userId) || colleges[0]);
       }
     } else {
       setCurrentUser(null);
@@ -36,37 +39,55 @@ export const AppProvider = ({ children }) => {
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
-  const login = (type, credentials) => {
-    if (type === 'student') {
-      const student = AppState.getStudentByEmail(credentials.email);
-      if (student && student.password === credentials.password) {
-        AppState.setSession('student', student.id);
-        refreshSession();
-        return { success: true, user: student };
-      }
-    } else if (type === 'mentor') {
-      if (credentials.password === 'mentor123') {
-        const mentor = AppState.getMentors().find(m => m.email === credentials.email) || AppState.getMentors()[0];
-        AppState.setSession('mentor', mentor.id);
-        refreshSession();
-        return { success: true, user: mentor };
-      }
-    } else if (type === 'corporate') {
-      if (credentials.password === 'corp123') {
-        const corps = AppState.getCorporates();
-        const corp = corps.find(c => c.contact === credentials.email) || corps[0];
-        AppState.setSession('corporate', corp.id);
-        refreshSession();
-        return { success: true, user: corp };
-      }
-    } else if (type === 'admin') {
-      if (credentials.email === 'admin@oc2.in' && credentials.password === 'admin123') {
-        AppState.setSession('admin', 'ADM001');
-        refreshSession();
-        return { success: true, user: { name: 'Admin' } };
-      }
+  /**
+   * Auto-detect user type from credentials and log in.
+   * Checks: admin → student → mentor → corporate → institute
+   */
+  const login = (credentials) => {
+    const { email, password } = credentials;
+
+    // 1. Check Admin
+    if (email === 'admin@oc2.in' && password === 'admin123') {
+      AppState.setSession('admin', 'ADM001');
+      refreshSession();
+      return { success: true, user: { name: 'Admin', type: 'admin' } };
     }
-    throw new Error('Invalid credentials');
+
+    // 2. Check Student
+    const student = AppState.getStudentByEmail(email);
+    if (student && student.password === password) {
+      AppState.setSession('student', student.id);
+      refreshSession();
+      return { success: true, user: { ...student, type: 'student' } };
+    }
+
+    // 3. Check Mentor
+    const mentor = AppState.getMentors().find(m => m.email === email);
+    if (mentor && password === 'mentor123') {
+      AppState.setSession('mentor', mentor.id);
+      refreshSession();
+      return { success: true, user: { ...mentor, type: 'mentor' } };
+    }
+
+    // 4. Check Corporate
+    const corps = AppState.getCorporates();
+    const corp = corps.find(c => c.contact === email);
+    if (corp && password === 'corp123') {
+      AppState.setSession('corporate', corp.id);
+      refreshSession();
+      return { success: true, user: { ...corp, type: 'corporate' } };
+    }
+
+    // 5. Check Institute (College Partner)
+    const colleges = AppState.getColleges();
+    const college = colleges.find(c => c.name.toLowerCase().includes(email.split('@')[0].toLowerCase()) || c.id.toLowerCase() === email.split('@')[0].toLowerCase());
+    if (college && password === 'institute123') {
+      AppState.setSession('institute', college.id);
+      refreshSession();
+      return { success: true, user: { ...college, type: 'institute' } };
+    }
+
+    throw new Error('Invalid credentials. Please check your email and password.');
   };
 
   const logout = () => {
