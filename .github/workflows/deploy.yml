@@ -67,7 +67,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           password: ${{ secrets.VPS_SSH_PASSWORD }}
           port: ${{ secrets.VPS_SSH_PORT || 22 }}
-          source: "deploy_package/**/*"
+          source: "deploy_package/**,deploy_package/*"
           target: "/home/user/web/tip.offcampuscareer.com/public_html"
           strip_components: 1 # Removes the "deploy_package" parent folder from destination path
           rm: false # Overwrites matching files, leaves others (e.g. database/resumes uploads intact)
