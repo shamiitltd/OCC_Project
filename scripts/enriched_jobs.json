@@ -1,0 +1,268 @@
+[
+  {
+    "link": "https://www.iitjobs.com/job/data-engineer-microsoft-fabric-azure-mumbai-maharashtra-india-359873",
+    "title": "Data Engineer (Microsoft Fabric + Azure)",
+    "company": "iitjobs inc",
+    "experience": "5+ years of experience",
+    "skills": [
+      "Data Engineer",
+      "Pyspark",
+      "Microsoft Fabric",
+      "Sql",
+      "Etl"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Contract",
+    "full_description": "\\n \\n Design and develop ETL/ELT data pipelines using Microsoft Fabric and PySpark. \\n Build and optimize data models to support Power BI dashboards. \\n Write and optimize complex SQL queries for performance and data quality. \\n Ensure data governance and performance standards across Azure-based platforms. \\n Collaborate with cross-functional teams to deliver data-driven insights. \\n \\n",
+    "domain": "Data"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/golang-developer-bangalore-karnataka-india-453144",
+    "title": "Golang Developer",
+    "company": "CareerNet Technologies Pvt Ltd",
+    "skills": [
+      "Gold Audit",
+      "Golang",
+      "Postgresql",
+      "Rest",
+      "Grpc Apis"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "16px\">",
+    "full_description": "document.querySelectorAll('body link[rel=\"icon\"], body link[rel=\"apple-touch-icon\"]').forEach(el => document.head.appendChild(el)) {\"@context\":\"https://schema.org\",\"@type\":\"JobPosting\",\"title\":\"Golang Developer\",\"url\":\"https://www.iitjobs.com/job/golang-developer-bangalore-karnataka-india-453144\",\"description\":\" Key Skills: Gold Audit, Golang, PostgreSQL Roles and Responsibilities: Develop and maintain scalable backend applications using Golang. Design and build REST and gRPC APIs. Develop microservices-based applications and backend components. Optimize applications for performance, scalability, and reliability. Work closely with frontend, DevOps, and QA teams for smooth delivery. Participate in code reviews, testing, and deployment activities. Troubleshoot production issues and improve system stability. Write clean, reusable, and maintainable code. Support database integration and backend data processing activities. Contribute to technical documentation and development best practices. Skills Required: Strong hands-on experience in Golang development. Good understanding of REST APIs, gRPC, and microservices architecture. Experience with backend system design and scalable application development. Familiarity with PostgreSQL or relational databases. Understanding of performance optimization and troubleshooting techniques. Knowledge of version control and deployment processes. Good analytical, problem-solving, and communication skills. Ability to work in collaborative and agile environments. Education: Bachelor's degree in Computer Science, Information Technology, Engineering, or a related field \",\"datePosted\":\"2026-07-11T00:00:00.000Z\",\"validThrough\":\"2026-10-14T00:00:00.000Z\",\"employmentType\":\"FULL_TIME\",\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"CareerNet Technologies Pvt Ltd\",\"sameAs\":\"https://careernet.in/\",\"logo\":\"https://www.iitjobs.com/employer/media/company_docs/27792/20230823171549.png\"},\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"iitjobs inc.\",\"value\":\"453144\"},\"jobLocationType\":\"TELECOMMUTE\",\"applicantLocationRequirements\":{\"@type\":\"Country\",\"name\":\"IN\"},\"directApply\":true,\"totalJobOpenings\":1,\"educationRequirements\":{\"@type\":\"EducationalOccupationalCredential\",\"credentialCategory\":\"bachelor degree\"},\"experienceRequirements\":{\"@type\":\"OccupationalExperienceRequirements\",\"monthsOfExperience\":60},\"skills\":\"Gold Audit, Golang, Postgresql, Rest, Grpc Apis\"} ← Back to jobs",
+    "domain": "Web Dev"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/senior-linux-engineer-bangalore-karnataka-india-452941",
+    "title": "Senior Linux Engineer",
+    "company": "MediIT",
+    "skills": [
+      "Terraform",
+      "Github Actions",
+      "Ci/cd",
+      "Automation",
+      "Gitlab Ci"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Contract",
+    "experience": "16px\">",
+    "full_description": "🔹 Design and modernize enterprise Linux infrastructure 🔹 Build secure golden image pipelines using Packer, Kickstart, and PXE 🔹 Develop Infrastructure as Code using Ansible and Terraform 🔹 Implement security hardening, compliance automation, and CVE response workflows 🔹 Build and maintain CI/CD pipelines for infrastructure deployments 🔹 Perform performance tuning, capacity planning, and root cause analysis 🔹 Develop observability and proactive monitoring solutions 🔹 Collaborate with Development, Security, and Infrastructure teams 🔹 Maintain architecture documentation, runbooks, and operational standards \",\"datePosted\":\"2026-07-10T00:00:00.000Z\",\"validThrough\":\"2026-10-13T00:00:00.000Z\",\"employmentType\":\"CONTRACTOR\",\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"MediIT\",\"sameAs\":\"https://www.mediit.io\",\"logo\":\"https://www.iitjobs.com/employer/media/company_docs/31003/2d1aa5e92159923f8109b6cceb2344f1.png\"},\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"iitjobs inc.\",\"value\":\"452941\"},\"jobLocationType\":\"TELECOMMUTE\",\"applicantLocationRequirements\":{\"@type\":\"Country\",\"name\":\"IN\"},\"directApply\":true,\"totalJobOpenings\":1,\"educationRequirements\":{\"@type\":\"EducationalOccupationalCredential\",\"credentialCategory\":\"bachelor degree\"},\"experienceRequirements\":{\"@type\":\"OccupationalExperienceRequirements\",\"monthsOfExperience\":120},\"skills\":\"Terraform, Github Actions, Ci/cd, Automation, Gitlab Ci, Jenkins, Ansible\"} ← Back to jobs",
+    "domain": "DevOps"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/ssis-developer-hyderabad-telangana-india-452881",
+    "title": "SSIS Developer",
+    "company": "Infosys Limited",
+    "skills": [
+      "Ssis",
+      "Git",
+      "Azure Devops",
+      "Tfs",
+      "Sql Server"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "5 years of experience",
+    "full_description": "College Alumni New New Feature Alert! College Groups is here! Connecting with the right opportunities just got easier! Join your school's network – Find peers, alumni, and recruiters from your college. Access exclusive job postings – Get opportunities tailored for your school. Collaborate & share insights – Discuss career tips, interview experiences, and industry trends. Explore College Alumni Login Jobseeker Employer Sign Up Looking for job Looking for candidates Loading... SSIS Developer Job - Hyderabad, Telangana, India (Infosys Limited) ← Back to jobs SSIS Developer Infosys Limited Hyderabad, Telangana, India Apply Now Posted On: 3 days ago Experience: 5+ years Availability: Remote Openings: 1 Category: SSIS Developer Tenure: Full-time Only Related Jobs No related jobs found Description Strong experience with Microsoft SQL Server Integration Services (SSIS). Proficiency in T-SQL, stored procedures, triggers, views, and functions. Experience with SQL Server Management Studio (SSMS). Knowledge of ETL/ELT methodologies and data integration best practices. Experience with SQL Server Agent job scheduling and automation. Understanding of data warehousing concepts such as star schema and dimensional modeling. Experience in performance tuning and query optimization. Familiarity with source control tools such as Git, Azure DevOps, or TFS. Strong debugging and troubleshooting skills. Bachelor's degree in Computer Science, Information Technology, Engineering, or a related field. 2–5 years of experience in SSIS development and SQL Server environments. Relevant Microsoft certifications are an added advantage Key Skills Ssis Git Azure Devops Tfs Sql Server Education Bachelor's degree Apply Now Related Jobs No related jobs found Explore More Jobs Jobs in Hyderabad Jobs in Telangana Jobs in India Ssis Jobs Git Jobs Azure Devops Jobs Tfs Jobs Sql Server Jobs Jobs at iitjobs Jobs at Infosys Limited SSIS Developer Jobs Avalanche Jobs SIEM Jobs Jenkins Jobs Prompt Engineering Jobs SOAR Jobs IntelliJ Jobs ChromaDB Jobs Qdrant Jobs Semi-Supervised Learning Jobs Sentiment Analysis Jobs ← Back to jobs",
+    "domain": "Data"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/oracle-gtm-architect-noida-uttar-pradesh-india-452825",
+    "title": "Oracle GTM Architect",
+    "company": "Tekshapers",
+    "skills": [
+      "Oracle Gtm",
+      "Oracle Otm",
+      "Erp",
+      "Wms"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "16px\">",
+    "full_description": "College Alumni New New Feature Alert! College Groups is here! Connecting with the right opportunities just got easier! Join your school's network – Find peers, alumni, and recruiters from your college. Access exclusive job postings – Get opportunities tailored for your school. Collaborate & share insights – Discuss career tips, interview experiences, and industry trends. Explore College Alumni Login Jobseeker Employer Sign Up Looking for job Looking for candidates Loading... Oracle GTM Architect Job - Noida, Uttar Pradesh, India (Tekshapers) ← Back to jobs Oracle GTM Architect Tekshapers Noida, Uttar Pradesh, India Apply Now Posted On: 3 days ago Experience: 10+ years Availability: Remote Openings: 1 Category: Oracle GTM Consultant Tenure: No Preference/Any Related Jobs No related jobs found Description Experience 10–15+ Years Job Summary We are seeking an experienced Oracle GTM Architect to lead the design, implementation, and optimization of Oracle Global Trade Management (GTM) solutions. Required Qualifications Bachelor's degree in Computer Science, Information Technology, Supply Chain, Engineering, or a related field. 10+ years of IT experience with at least 6+ years of Oracle GTM implementation experience. Experience leading multiple Oracle GTM implementations as a Solution Architect or Technical Architect. Strong understanding of global trade regulations and compliance processes. Experience integrating Oracle GTM with Oracle OTM, ERP, WMS, and external systems Key Skills Oracle Gtm Oracle Otm Erp Wms Education Any Graduate Apply Now Related Jobs No related jobs found Explore More Jobs Jobs in Noida Jobs in Uttar Pradesh Jobs in India Oracle Gtm Jobs Oracle Otm Jobs Erp Jobs Wms Jobs Jobs at iitjobs Jobs at Tekshapers Oracle GTM Consultant Jobs Image Segmentation Jobs Lambda Jobs ELK Stack Jobs RabbitMQ Jobs Data Science Jobs Neural Networks Jobs ZK-SNARKs Jobs Transfer Learning Jobs Midjourney Jobs Databricks Jobs ← Back to jobs",
+    "domain": "ERP"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/scrum-master-bengaluru-karnataka-india-452385",
+    "title": "Scrum Master",
+    "company": "Ascendion",
+    "skills": [
+      "Agile",
+      "Jira",
+      "Azure Devops",
+      "Scrum Master",
+      "Kanban"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "16px\">",
+    "full_description": "document.querySelectorAll('body link[rel=\"icon\"], body link[rel=\"apple-touch-icon\"]').forEach(el => document.head.appendChild(el)) {\"@context\":\"https://schema.org\",\"@type\":\"JobPosting\",\"title\":\"Scrum Master\",\"url\":\"https://www.iitjobs.com/job/scrum-master-bengaluru-karnataka-india-452385\",\"description\":\" Key Responsibilities** Facilitate Scrum ceremonies (Daily Stand-ups, Sprint Planning, Sprint Review, and Sprint Retrospective) Remove impediments and support the team in achieving sprint goals Coach the team and stakeholders on Agile/Scrum best practices Work closely with the Product Owner to maintain a healthy and prioritized product backlog Track and report project progress using burndown charts, velocity, and other agile metrics Foster a culture of continuous improvement and collaboration Shield the team from external distractions **Requirements** 3+ years of proven experience as a Scrum Master Certified Scrum Master (CSM) or PSM certification is mandatory Strong understanding of Agile principles, Scrum framework, and Kanban Excellent facilitation, communication, and conflict resolution skills Experience working with cross-functional and distributed teams Ability to drive teams toward self-organization and high performance **Preferred Skills** Experience in DOT [Department of Transportation] or government projects (if applicable) Familiarity with tools like Jira, Azure DevOps, or Confluence SAFe or Agile coaching experience is a plus \",\"datePosted\":\"2026-07-08T00:00:00.000Z\",\"validThrough\":\"2026-10-11T00:00:00.000Z\",\"employmentType\":\"FULL_TIME\",\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"Ascendion\",\"sameAs\":\"https://ascendion.com/\",\"logo\":\"https://www.iitjobs.com/employer/media/company_docs/29417/20240130002743.jpg\"},\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"iitjobs inc.\",\"value\":\"452385\"},\"jobLocationType\":\"TELECOMMUTE\",\"applicantLocationRequirements\":{\"@type\":\"Country\",\"name\":\"IN\"},\"directApply\":true,\"totalJobOpenings\":1,\"educationRequirements\":{\"@type\":\"EducationalOccupationalCredential\",\"credentialCategory\":\"bachelor degree\"},\"experienceRequirements\":{\"@type\":\"OccupationalExperienceRequirements\",\"monthsOfExperience\":36},\"skills\":\"Agile, Jira, Azure Devops, Scrum Master, Kanban, Safe\"} ← Back to jobs",
+    "domain": "DevOps"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/sr-powerbi-developer-bangalore-karnataka-india-452121",
+    "title": "Sr. PowerBI Developer",
+    "company": "MSR Technology Group",
+    "skills": [
+      "Power Bi",
+      "Jira",
+      "Confluence",
+      "Smartsheet",
+      "Snowflake"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Contract",
+    "experience": "5+ years of experience",
+    "full_description": "document.querySelectorAll('body link[rel=\"icon\"], body link[rel=\"apple-touch-icon\"]').forEach(el => document.head.appendChild(el)) {\"@context\":\"https://schema.org\",\"@type\":\"JobPosting\",\"title\":\"Sr. PowerBI Developer\",\"url\":\"https://www.iitjobs.com/job/sr-powerbi-developer-bangalore-karnataka-india-452121\",\"description\":\" Strong SQL skills (primary requirement) Power BI and DAX Semantic modeling Experience working with BI/reporting environments Ability to understand end-to-end data flow and mapping Experience building complex dashboards (multiple pages, multiple data sources) Ability to ramp quickly and operate in a fast-paced environment Strong communication to coordinate with IT/data hub teams Requirements: Bachelor’s degree in Business Intelligence, Computer Science, Engineering, Data Science, or related field 5+ years of experience in BI development or analytics engineering roles Strong hands-on experience with Power BI (DAX, data modeling, performance tuning, deployment standards) Advanced SQL across platforms such as Snowflake, Oracle, or Databricks Strong understanding of data modeling, ETL pipelines, and analytics architecture Experience working in Agile / Scrum delivery environments Strong communication skills with ability to translate requirements into technical solutions Experience with Power Apps and Power Automate for workflow enablement Nice to Have: Experience working within a separated intake vs. delivery model Familiarity with Jira, Confluence, Smartsheet, or similar tools Exposure to AI/ML concepts within analytics workflows Experience migrating legacy reporting (e.g., SSRS) to Power BI \",\"datePosted\":\"2026-07-07T00:00:00.000Z\",\"validThrough\":\"2026-10-10T00:00:00.000Z\",\"employmentType\":\"CONTRACTOR\",\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"MSR Technology Group\",\"sameAs\":\"https://msrtechnologies.com/\",\"logo\":\"https://www.iitjobs.com/employer/media/company_docs/32263/123966bf623d6c289e07ca02ee01e5b5.jpg\"},\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"iitjobs inc.\",\"value\":\"452121\"},\"jobLocationType\":\"TELECOMMUTE\",\"applicantLocationRequirements\":{\"@type\":\"Country\",\"name\":\"IN\"},\"directApply\":true,\"totalJobOpenings\":1,\"educationRequirements\":{\"@type\":\"EducationalOccupationalCredential\",\"credentialCategory\":\"bachelor degree\"},\"experienceRequirements\":{\"@type\":\"OccupationalExperienceRequirements\",\"monthsOfExperience\":60},\"skills\":\"Power Bi, Jira, Confluence, Smartsheet, Snowflake, Oracle, Databricks, Sql, Etl, Agile\"} ← Back to jobs",
+    "domain": "Data"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/sap-njit-logistics-india-452112",
+    "title": "SAP nJIT logistics",
+    "company": "Digital Links Inc",
+    "skills": [
+      "Sap Logistics",
+      "Sd",
+      "Ppds",
+      "Ibp"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Contract",
+    "experience": "16px\">",
+    "full_description": "- The focus is on mapping and optimizing supply-to-production and supply-to-customer processes according to the new NJIT-SAP concept, as well as on integrating related functions, including in the area of ​​hazardous goods. - Extensive knowledge of the SAP modules IBP, PP/DS, TM, EWM and nJIT, as well as in the interactive processing of practical technical tasks together with module experts. - High competence in the conception, coordination and implementation of efficient, end-to-end logistics processes with a strong focus on process integration, solution orientation and operational excellence. \",\"datePosted\":\"2026-07-07T00:00:00.000Z\",\"validThrough\":\"2026-10-10T00:00:00.000Z\",\"employmentType\":\"FULL_TIME\",\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"Digital Links Inc\",\"sameAs\":\"https://dlinksinc.com\",\"logo\":\"https://www.iitjobs.com/employer/media/company_docs/35403/88a557ef5079bc48345a0736bf5424fc.png\"},\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"iitjobs inc.\",\"value\":\"452112\"},\"jobLocationType\":\"TELECOMMUTE\",\"applicantLocationRequirements\":{\"@type\":\"Country\",\"name\":\"IN\"},\"directApply\":true,\"totalJobOpenings\":1,\"educationRequirements\":{\"@type\":\"EducationalOccupationalCredential\",\"credentialCategory\":\"bachelor degree\"},\"experienceRequirements\":{\"@type\":\"OccupationalExperienceRequirements\",\"monthsOfExperience\":96},\"skills\":\"Sap Logistics, Sd, Ppds, Ibp\"} ← Back to jobs",
+    "domain": "ERP"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/openshift-platform-engineer-bangalore-karnataka-india-451961",
+    "title": "OpenShift Platform Engineer",
+    "company": "Varite Inc",
+    "skills": [
+      "Python",
+      "Bash",
+      "Ansible",
+      "Terraform",
+      "Rhcsa"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Contract",
+    "experience": "16px\">",
+    "full_description": "Produce and maintain clear technical documentation and operational runbooks. Qualification: Proven experience managing OpenShift on x86-based infrastructure & container technologies. Strong focus on incident management, root cause analysis, and recovery. Experience working with VMware vSphere / virtualised infrastructure environments. Strong troubleshooting skills across: Networking Storage Container orchestration Platform performance Demonstrable experience in production operations & support environments Experience supporting internal application teams consuming platform services. Ability to work under pressure in critical service environments. Experience with automation tools (e.g., Ansible, Terraform, scripting). Competence in at least one scripting/programming language (e.g., Python, Bash, Go). Familiarity with CI/CD pipelines and DevOps tooling. Domain Experience Proven experience working within financial services or similarly regulated environments. Strong understanding of: Governance, risk, and compliance requirements Change control and audit practices Secure platform operations Desirable Skills Exposure to SRE practices (SLIs/SLOs, error budgets, observability). Experience with monitoring and logging tools Familiarity with hybrid or multi-cloud environments. Knowledge of security best practices in container platforms. Red Hat certifications (e.g., RHCSA, RHCE, OpenShift certification) are advantageous \",\"datePosted\":\"2026-07-07T00:00:00.000Z\",\"validThrough\":\"2026-10-10T00:00:00.000Z\",\"employmentType\":\"CONTRACTOR\",\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"Varite Inc\",\"sameAs\":\"http://www.varite.com\",\"logo\":\"https://www.iitjobs.com/employer/media/company_docs/29414/20240130004351.jpg\"},\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"iitjobs inc.\",\"value\":\"451961\"},\"jobLocationType\":\"TELECOMMUTE\",\"applicantLocationRequirements\":{\"@type\":\"Country\",\"name\":\"IN\"},\"directApply\":true,\"totalJobOpenings\":1,\"educationRequirements\":{\"@type\":\"EducationalOccupationalCredential\",\"credentialCategory\":\"bachelor degree\"},\"experienceRequirements\":{\"@type\":\"OccupationalExperienceRequirements\",\"monthsOfExperience\":60},\"skills\":\"Python, Bash, Ansible, Terraform, Rhcsa, Rhce, Openshift, Vmware, Ci/cd, Devops\"} ← Back to jobs",
+    "domain": "DevOps"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/sr-salesforce-developer-noida-uttar-pradesh-india-451735",
+    "title": "Sr Salesforce Developer",
+    "company": "Smart IT Frame LLC",
+    "skills": [
+      "Apex",
+      "Rest Api",
+      "Triggers",
+      "Batch Apex",
+      "Lwc"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "16px\">",
+    "full_description": "Secondary Responsibilities: - Participate in code reviews and mentor junior developers. - Work closely with business analysts and stakeholders to gather requirements. - Ensure adherence to Salesforce best practices and governance limits. - Support release planning and environment management. - Contribute to continuous improvement initiatives in DevOps and agile delivery. Required Skills & Qualifications: Core Technical Skills: - Apex Programming (Classes, Triggers, Batch Apex, Schedulable Apex) - Exception Handling and Governor Limits - Lightning Web Components (LWC), Aura Components - Salesforce Flows - REST API Integration - SSO Authentication (SAML, OAuth, OpenID Connect) - Reports & Dashboards (Custom report types, joined reports, dynamic dashboards) - Sales Cloud, Service Cloud - DevOps (Deployment, Change Sets, Git, CI/CD tools) - Debugging & Optimization (Debug Logs, Developer Console, VS Code, SOQL/DML tuning) Soft Skills: - Excellent Communication - Strong Problem-Solving Abilities - Team Collaboration - Attention to Detail - Adaptability and Ownership \",\"datePosted\":\"2026-07-06T00:00:00.000Z\",\"validThrough\":\"2026-10-09T00:00:00.000Z\",\"employmentType\":\"FULL_TIME\",\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"Smart IT Frame LLC\",\"sameAs\":\"http://www.smartitframe.com\",\"logo\":\"https://www.iitjobs.com/employer/media/company_docs/28211/20231025135050.png\"},\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"iitjobs inc.\",\"value\":\"451735\"},\"jobLocationType\":\"TELECOMMUTE\",\"applicantLocationRequirements\":{\"@type\":\"Country\",\"name\":\"IN\"},\"directApply\":true,\"totalJobOpenings\":1,\"educationRequirements\":{\"@type\":\"EducationalOccupationalCredential\",\"credentialCategory\":\"bachelor degree\"},\"experienceRequirements\":{\"@type\":\"OccupationalExperienceRequirements\",\"monthsOfExperience\":60},\"skills\":\"Apex, Rest Api, Triggers, Batch Apex, Lwc, Saml, Oauth, Git, Ci/cd Tools\"} ← Back to jobs",
+    "domain": "ERP"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/salesforce-architect-pune-maharashtra-india-451421",
+    "title": "Salesforce Architect",
+    "company": "HARP Technologies &amp; Services Pvt Ltd",
+    "skills": [
+      "Salesforce B2b",
+      "Apex",
+      "Rest Api",
+      "Visualforce"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "16px\">",
+    "full_description": "document.querySelectorAll('body link[rel=\"icon\"], body link[rel=\"apple-touch-icon\"]').forEach(el => document.head.appendChild(el)) {\"@context\":\"https://schema.org\",\"@type\":\"JobPosting\",\"title\":\"Salesforce Architect\",\"url\":\"https://www.iitjobs.com/job/salesforce-architect-pune-maharashtra-india-451421\",\"description\":\" You will architect and implement B2B Commerce solutions on the Salesforce platform.",
+    "domain": "ERP"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/php-developer-nagpur-maharashtra-india-451225",
+    "title": "PHP Developer",
+    "company": "Starorigin Business Solutions Pvt. Ltd",
+    "skills": [
+      "Mysql",
+      "Html",
+      "Css",
+      "Javascript"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "16px\">",
+    "full_description": "document.querySelectorAll('body link[rel=\"icon\"], body link[rel=\"apple-touch-icon\"]').forEach(el => document.head.appendChild(el)) {\"@context\":\"https://schema.org\",\"@type\":\"JobPosting\",\"title\":\"PHP Developer\",\"url\":\"https://www.iitjobs.com/job/php-developer-nagpur-maharashtra-india-451225\",\"description\":\" Develop and maintain web applications using PHP and the WordPress CMS. \\n",
+    "domain": "AI/ML"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/backend-developer-nodejs-bangalore-karnataka-india-451152",
+    "title": "Backend Developer (Node.js)",
+    "company": "Wissda",
+    "skills": [
+      "Ood",
+      "Restful Web Services",
+      "Nodejs",
+      "Java",
+      "Kubernetes"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "5+ years of experience",
+    "full_description": "document.querySelectorAll('body link[rel=\"icon\"], body link[rel=\"apple-touch-icon\"]').forEach(el => document.head.appendChild(el)) {\"@context\":\"https://schema.org\",\"@type\":\"JobPosting\",\"title\":\"Backend Developer (Node.js)\",\"url\":\"https://www.iitjobs.com/job/backend-developer-nodejs-bangalore-karnataka-india-451152\",\"description\":\" Build and maintain distributed applications and RESTful web services within a microservices architecture.",
+    "domain": "DevOps"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/full-stack-net-developer-mumbai-maharashtra-india-451106",
+    "title": "Full Stack .NET Developer",
+    "company": "Skillventory",
+    "skills": [
+      ".net",
+      "Mvc",
+      "Asp.net",
+      "C#",
+      "React"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Job",
+    "experience": "16px\">",
+    "full_description": "document.querySelectorAll('body link[rel=\"icon\"], body link[rel=\"apple-touch-icon\"]').forEach(el => document.head.appendChild(el)) {\"@context\":\"https://schema.org\",\"@type\":\"JobPosting\",\"title\":\"Full Stack .NET Developer\",\"url\":\"https://www.iitjobs.com/job/full-stack-net-developer-mumbai-maharashtra-india-451106\",\"description\":\" You will build and maintain web applications using the .NET stack and React, deploying solutions on Azure. \\n",
+    "domain": "Web Dev"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/sql-developer-gurgaon-haryana-india-451018",
+    "title": "SQL Developer",
+    "company": "TalentOnLease",
+    "experience": "16px\">",
+    "skills": [
+      "Python",
+      "Spring",
+      "Oracle",
+      "Plsql",
+      "No Sql"
+    ],
+    "location": "Remote, India",
+    "salary": "$1\\\",\\\"c\\\",{\\\"children\\\":[[[\\\"$\\",
+    "type": "Internship",
+    "full_description": "document.querySelectorAll('body link[rel=\"icon\"], body link[rel=\"apple-touch-icon\"]').forEach(el => document.head.appendChild(el)) {\"@context\":\"https://schema.org\",\"@type\":\"JobPosting\",\"title\":\"SQL Developer\",\"url\":\"https://www.iitjobs.com/job/sql-developer-gurgaon-haryana-india-451018\",\"description\":\" You will own database development and backend scripting tasks. \\n",
+    "domain": "Data"
+  }
+]

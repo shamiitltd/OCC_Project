@@ -1,0 +1,225 @@
+[
+  {
+    "link": "https://www.iitjobs.com/job/data-engineer-microsoft-fabric-azure-mumbai-maharashtra-india-359873",
+    "title": "Data Engineer (Microsoft Fabric + Azure)",
+    "company": "iitjobs inc",
+    "experience": "5+ Years",
+    "skills": [
+      "Data Engineer",
+      "Pyspark",
+      "Microsoft Fabric",
+      "Sql",
+      "Etl"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/golang-developer-bangalore-karnataka-india-453144",
+    "title": "Golang Developer",
+    "company": "CareerNet Technologies Pvt Ltd",
+    "skills": [
+      "Gold Audit",
+      "Golang",
+      "Postgresql",
+      "Rest",
+      "Grpc Apis"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/senior-linux-engineer-bangalore-karnataka-india-452941",
+    "title": "Senior Linux Engineer",
+    "company": "MediIT",
+    "skills": [
+      "Terraform",
+      "Github Actions",
+      "Ci/cd",
+      "Automation",
+      "Gitlab Ci"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/ssis-developer-hyderabad-telangana-india-452881",
+    "title": "SSIS Developer",
+    "company": "Infosys Limited",
+    "skills": [
+      "Ssis",
+      "Git",
+      "Azure Devops",
+      "Tfs",
+      "Sql Server"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/oracle-gtm-architect-noida-uttar-pradesh-india-452825",
+    "title": "Oracle GTM Architect",
+    "company": "Tekshapers",
+    "skills": [
+      "Oracle Gtm",
+      "Oracle Otm",
+      "Erp",
+      "Wms"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/scrum-master-bengaluru-karnataka-india-452385",
+    "title": "Scrum Master",
+    "company": "Ascendion",
+    "skills": [
+      "Agile",
+      "Jira",
+      "Azure Devops",
+      "Scrum Master",
+      "Kanban"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/sr-powerbi-developer-bangalore-karnataka-india-452121",
+    "title": "Sr. PowerBI Developer",
+    "company": "MSR Technology Group",
+    "skills": [
+      "Power Bi",
+      "Jira",
+      "Confluence",
+      "Smartsheet",
+      "Snowflake"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/sap-njit-logistics-india-452112",
+    "title": "SAP nJIT logistics",
+    "company": "Digital Links Inc",
+    "skills": [
+      "Sap Logistics",
+      "Sd",
+      "Ppds",
+      "Ibp"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/openshift-platform-engineer-bangalore-karnataka-india-451961",
+    "title": "OpenShift Platform Engineer",
+    "company": "Varite Inc",
+    "skills": [
+      "Python",
+      "Bash",
+      "Ansible",
+      "Terraform",
+      "Rhcsa"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/sr-salesforce-developer-noida-uttar-pradesh-india-451735",
+    "title": "Sr Salesforce Developer",
+    "company": "Smart IT Frame LLC",
+    "skills": [
+      "Apex",
+      "Rest Api",
+      "Triggers",
+      "Batch Apex",
+      "Lwc"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/salesforce-architect-pune-maharashtra-india-451421",
+    "title": "Salesforce Architect",
+    "company": "HARP Technologies &amp; Services Pvt Ltd",
+    "skills": [
+      "Salesforce B2b",
+      "Apex",
+      "Rest Api",
+      "Visualforce"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/php-developer-nagpur-maharashtra-india-451225",
+    "title": "PHP Developer",
+    "company": "Starorigin Business Solutions Pvt. Ltd",
+    "skills": [
+      "Mysql",
+      "Html",
+      "Css",
+      "Javascript"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/backend-developer-nodejs-bangalore-karnataka-india-451152",
+    "title": "Backend Developer (Node.js)",
+    "company": "Wissda",
+    "skills": [
+      "Ood",
+      "Restful Web Services",
+      "Nodejs",
+      "Java",
+      "Kubernetes"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/full-stack-net-developer-mumbai-maharashtra-india-451106",
+    "title": "Full Stack .NET Developer",
+    "company": "Skillventory",
+    "skills": [
+      ".net",
+      "Mvc",
+      "Asp.net",
+      "C#",
+      "React"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Job"
+  },
+  {
+    "link": "https://www.iitjobs.com/job/sql-developer-gurgaon-haryana-india-451018",
+    "title": "SQL Developer",
+    "company": "TalentOnLease",
+    "experience": "5+ Years",
+    "skills": [
+      "Python",
+      "Spring",
+      "Oracle",
+      "Plsql",
+      "No Sql"
+    ],
+    "location": "Remote, India",
+    "salary": "Competitive",
+    "type": "Internship"
+  }
+]

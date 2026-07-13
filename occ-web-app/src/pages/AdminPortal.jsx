@@ -92,12 +92,12 @@ export default function AdminPortal() {
       {/* Tabs */}
       <div className="flex gap-sm flex-wrap" style={{ borderBottom: '1px solid var(--border-subtle)', paddingBottom: 'var(--space-sm)', marginBottom: 'var(--space-xl)' }}>
         <button className={`btn btn-sm ${activeTab === 'overview' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('overview')}>Overview</button>
-        <button className={`btn btn-sm ${activeTab === 'students' ? 'btn-ghost' : 'btn-ghost'}`} onClick={() => setActiveTab('students')}>Students</button>
-        <button className={`btn btn-sm ${activeTab === 'mentors' ? 'btn-ghost' : 'btn-ghost'}`} onClick={() => setActiveTab('mentors')}>Mentors</button>
-        <button className={`btn btn-sm ${activeTab === 'classes' ? 'btn-ghost' : 'btn-ghost'}`} onClick={() => setActiveTab('classes')}>Classes</button>
-        <button className={`btn btn-sm ${activeTab === 'assignments' ? 'btn-ghost' : 'btn-ghost'}`} onClick={() => setActiveTab('assignments')}>Assignments</button>
-        <button className={`btn btn-sm ${activeTab === 'payments' ? 'btn-ghost' : 'btn-ghost'}`} onClick={() => setActiveTab('payments')}>Payments</button>
-        <button className={`btn btn-sm ${activeTab === 'jobs' ? 'btn-ghost' : 'btn-ghost'}`} onClick={() => setActiveTab('jobs')}>Jobs</button>
+        <button className={`btn btn-sm ${activeTab === 'students' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('students')}>Students</button>
+        <button className={`btn btn-sm ${activeTab === 'mentors' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('mentors')}>Mentors</button>
+        <button className={`btn btn-sm ${activeTab === 'classes' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('classes')}>Classes</button>
+        <button className={`btn btn-sm ${activeTab === 'assignments' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('assignments')}>Assignments</button>
+        <button className={`btn btn-sm ${activeTab === 'payments' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('payments')}>Payments</button>
+        <button className={`btn btn-sm ${activeTab === 'jobs' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('jobs')}>Jobs</button>
       </div>
 
       {/* Tab Content */}

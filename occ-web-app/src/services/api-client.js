@@ -7,16 +7,18 @@
 import AppState from './app-state.js';
 
 const ApiClient = {
-  baseUrl: '/api',
-  useLocalFallback: false, // Auto-fallback inactive (using PHP backend)
-
+  baseUrl: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8000/api'
+    : 'api',
+  useLocalFallback: false, // Network-first mode active
 
   async request(endpoint, method = 'GET', data = null) {
     if (!this.useLocalFallback) {
       try {
         const config = {
           method: method,
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include' // Allow session cookie passing
         };
         if (data) config.body = JSON.stringify(data);
         const response = await fetch(`${this.baseUrl}/${endpoint}`, config);
@@ -58,24 +60,6 @@ const ApiClient = {
       if (action === 'logout') {
         AppState.clearSession();
         return { success: true };
-      }
-      
-      if (action === 'signup') {
-        const studentId = 'STU' + Math.floor(Math.random() * 1000000);
-        const newStu = {
-          id: studentId,
-          name: data.name,
-          email: data.email,
-          password: data.password,
-          phone: data.phone,
-          college: data.college,
-          year: data.year,
-          role: 'student',
-          joinedAt: new Date().toISOString().split('T')[0]
-        };
-        AppState.addStudent(newStu);
-        AppState.setSession('student', studentId);
-        return { success: true, session: { type: 'student', userId: studentId }, user: newStu };
       }
       
       if (action === 'status') {
@@ -280,8 +264,8 @@ const ApiClient = {
     return this.request(`auth.php?action=login`, 'POST', { email, password, type });
   },
 
-  async signup(signupData) {
-    return this.request(`auth.php?action=signup`, 'POST', signupData);
+  async register(userData) {
+    return this.request(`auth.php?action=register`, 'POST', userData);
   },
 
   async logout() {

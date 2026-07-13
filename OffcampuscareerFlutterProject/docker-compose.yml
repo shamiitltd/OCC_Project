@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database storing Supabase tables
+  db:
+    image: supabase/postgres:15.1.0.117
+    container_name: occ-supabase-db
+    ports:
+      - "54322:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: supabase_occ_secure_pwd
+      JWT_SECRET: super-secret-jwt-token-key-for-offcampuscareer-portal
+    volumes:
+      - occ_supabase_db_data:/var/lib/postgresql/data
+      - ./supabase/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    restart: always
+
+  # GoTrue Auth service (Supabase Auth API)
+  auth:
+    image: supabase/gotrue:v2.132.2
+    container_name: occ-supabase-auth
+    ports:
+      - "9999:9999"
+    depends_on:
+      - db
+    environment:
+      API_EXTERNAL_URL: http://localhost:9999
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: 9999
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_DB_DATABASE_URL: postgres://postgres:supabase_occ_secure_pwd@db:5432/postgres?sslmode=disable
+      GOTRUE_JWT_SECRET: super-secret-jwt-token-key-for-offcampuscareer-portal
+      GOTRUE_JWT_EXP: 3600
+      GOTRUE_SITE_URL: http://localhost:3000
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: "false"
+      GOTRUE_EXTERNAL_PHONE_ENABLED: "false"
+      GOTRUE_MAILER_AUTOCONFIRM: "true"
+    restart: always
+
+  # PostgREST (Auto-generated REST API from DB Schema)
+  rest:
+    image: postgrest/postgrest:v11.1.0
+    container_name: occ-supabase-rest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      PGRST_DB_URI: postgres://postgres:supabase_occ_secure_pwd@db:5432/postgres?sslmode=disable
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: super-secret-jwt-token-key-for-offcampuscareer-portal
+      PGRST_SERVER_PORT: 3000
+    restart: always
+
+  # Supabase Studio (UI Console)
+  studio:
+    image: supabase/studio:20240125-e51c890
+    container_name: occ-supabase-studio
+    ports:
+      - "8000:3000"
+    depends_on:
+      - db
+    environment:
+      STUDIO_PG_META_URL: http://db:5432/
+      POSTGRES_PASSWORD: supabase_occ_secure_pwd
+      SUPABASE_URL: http://localhost:8000
+    restart: always
+
+volumes:
+  occ_supabase_db_data:
+    driver: local

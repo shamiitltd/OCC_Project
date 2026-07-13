@@ -14,41 +14,37 @@ export const AppProvider = ({ children }) => {
       const res = await ApiClient.getSessionStatus();
       if (res && res.loggedIn) {
         setSessionState({ type: res.type, userId: res.user.id });
-        setCurrentUser(res.user);
+        setCurrentUser({
+          ...res.user,
+          // Map college to display names if needed
+          college: res.user.college || '',
+          company: res.user.college || ''
+        });
         AppState.setSession(res.type, res.user.id);
-      } else {
-        const activeSession = AppState.getSession();
-        setSessionState(activeSession);
-        if (activeSession) {
-          if (activeSession.type === 'student') {
-            setCurrentUser(AppState.getStudent(activeSession.userId));
-          } else if (activeSession.type === 'mentor') {
-            setCurrentUser(AppState.getMentor(activeSession.userId) || AppState.getMentors()[0]);
-          } else if (activeSession.type === 'corporate') {
-            const corps = AppState.getCorporates();
-            setCurrentUser(corps.find(c => c.id === activeSession.userId) || corps[0]);
-          } else if (activeSession.type === 'admin') {
-            setCurrentUser({ id: 'ADM001', name: 'System Admin', role: 'Administrator' });
-          } else if (activeSession.type === 'institute') {
-            const colleges = AppState.getColleges();
-            setCurrentUser(colleges.find(c => c.id === activeSession.userId) || colleges[0]);
-          }
-        } else {
-          setCurrentUser(null);
-        }
+        return;
       }
-    } catch (err) {
-      const activeSession = AppState.getSession();
-      setSessionState(activeSession);
-      if (activeSession) {
-        if (activeSession.type === 'student') {
-          setCurrentUser(AppState.getStudent(activeSession.userId));
-        } else {
-          setCurrentUser({ id: activeSession.userId, name: 'Offline User', role: activeSession.type });
-        }
-      } else {
-        setCurrentUser(null);
+    } catch (e) {
+      console.warn("Auth status check failed, falling back to Local session.", e);
+    }
+
+    const activeSession = AppState.getSession();
+    setSessionState(activeSession);
+    if (activeSession) {
+      if (activeSession.type === 'student') {
+        setCurrentUser(AppState.getStudent(activeSession.userId));
+      } else if (activeSession.type === 'mentor') {
+        setCurrentUser(AppState.getMentor(activeSession.userId) || AppState.getMentors()[0]);
+      } else if (activeSession.type === 'corporate') {
+        const corps = AppState.getCorporates();
+        setCurrentUser(corps.find(c => c.id === activeSession.userId) || corps[0]);
+      } else if (activeSession.type === 'admin') {
+        setCurrentUser({ id: 'ADM001', name: 'System Admin', role: 'Administrator' });
+      } else if (activeSession.type === 'institute') {
+        const colleges = AppState.getColleges();
+        setCurrentUser(colleges.find(c => c.id === activeSession.userId) || colleges[0]);
       }
+    } else {
+      setCurrentUser(null);
     }
   };
 
@@ -60,25 +56,45 @@ export const AppProvider = ({ children }) => {
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
+  /**
+   * Auto-detect user type from credentials and log in.
+   * Checks: admin → student → mentor → corporate → institute
+   */
   const login = async (credentials) => {
     const { email, password } = credentials;
-    try {
-      const res = await ApiClient.login(email, password, 'student');
-      if (res && res.success) {
-        AppState.setSession(res.user.role || 'student', res.user.id);
-        await refreshSession();
-        return { success: true, user: res.user };
-      }
-    } catch (err) {
-      console.warn("PHP login failed, trying fallback local accounts:", err.message);
+
+    // Detect fallback user type based on local lists
+    let fallbackRole = 'student';
+    if (email === 'admin@oc2.in') {
+      fallbackRole = 'admin';
+    } else if (AppState.getMentors().some(m => m.email === email)) {
+      fallbackRole = 'mentor';
+    } else if (AppState.getCorporates().some(c => c.contact === email)) {
+      fallbackRole = 'corporate';
     }
 
+    try {
+      const res = await ApiClient.login(email, password, fallbackRole);
+      if (res && res.success) {
+        const user = res.user;
+        const finalRole = user.role || fallbackRole;
+        AppState.setSession(finalRole, user.id);
+        await refreshSession();
+        return { success: true, user: user };
+      }
+    } catch (e) {
+      console.warn("Backend login failed. Falling back to Local AppState authentication.");
+    }
+
+    // Local Fallback validation
+    // 1. Check Admin
     if (email === 'admin@oc2.in' && password === 'admin123') {
       AppState.setSession('admin', 'ADM001');
       await refreshSession();
       return { success: true, user: { name: 'Admin', type: 'admin' } };
     }
 
+    // 2. Check Student
     const student = AppState.getStudentByEmail(email);
     if (student && student.password === password) {
       AppState.setSession('student', student.id);
@@ -86,21 +102,24 @@ export const AppProvider = ({ children }) => {
       return { success: true, user: { ...student, type: 'student' } };
     }
 
+    // 3. Check Mentor
     const mentor = AppState.getMentors().find(m => m.email === email);
-    if (mentor && password === 'mentor123') {
+    if (mentor && (mentor.password === password || password === 'mentor123')) {
       AppState.setSession('mentor', mentor.id);
       await refreshSession();
       return { success: true, user: { ...mentor, type: 'mentor' } };
     }
 
+    // 4. Check Corporate
     const corps = AppState.getCorporates();
     const corp = corps.find(c => c.contact === email);
-    if (corp && password === 'corp123') {
+    if (corp && (corp.password === password || password === 'corp123')) {
       AppState.setSession('corporate', corp.id);
       await refreshSession();
       return { success: true, user: { ...corp, type: 'corporate' } };
     }
 
+    // 5. Check Institute (College Partner)
     const colleges = AppState.getColleges();
     const college = colleges.find(c => c.name.toLowerCase().includes(email.split('@')[0].toLowerCase()) || c.id.toLowerCase() === email.split('@')[0].toLowerCase());
     if (college && password === 'institute123') {
@@ -112,40 +131,99 @@ export const AppProvider = ({ children }) => {
     throw new Error('Invalid credentials. Please check your email and password.');
   };
 
-  const signup = async (signupData) => {
+  /**
+   * Register a new user in AppState and log them in
+   */
+  const register = async (userData) => {
+    const { type, name, email, password, phone } = userData;
+
     try {
-      const res = await ApiClient.signup(signupData);
+      const res = await ApiClient.register(userData);
       if (res && res.success) {
-        AppState.setSession(res.user.role || 'student', res.user.id);
+        const user = res.user;
+        AppState.setSession(type, user.id);
         await refreshSession();
-        return { success: true, user: res.user };
+        return { success: true, user: user };
       }
-    } catch (err) {
-      console.warn("PHP signup failed, trying fallback local registration:", err.message);
+    } catch (e) {
+      console.warn("Backend signup failed. Falling back to Local AppState registration.");
     }
 
-    const studentId = 'STU' + Math.floor(Math.random() * 1000000);
-    const newStu = {
-      id: studentId,
-      name: signupData.name,
-      email: signupData.email,
-      password: signupData.password,
-      phone: signupData.phone,
-      college: signupData.college,
-      year: signupData.year || '3rd Year',
-      role: 'student',
-      joinedAt: new Date().toISOString().split('T')[0]
-    };
-    AppState.addStudent(newStu);
-    AppState.setSession('student', studentId);
+    // Local Fallback logic
+    if (type === 'student' && AppState.getStudentByEmail(email)) {
+      throw new Error('Email address already registered as a student.');
+    }
+    if (type === 'mentor' && AppState.getMentors().some(m => m.email === email)) {
+      throw new Error('Email address already registered as a mentor.');
+    }
+    if (type === 'corporate' && AppState.getCorporates().some(c => c.contact === email)) {
+      throw new Error('Email address already registered as an employer.');
+    }
+
+    let newUser;
+    if (type === 'student') {
+      newUser = AppState.addStudent({
+        name,
+        email,
+        password,
+        phone,
+        college: userData.college || '',
+        stream: userData.stream || 'Computer Science'
+      });
+    } else if (type === 'corporate') {
+      newUser = AppState.addCorporate({
+        company: name,
+        contact: email,
+        password,
+        logo: name[0].toUpperCase(),
+        industry: userData.industry || 'Technology',
+        size: userData.size || '50-100',
+        location: userData.location || 'Remote',
+        partnerType: 'Hiring Partner',
+        requirements: '',
+        activeJobs: 0,
+        placedStudents: 0
+      });
+    } else if (type === 'mentor') {
+      newUser = AppState.addMentor({
+        name,
+        email,
+        password,
+        initials: name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2),
+        title: userData.title || 'Career Mentor',
+        company: userData.company || 'SHAMIIT Partner',
+        specialties: userData.specialties || ['Career Mentorship'],
+        domains: userData.domains || ['Career'],
+        rating: 5.0,
+        totalRatings: 0,
+        students: 0,
+        sessions: 0,
+        experience: '3 years',
+        price: 0,
+        priceType: '/session',
+        bio: userData.bio || 'Professional mentor registered on Offcampuscareer.',
+        verified: true,
+        active: true,
+        languages: ['English'],
+        responseTime: 'Within 24 hours'
+      });
+    }
+
+    if (!newUser) {
+      throw new Error('Registration failed. Invalid user type.');
+    }
+
+    AppState.setSession(type, newUser.id);
     await refreshSession();
-    return { success: true, user: newStu };
+    return { success: true, user: newUser };
   };
 
   const logout = async () => {
     try {
       await ApiClient.logout();
-    } catch (e) {}
+    } catch (e) {
+      console.warn("Backend logout failed.", e);
+    }
     AppState.clearSession();
     setSessionState(null);
     setCurrentUser(null);
@@ -164,7 +242,7 @@ export const AppProvider = ({ children }) => {
       currentUser,
       theme,
       login,
-      signup,
+      register,
       logout,
       toggleTheme,
       refreshSession,

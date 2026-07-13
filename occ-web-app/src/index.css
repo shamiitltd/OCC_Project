@@ -5541,6 +5541,25 @@ small,
   background: rgba(155, 95, 208, 0.08);
 }
 
+.mobile-nav hr {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-sm) 0;
+}
+
+.mobile-nav-actions {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-xs) 0;
+}
+
+.mobile-nav-actions .btn {
+  flex: 1;
+  justify-content: center;
+  display: inline-flex;
+  text-align: center;
+}
+
 /* ── Public Footer ── */
 .public-footer {
   background: var(--bg-surface);
@@ -5815,6 +5834,8 @@ small,
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
   padding-top: var(--space-md);
   border-top: 1px solid var(--border-subtle);
 }
@@ -5972,6 +5993,8 @@ small,
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
   padding-top: var(--space-md);
   border-top: 1px solid var(--border-subtle);
 }
@@ -6331,6 +6354,22 @@ small,
 }
 
 /* ── Public page responsive ── */
+
+/* 3-column intermediate step for 14-inch desktops */
+@media (max-width: 1200px) {
+  .courses-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .mentors-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .modules-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 1024px) {
   .modules-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -6370,6 +6409,11 @@ small,
     display: flex;
   }
 
+  /* Hide desktop nav action buttons — shown in mobile drawer instead */
+  .hide-on-mobile {
+    display: none !important;
+  }
+
   .modules-grid {
     grid-template-columns: 1fr;
   }
@@ -6400,6 +6444,8 @@ small,
 
   .stats-banner {
     grid-template-columns: repeat(2, 1fr);
+    padding: var(--space-xl);
+    gap: var(--space-lg);
   }
 
   .hero-stats {
@@ -6419,4 +6465,148 @@ small,
     gap: var(--space-sm);
     text-align: center;
   }
+
+  /* Mobile nav action buttons at bottom of drawer */
+  .mobile-nav-actions {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0 var(--space-sm);
+  }
+
+  .mobile-nav-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* Hero section adjustments */
+  .hero-section {
+    padding: calc(var(--nav-height) + var(--space-2xl)) 0 var(--space-2xl);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  /* Section padding reduction */
+  .page-hero {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
 }
+
+/* ── Extra small screens (< 576px) ── */
+@media (max-width: 576px) {
+  .stats-banner {
+    grid-template-columns: repeat(2, 1fr);
+    padding: var(--space-lg);
+    gap: var(--space-md);
+  }
+
+  /* Stack card footers vertically so buttons don't clip */
+  .course-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .course-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mentor-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mentor-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Modules grid single column */
+  .modules-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .module-card {
+    padding: var(--space-lg);
+  }
+
+  /* Section spacing tightening */
+  .section {
+    padding: var(--space-xl) 0;
+  }
+
+  h1 {
+    font-size: clamp(1.7rem, 6vw, 2.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  /* Mentor card specialties overflow */
+  .mentor-specialties {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Career / Jobs list on mobile */
+  .job-card {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+}
+
+/* ── Responsive Tables & Wrappers ── */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.table, .data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.table th, .table td, .data-table th, .data-table td {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+.table th, .data-table th {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-surface-alt);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.table tr, .data-table tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tr:hover, .data-table tr:hover {
+  background: rgba(155, 95, 208, 0.03);
+}
+
+[data-theme="dark"] .table tr:hover, [data-theme="dark"] .data-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}

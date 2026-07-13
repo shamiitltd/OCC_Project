@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +6,10 @@
   <meta name="description" content="OCC Jobs — Find internships, full-time jobs, and freelance opportunities. Browse 500+ active job listings from 120+ top companies for freshers and experienced professionals.">
   <title>OCC Jobs — Find Your Dream Job | Offcampuscareer</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta name="theme-color" content="#7C3AED">
 </head>
 <body>
   <!-- NAVBAR -->
@@ -78,6 +81,7 @@
           <select class="form-select" id="hero-type" style="flex:1; min-width:150px;" aria-label="Filter by type">
             <option value="">💼 All Types</option>
             <option value="Job">Full Time</option>
+            <option value="Contract">Contract</option>
             <option value="Internship">Internship</option>
             <option value="Freelance">Freelance</option>
           </select>
@@ -100,6 +104,7 @@
         <div class="filter-pills" style="margin:0;">
           <button class="filter-pill active" data-filter="">All</button>
           <button class="filter-pill" data-filter="Job">Full Time</button>
+          <button class="filter-pill" data-filter="Contract">Contract</button>
           <button class="filter-pill" data-filter="Internship">Internship</button>
           <button class="filter-pill" data-filter="Freelance">Freelance</button>
         </div>
@@ -125,8 +130,12 @@
               <option value="">All Domains</option>
               <option value="Web Dev">Web Dev</option>
               <option value="AI/ML">AI / ML</option>
+              <option value="Data">Data / Analytics</option>
               <option value="Data Science">Data Science</option>
+              <option value="DevOps">DevOps / Cloud</option>
               <option value="Cloud">Cloud</option>
+              <option value="ERP">ERP / CRM</option>
+              <option value="QA">QA / Agile</option>
               <option value="Tech">Tech / General</option>
               <option value="Product Management">Product Management</option>
             </select>
@@ -263,7 +272,7 @@
   <script>
     let allJobs = [];
     let activeJobId = null;
-    const typeColors = { Internship:'badge-exams', Job:'badge-primary', Freelance:'badge-mentor' };
+    const typeColors = { Internship:'badge-exams', Job:'badge-primary', Freelance:'badge-mentor', Contract:'badge-amber' };
     const typeIcons = { Internship:'🎓', Job:'💼', Freelance:'🌐' };
     const modeIcons = { Remote:'🌐', Hybrid:'🔄', 'On-site':'🏢' };
 
@@ -286,9 +295,10 @@
             <div style="flex:1;">
               <div class="job-role">${j.role}</div>
               <div class="job-company">${j.company}</div>
+              ${j.source ? `<div style="font-size:0.7rem; color:var(--text-muted); margin-top:2px;">📌 via ${j.source}</div>` : ''}
             </div>
             <div class="flex flex-col items-end gap-xs">
-              <span class="badge ${typeColors[j.type] || 'badge-primary'}">${typeIcons[j.type]} ${j.type}</span>
+              <span class="badge ${typeColors[j.type] || 'badge-primary'}">${typeIcons[j.type] || '💼'} ${j.type}</span>
               <div class="flex items-center gap-xs">
                 <span class="status-dot status-active"></span>
                 <span style="font-size:0.72rem; color:var(--text-muted);">Active</span>
@@ -297,11 +307,11 @@
           </div>
           <div class="job-meta">
             <div class="job-meta-item">📍 ${j.location}</div>
-            <div class="job-meta-item">${modeIcons[j.mode]||'🏢'} ${j.mode}</div>
-            <div class="job-meta-item">👤 ${j.experience}</div>
+            <div class="job-meta-item">${modeIcons[j.mode]||'🏢'} ${j.mode || 'Remote'}</div>
+            <div class="job-meta-item">👤 ${j.experience || 'Open'}</div>
             <div class="job-meta-item">🏛️ ${j.domain}</div>
           </div>
-          <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:var(--space-md); line-height:1.6;">${OC2.Utils.truncate(j.description, 150)}</p>
+          <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:var(--space-md); line-height:1.6;">${OC2.Utils.truncate(j.description.replace(/\*\*/g,'').replace(/###/g,''), 150)}</p>
           <div class="job-skills">
             ${j.skills.slice(0,5).map(s => `<span class="badge badge-outline">${s}</span>`).join('')}
           </div>
@@ -312,7 +322,10 @@
             </div>
             <div class="flex gap-sm">
               <button class="btn btn-ghost btn-sm" onclick="showJobDetail('${j.id}')">Details</button>
-              <button class="btn btn-jobs btn-sm" onclick="openApplyModal('${j.id}')">Apply Now →</button>
+              ${j.applyLink 
+                ? `<a href="${j.applyLink}" target="_blank" rel="noopener noreferrer" class="btn btn-jobs btn-sm">Apply on IITJobs →</a>`
+                : `<button class="btn btn-jobs btn-sm" onclick="openApplyModal('${j.id}')">Apply Now →</button>`
+              }
             </div>
           </div>
         </div>
@@ -380,6 +393,17 @@
     function showJobDetail(jobId) {
       const job = AppState.getJob(jobId);
       if (!job) return;
+      // Format description with basic markdown conversion
+      const formatDesc = (desc) => {
+        if (!desc) return '';
+        return desc
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/###\s*([^\n]+)/g, '<h5 style="margin:12px 0 6px; color:var(--text-primary);">$1</h5>')
+          .replace(/^-\s+(.+)/gm, '<li style="margin:3px 0;">$1</li>')
+          .replace(/(<li[^>]*>.*<\/li>)/gs, '<ul style="padding-left:18px; margin:8px 0;">$1</ul>')
+          .replace(/\n\n/g, '</p><p style="font-size:0.9rem; line-height:1.8; margin:8px 0;">')
+          .replace(/\n/g, '<br>');
+      };
       document.getElementById('job-detail-content').innerHTML = `
         <div style="display:flex; align-items:flex-start; gap:var(--space-lg); margin-bottom:var(--space-xl);">
           <div class="company-logo" style="width:72px; height:72px; font-size:2rem; border-radius:var(--radius-lg); flex-shrink:0;">${job.companyLogo||job.company[0]}</div>
@@ -387,18 +411,22 @@
             <h2 style="margin-bottom:var(--space-sm);">${job.role}</h2>
             <div style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:var(--space-sm);">${job.company} · ${job.location}</div>
             <div class="flex gap-sm flex-wrap">
-              <span class="badge ${typeColors[job.type]||'badge-primary'}">${typeIcons[job.type]} ${job.type}</span>
-              <span class="badge badge-outline">${job.mode}</span>
-              <span class="badge badge-outline">Experience: ${job.experience}</span>
+              <span class="badge ${typeColors[job.type]||'badge-primary'}">${typeIcons[job.type]||'💼'} ${job.type}</span>
+              <span class="badge badge-outline">${job.mode || 'Remote'}</span>
+              <span class="badge badge-outline">Experience: ${job.experience || 'Open'}</span>
+              ${job.source ? `<span class="badge badge-outline" style="border-color:var(--accent-amber); color:var(--accent-amber);">📌 via ${job.source}</span>` : ''}
             </div>
           </div>
-          <button class="btn btn-jobs btn-lg" onclick="OC2.Modal.close('job-detail-modal'); setTimeout(() => openApplyModal('${job.id}'), 100);" style="flex-shrink:0;">Apply Now →</button>
+          ${job.applyLink 
+            ? `<a href="${job.applyLink}" target="_blank" rel="noopener noreferrer" class="btn btn-jobs btn-lg" style="flex-shrink:0;">Apply on IITJobs.com →</a>`
+            : `<button class="btn btn-jobs btn-lg" onclick="OC2.Modal.close('job-detail-modal'); setTimeout(() => openApplyModal('${job.id}'), 100);" style="flex-shrink:0;">Apply Now →</button>`
+          }
         </div>
         <div class="divider"></div>
         <div class="grid grid-2 gap-xl">
           <div>
             <h4 style="margin-bottom:var(--space-md);">📄 Job Description</h4>
-            <p style="font-size:0.9rem; line-height:1.8;">${job.description}</p>
+            <div style="font-size:0.9rem; line-height:1.8;">${formatDesc(job.description)}</div>
             <h4 style="margin:var(--space-xl) 0 var(--space-md);">🎯 Required Skills</h4>
             <div class="flex gap-sm flex-wrap">${job.skills.map(s => `<span class="badge badge-jobs">${s}</span>`).join('')}</div>
             ${job.perks ? `<h4 style="margin:var(--space-xl) 0 var(--space-md);">🎁 Perks & Benefits</h4><div class="flex gap-sm flex-wrap">${job.perks.map(p => `<span class="badge badge-exams">${p}</span>`).join('')}</div>` : ''}
@@ -410,6 +438,7 @@
                 <div class="flex justify-between"><span class="text-muted">Salary/Stipend</span><span style="font-weight:700; color:var(--accent-green);">${job.stipend}</span></div>
                 <div class="flex justify-between"><span class="text-muted">Deadline</span><span style="font-weight:600;">${OC2.Utils.formatDate(job.deadline)}</span></div>
                 <div class="flex justify-between"><span class="text-muted">Applications</span><span style="font-weight:600;">${job.applications?.length || 0}+ applied</span></div>
+                ${job.source ? `<div class="flex justify-between"><span class="text-muted">Source</span><span style="font-weight:600; color:var(--accent-amber);">${job.source}</span></div>` : ''}
               </div>
             </div>
             <div class="card">
@@ -422,14 +451,15 @@
               `).join('')}
             </div>
             ${job.aboutCompany ? `<div class="card" style="margin-top:var(--space-lg);"><h4 style="margin-bottom:var(--space-md);">🏢 About ${job.company}</h4><p style="font-size:0.88rem; line-height:1.7;">${job.aboutCompany}</p></div>` : ''}
+            ${job.applyLink ? `<div class="card" style="margin-top:var(--space-lg); background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.3);"><h4 style="margin-bottom:var(--space-sm); color:var(--accent-amber);">🔗 Apply on IITJobs.com</h4><p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:var(--space-md);">This job is sourced from iitjobs.com. Click below to view the full listing and apply directly on the recruiter's platform.</p><a href="${job.applyLink}" target="_blank" rel="noopener noreferrer" class="btn btn-jobs w-full" style="justify-content:center;">View & Apply on IITJobs.com →</a></div>` : ''}
           </div>
         </div>
       `;
       OC2.Modal.open('job-detail-modal');
     }
 
-    // Init
-    allJobs = AppState.getJobs().filter(j => j.status === 'Active');
+    // Init — include all jobs (Active + iitjobs.com listings which don't have status field issue)
+    allJobs = AppState.getJobs().filter(j => !j.status || j.status === 'Active');
     renderJobs(allJobs);
     OC2.Modal.init('apply-modal');
     OC2.Modal.init('job-detail-modal');

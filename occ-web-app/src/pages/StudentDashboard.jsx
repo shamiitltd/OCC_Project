@@ -49,7 +49,9 @@ export default function StudentDashboard() {
       stream: profileStream,
       profileComplete: 100
     });
-    alert('✅ Profile updated successfully!');
+    if (window.OC2 && window.OC2.Toast) {
+      window.OC2.Toast.success('Profile updated successfully!');
+    }
     refreshSession();
   };
 
@@ -81,7 +83,12 @@ export default function StudentDashboard() {
     target.progress = Math.round((target.completedModules.length / playerCourse.modules.length) * 100);
     if (target.progress === 100) {
       target.certificateIssued = true;
-      alert(`🏆 Congratulations! You have completed "${playerCourse.title}" and earned your certificate!`);
+      if (window.OC2 && window.OC2.Toast) {
+        window.OC2.Toast.success(`🏆 Congratulations! You have completed "${playerCourse.title}" and earned your certificate!`);
+      }
+      if (window.OC2 && window.OC2.Confetti) {
+        window.OC2.Confetti.burst();
+      }
     } else {
       target.certificateIssued = false;
     }
@@ -215,21 +222,24 @@ export default function StudentDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {appliedJobs.map((aj, idx) => (
-                      <tr key={idx}>
-                        <td style={{ fontWeight: 600 }}>{aj.role}</td>
-                        <td>{aj.company}</td>
-                        <td style={{ color: 'var(--accent-green)', fontWeight: 600 }}>{aj.stipend || aj.salary}</td>
-                        <td>
-                          <span className={`badge ${
-                            aj.status === 'Shortlisted' ? 'badge-green' : 
-                            aj.status === 'Interview' ? 'badge-cyan' : 
-                            aj.status === 'Rejected' ? 'badge-rose' : 'badge-outline'
-                          }`}>{aj.status}</span>
-                        </td>
-                        <td>{new Date(aj.appliedAt).toLocaleDateString()}</td>
-                      </tr>
-                    ))}
+                    {appliedJobs.map((aj, idx) => {
+                      const job = AppState.getJob(aj.jobId) || {};
+                      return (
+                        <tr key={idx}>
+                          <td style={{ fontWeight: 600 }}>{job.role || 'Job Opening'}</td>
+                          <td>{job.company || 'Unknown Company'}</td>
+                          <td style={{ color: 'var(--accent-green)', fontWeight: 600 }}>{job.stipend || 'N/A'}</td>
+                          <td>
+                            <span className={`badge ${
+                              aj.status === 'Shortlisted' ? 'badge-green' : 
+                              aj.status === 'Interview' ? 'badge-cyan' : 
+                              aj.status === 'Rejected' ? 'badge-rose' : 'badge-outline'
+                            }`}>{aj.status}</span>
+                          </td>
+                          <td>{aj.appliedAt ? new Date(aj.appliedAt).toLocaleDateString() : 'N/A'}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

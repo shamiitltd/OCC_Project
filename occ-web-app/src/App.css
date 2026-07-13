@@ -108,15 +108,105 @@
   margin-top: 4px;
 }
 
+.portal-sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(8, 8, 26, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-toggle {
+  display: none;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.sidebar-toggle:hover {
+  background: var(--bg-hover);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
 @media (max-width: 992px) {
   .portal-sidebar {
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
   }
   .portal-sidebar.open {
     transform: translateX(0);
   }
   .portal-main {
     margin-left: 0;
+    padding: var(--space-lg);
+  }
+  .sidebar-toggle {
+    display: flex;
   }
 }
+
+@media (min-width: 1440px) {
+  .portal-main > *:not(header) {
+    max-width: 1400px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .portal-header {
+    max-width: 1400px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ── Demo Login Buttons Layout Fix ── */
+.demo-login-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+  text-align: left;
+  gap: var(--space-sm);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.demo-login-btn:hover {
+  background: rgba(155, 95, 208, 0.08);
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+@media (max-width: 576px) {
+  .demo-login-btn {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
+

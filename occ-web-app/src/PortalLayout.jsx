@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from './context/AppContext';
 import { Link } from 'react-router-dom';
 import Login from './pages/Login';
@@ -10,6 +10,7 @@ import InstitutePortal from './pages/InstitutePortal';
 
 export default function PortalLayout() {
     const { session, currentUser, logout, theme, toggleTheme } = useAppContext();
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     if (!session || !currentUser) {
         return <Login />;
@@ -85,9 +86,10 @@ export default function PortalLayout() {
 
     return (
         <div className="app-container">
-            <aside className="portal-sidebar">
+            {sidebarOpen && <div className="portal-sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
+            <aside className={`portal-sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <div className="sidebar-logo">
-                    <div style={{ fontSize: '1.8rem' }}>🚀</div>
+                    <img src="/favicon.png" alt="Logo" />
                     <div className="sidebar-brand-text">OCC<span>Portal</span></div>
                 </div>
 
@@ -100,11 +102,11 @@ export default function PortalLayout() {
                     </div>
                 </div>
 
-                <nav className="sidebar-links">
+                <nav className="sidebar-links" onClick={() => setSidebarOpen(false)}>
                     {renderSidebarLinks()}
                 </nav>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)', marginTop: 'auto' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)', marginTop: 'auto' }} onClick={() => setSidebarOpen(false)}>
                     <button onClick={toggleTheme} className="sidebar-link" style={{ justifyContent: 'flex-start' }}>
                         {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
                     </button>
@@ -116,10 +118,15 @@ export default function PortalLayout() {
 
             <main className="portal-main">
                 <header className="portal-header">
-                    <div>
-                        <div className="portal-title">{getDashboardTitle()}</div>
-                        <div className="portal-subtitle">
-                            Manage credentials, track items, and update settings
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
+                        <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle Sidebar">
+                            ☰
+                        </button>
+                        <div>
+                            <div className="portal-title">{getDashboardTitle()}</div>
+                            <div className="portal-subtitle">
+                                Manage credentials, track items, and update settings
+                            </div>
                         </div>
                     </div>
                     <div className="flex items-center gap-md">

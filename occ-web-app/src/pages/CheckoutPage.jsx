@@ -1,223 +1,224 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useAppContext } from '../context/AppContext';
+import { useSearchParams, Link } from 'react-router-dom';
+import ApiClient from '../services/api-client';
 
 export default function CheckoutPage() {
-    const { AppState } = useAppContext();
     const [searchParams] = useSearchParams();
-    const navigate = useNavigate();
-
     const [courses, setCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState(null);
-    const [step, setStep] = useState(1);
-    
-    // Form fields
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [college, setCollege] = useState('');
-    const [year, setYear] = useState('3rd Year');
-
-    // Payment fields
-    const [payTab, setPayTab] = useState('upi');
+    const [step, setStep] = useState(1); // 1: Select, 2: Details/Payment, 3: Success
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        college: '',
+        year: '3rd Year'
+    });
+    const [paymentMethod, setPaymentMethod] = useState('upi'); // upi, card, netbanking
     const [upiId, setUpiId] = useState('');
     const [cardNumber, setCardNumber] = useState('');
     const [cardExpiry, setCardExpiry] = useState('');
     const [cardCvv, setCardCvv] = useState('');
     const [bankSelect, setBankSelect] = useState('');
-
-    // Promo code fields
-    const [promoCode, setPromoCode] = useState('');
-    const [discount, setDiscount] = useState(0);
+    
+    const [discountCode, setDiscountCode] = useState('');
+    const [discountAmount, setDiscountAmount] = useState(0);
+    const [processing, setProcessing] = useState(false);
+    const [successData, setSuccessData] = useState(null);
 
     useEffect(() => {
-        const allCourses = AppState.getCourses(true);
-        setCourses(allCourses);
-
-        const courseId = searchParams.get('courseId');
-        if (courseId) {
-            const matched = allCourses.find(c => c.id === courseId);
-            if (matched) {
-                setSelectedCourse(matched);
-                setStep(2);
+        // Load courses
+        const loadCourses = async () => {
+            try {
+                const list = await ApiClient.getCoursesPublic();
+                setCourses(list);
+                
+                // Check if courseId is passed in URL
+                const courseId = searchParams.get('course') || searchParams.get('courseId');
+                if (courseId) {
+                    const matched = list.find(c => c.id === courseId);
+                    if (matched) {
+                        setSelectedCourse(matched);
+                        setStep(2);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to load courses", err);
             }
-        }
-    }, [AppState, searchParams]);
+        };
+        loadCourses();
+    }, [searchParams]);
 
-    const selectCourse = (course) => {
+    const formatCurrency = (val) => {
+        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(val);
+    };
+
+    const handleSelectCourse = (course) => {
         setSelectedCourse(course);
         setStep(2);
     };
 
-    const handleApplyPromo = () => {
-        const code = promoCode.trim().toUpperCase();
-        if (code === 'WELCOME10' || code === 'OC2FIRST') {
-            const amt = Math.round((selectedCourse?.price || 0) * 0.10);
-            setDiscount(amt);
-            alert('Promo code applied successfully! 10% discount added.');
+    const handleApplyDiscount = () => {
+        if (!selectedCourse) return;
+        const code = discountCode.trim().toUpperCase();
+        if (code === 'OC2FIRST' || code === 'WELCOME10') {
+            setDiscountAmount(Math.round(selectedCourse.price * 0.1));
+            if (window.OC2?.Toast) window.OC2.Toast.success('10% discount applied!');
+        } else if (code === 'LAUNCH20') {
+            setDiscountAmount(Math.round(selectedCourse.price * 0.2));
+            if (window.OC2?.Toast) window.OC2.Toast.success('20% discount applied!');
         } else {
-            alert('Invalid promo code.');
+            setDiscountAmount(0);
+            if (window.OC2?.Toast) window.OC2.Toast.error('Invalid discount code.');
         }
     };
 
-    const processPayment = (e) => {
+    const handlePay = async (e) => {
         e.preventDefault();
-        
-        if (!name || !email || !phone || !college) {
-            alert('Please fill out all student details before paying.');
+        if (!formData.name || !formData.email || !formData.phone || !formData.college) {
+            if (window.OC2?.Toast) window.OC2.Toast.error('Please fill in all required details.');
             return;
         }
 
-        // Validate payment fields
-        if (payTab === 'upi' && !upiId) {
-            alert('Please enter your UPI ID.');
-            return;
-        }
-        if (payTab === 'card' && (!cardNumber || !cardExpiry || !cardCvv)) {
-            alert('Please enter your card details.');
-            return;
-        }
-        if (payTab === 'netbanking' && !bankSelect) {
-            alert('Please select a bank.');
-            return;
-        }
+        setProcessing(true);
+        const subTotal = selectedCourse.price - discountAmount;
+        const total = Math.round(subTotal * 1.18);
 
-        // Complete the registration/enrollment in AppState
-        const total = Math.round(((selectedCourse?.price || 0) - discount) * 1.18);
-        const result = AppState.enrollInCourse(selectedCourse.id, {
-            name,
-            email,
-            phone,
-            college,
-            year,
-            paymentMethod: payTab,
-            paidAmount: total
-        });
+        try {
+            const res = await ApiClient.checkout({
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                college: formData.college,
+                year: formData.year,
+                courseId: selectedCourse.id,
+                amount: total,
+                method: paymentMethod === 'upi' ? 'UPI' : paymentMethod === 'card' ? 'Card' : 'Net Banking'
+            });
 
-        if (result) {
-            alert(`Enrollment successful! You have successfully enrolled in ${selectedCourse.title}. Total Paid: ₹${total.toLocaleString('en-IN')}`);
-            navigate('/training');
-        } else {
-            alert('Failed to complete enrollment. Please try again.');
+            setSuccessData(res);
+            setStep(3);
+            if (window.OC2?.Toast) window.OC2.Toast.success('Enrollment successful!');
+        } catch (err) {
+            if (window.OC2?.Toast) window.OC2.Toast.error(err.message || 'Checkout failed.');
+        } finally {
+            setProcessing(false);
         }
     };
-
-    const totalFee = selectedCourse ? selectedCourse.price : 0;
-    const gst = Math.round((totalFee - discount) * 0.18);
-    const grandTotal = Math.round((totalFee - discount) * 1.18);
 
     return (
-        <div className="checkoutpage-wrapper">
-            {/* HERO */}
+        <div className="public-page">
+            {/* Page Hero */}
             <section className="page-hero" style={{ paddingBottom: 'var(--space-xl)' }}>
                 <div className="hero-bg"></div>
-                <div className="grid-bg"></div>
                 <div className="container">
                     <span className="section-label">// Checkout</span>
-                    <h1 style={{ marginTop: 'var(--space-md)' }}>Complete Your <span className="text-gradient">Enrollment</span></h1>
-                    
-                    <div className="checkout-steps" style={{ marginTop: 'var(--space-xl)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-md)' }}>
-                        <div className={`checkout-step ${step === 1 ? 'active' : step > 1 ? 'completed' : ''}`}>
-                            <span className="step-number">1</span>
+                    <h1 style={{ marginTop: 'var(--space-md)' }}><span className="text-gradient">Secure</span> Enrollment</h1>
+                    {/* Steps Header */}
+                    <div className="checkout-steps" style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center', marginTop: 'var(--space-xl)', alignItems: 'center' }}>
+                        <div className={`checkout-step ${step >= 1 ? 'active' : ''} ${step > 1 ? 'completed' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: step >= 1 ? 1 : 0.5 }}>
+                            <span className="step-number" style={{ background: step > 1 ? 'var(--accent-green)' : 'var(--brand-primary)', color: '#fff', borderRadius: '50%', width: '24px', height: '24px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.8rem' }}>{step > 1 ? '✓' : '1'}</span>
                             <span>Course</span>
                         </div>
-                        <div style={{ flex: 1, height: '2px', background: 'var(--border-subtle)', maxWidth: '80px' }}></div>
-                        <div className={`checkout-step ${step === 2 ? 'active' : step > 2 ? 'completed' : ''}`}>
-                            <span className="step-number">2</span>
-                            <span>Details & Payment</span>
+                        <div style={{ width: '40px', height: '1px', background: 'var(--border-subtle)' }}></div>
+                        <div className={`checkout-step ${step >= 2 ? 'active' : ''} ${step > 2 ? 'completed' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: step >= 2 ? 1 : 0.5 }}>
+                            <span className="step-number" style={{ background: step > 2 ? 'var(--accent-green)' : step === 2 ? 'var(--brand-primary)' : 'var(--bg-surface-alt)', color: step >= 2 ? '#fff' : 'var(--text-muted)', borderRadius: '50%', width: '24px', height: '24px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.8rem' }}>{step > 2 ? '✓' : '2'}</span>
+                            <span>Details</span>
+                        </div>
+                        <div style={{ width: '40px', height: '1px', background: 'var(--border-subtle)' }}></div>
+                        <div className={`checkout-step ${step >= 3 ? 'active' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: step >= 3 ? 1 : 0.5 }}>
+                            <span className="step-number" style={{ background: step === 3 ? 'var(--accent-green)' : 'var(--bg-surface-alt)', color: step === 3 ? '#fff' : 'var(--text-muted)', borderRadius: '50%', width: '24px', height: '24px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.8rem' }}>3</span>
+                            <span>Payment</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* CHECKOUT BODY */}
             <section className="section" style={{ paddingTop: 'var(--space-lg)' }}>
                 <div className="container">
-                    
-                    {/* STEP 1: SELECT COURSE */}
+                    {/* STEP 1: Select Program */}
                     {step === 1 && (
                         <div>
-                            <div className="section-header" style={{ marginBottom: 'var(--space-xl)' }}>
+                            <div className="section-header" style={{ marginBottom: 'var(--space-xl)', textAlign: 'center' }}>
                                 <h3>Select a <span className="text-gradient">Program</span></h3>
                             </div>
-                            <div className="grid grid-3 gap-lg" id="course-select-grid">
+                            <div className="grid grid-3 gap-lg" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 'var(--space-lg)' }}>
                                 {courses.map(c => (
-                                    <div className="card" style={{ cursor: 'pointer', padding: 'var(--space-lg)' }} onClick={() => selectCourse(c)} key={c.id}>
+                                    <div key={c.id} className="card" style={{ cursor: 'pointer', padding: 'var(--space-xl)', border: '1px solid var(--border-color)' }} onClick={() => handleSelectCourse(c)}>
                                         <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-md)' }}>{c.icon}</div>
-                                        <span className="badge badge-primary" style={{ marginBottom: 'var(--space-sm)' }}>{c.category}</span>
-                                        <h4 style={{ marginBottom: 'var(--space-sm)' }}>{c.title}</h4>
-                                        <p className="text-sm" style={{ marginBottom: 'var(--space-lg)', color: 'var(--text-muted)' }}>{c.duration} · {c.level}</p>
-                                        <span style={{ fontFamily: 'Outfit', fontSize: '1.5rem', fontWeight: 800 }}>₹{c.price.toLocaleString('en-IN')}</span>
+                                        <span className="badge badge-outline" style={{ marginBottom: 'var(--space-sm)' }}>{c.category}</span>
+                                        <h4 style={{ marginBottom: 'var(--space-sm)', fontWeight: 700 }}>{c.title}</h4>
+                                        <p className="text-sm" style={{ marginBottom: 'var(--space-lg)', color: 'var(--text-secondary)' }}>{c.duration} · {c.level}</p>
+                                        <span style={{ fontFamily: 'Outfit', fontSize: '1.5rem', fontSpread: 'normal', fontWeight: 800 }}>{formatCurrency(c.price)}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     )}
 
-                    {/* STEP 2: DETAILS & PAYMENT */}
+                    {/* STEP 2: Details + Payment */}
                     {step === 2 && selectedCourse && (
-                        <div className="checkout-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 'var(--space-xl)' }}>
-                            {/* Left Col: Form and Payment */}
+                        <div className="checkout-layout" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 'var(--space-2xl)' }}>
+                            {/* Left: Form details */}
                             <div>
-                                {/* Student Info */}
-                                <div className="card" style={{ marginBottom: 'var(--space-xl)', padding: 'var(--space-lg)' }}>
+                                {/* Details Card */}
+                                <div className="card" style={{ marginBottom: 'var(--space-xl)', padding: 'var(--space-xl)' }}>
                                     <h3 style={{ marginBottom: 'var(--space-xl)' }}>👤 Your Details</h3>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-                                        <div className="grid grid-2 gap-lg">
+                                    <form onSubmit={handlePay}>
+                                        <div className="grid grid-2 gap-lg" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-lg)' }}>
                                             <div className="form-group">
-                                                <label className="form-label required">Full Name</label>
+                                                <label className="form-label">Full Name *</label>
                                                 <input
                                                     type="text"
                                                     className="form-input"
                                                     placeholder="Your full name"
-                                                    value={name}
-                                                    onChange={(e) => setName(e.target.value)}
+                                                    value={formData.name}
+                                                    onChange={e => setFormData({ ...formData, name: e.target.value })}
                                                     required
                                                 />
                                             </div>
                                             <div className="form-group">
-                                                <label className="form-label required">Email</label>
+                                                <label className="form-label">Email *</label>
                                                 <input
                                                     type="email"
                                                     className="form-input"
                                                     placeholder="you@example.com"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    value={formData.email}
+                                                    onChange={e => setFormData({ ...formData, email: e.target.value })}
                                                     required
                                                 />
                                             </div>
                                         </div>
-                                        <div className="grid grid-2 gap-lg">
+                                        <div className="grid grid-2 gap-lg" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-lg)', marginTop: 'var(--space-md)' }}>
                                             <div className="form-group">
-                                                <label className="form-label required">Phone</label>
+                                                <label className="form-label">Phone *</label>
                                                 <input
                                                     type="tel"
                                                     className="form-input"
                                                     placeholder="+91 XXXXX XXXXX"
-                                                    value={phone}
-                                                    onChange={(e) => setPhone(e.target.value)}
+                                                    value={formData.phone}
+                                                    onChange={e => setFormData({ ...formData, phone: e.target.value })}
                                                     required
                                                 />
                                             </div>
                                             <div className="form-group">
-                                                <label className="form-label required">College</label>
+                                                <label className="form-label">College *</label>
                                                 <input
                                                     type="text"
                                                     className="form-input"
                                                     placeholder="Your college name"
-                                                    value={college}
-                                                    onChange={(e) => setCollege(e.target.value)}
+                                                    value={formData.college}
+                                                    onChange={e => setFormData({ ...formData, college: e.target.value })}
                                                     required
                                                 />
                                             </div>
                                         </div>
-                                        <div className="form-group">
-                                            <label className="form-label">Year of Study</label>
+                                        <div className="form-group" style={{ marginTop: 'var(--space-md)' }}>
+                                            <label className="form-label">Year</label>
                                             <select
                                                 className="form-select"
-                                                value={year}
-                                                onChange={(e) => setYear(e.target.value)}
-                                                style={{ width: '100%' }}
+                                                value={formData.year}
+                                                onChange={e => setFormData({ ...formData, year: e.target.value })}
                                             >
                                                 <option value="1st Year">1st Year</option>
                                                 <option value="2nd Year">2nd Year</option>
@@ -226,70 +227,91 @@ export default function CheckoutPage() {
                                                 <option value="Graduated">Graduated</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
 
-                                {/* Payment Options */}
-                                <div className="card" style={{ padding: 'var(--space-lg)' }}>
+                                {/* Payment Method Card */}
+                                <div className="card" style={{ padding: 'var(--space-xl)' }}>
                                     <h3 style={{ marginBottom: 'var(--space-xl)' }}>💳 Payment Method</h3>
-                                    <div className="flex" style={{ marginBottom: 'var(--space-md)', gap: '8px' }}>
-                                        <button className={`payment-tab-btn ${payTab === 'upi' ? 'active' : ''}`} onClick={() => setPayTab('upi')} style={{ flex: 1, padding: '10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: payTab === 'upi' ? 'var(--brand-gradient)' : 'var(--bg-surface)', color: payTab === 'upi' ? '#fff' : 'var(--text-primary)', cursor: 'pointer', fontWeight: 600 }}>UPI</button>
-                                        <button className={`payment-tab-btn ${payTab === 'card' ? 'active' : ''}`} onClick={() => setPayTab('card')} style={{ flex: 1, padding: '10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: payTab === 'card' ? 'var(--brand-gradient)' : 'var(--bg-surface)', color: payTab === 'card' ? '#fff' : 'var(--text-primary)', cursor: 'pointer', fontWeight: 600 }}>Card</button>
-                                        <button className={`payment-tab-btn ${payTab === 'netbanking' ? 'active' : ''}`} onClick={() => setPayTab('netbanking')} style={{ flex: 1, padding: '10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: payTab === 'netbanking' ? 'var(--brand-gradient)' : 'var(--bg-surface)', color: payTab === 'netbanking' ? '#fff' : 'var(--text-primary)', cursor: 'pointer', fontWeight: 600 }}>Net Banking</button>
+                                    <div className="flex" style={{ display: 'flex', marginBottom: 'var(--space-md)' }}>
+                                        <button
+                                            type="button"
+                                            className={`payment-tab-btn ${paymentMethod === 'upi' ? 'active' : ''}`}
+                                            onClick={() => setPaymentMethod('upi')}
+                                            style={{ flex: 1, padding: 'var(--space-md)', border: '1px solid var(--border-color)', background: paymentMethod === 'upi' ? 'var(--brand-gradient-solid)' : 'var(--bg-surface-alt)', color: paymentMethod === 'upi' ? '#fff' : 'var(--text-secondary)', cursor: 'pointer', fontWeight: 600, borderTopLeftRadius: 'var(--radius-md)', borderBottomLeftRadius: 'var(--radius-md)' }}
+                                        >
+                                            UPI
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className={`payment-tab-btn ${paymentMethod === 'card' ? 'active' : ''}`}
+                                            onClick={() => setPaymentMethod('card')}
+                                            style={{ flex: 1, padding: 'var(--space-md)', border: '1px solid var(--border-color)', background: paymentMethod === 'card' ? 'var(--brand-gradient-solid)' : 'var(--bg-surface-alt)', color: paymentMethod === 'card' ? '#fff' : 'var(--text-secondary)', cursor: 'pointer', fontWeight: 600 }}
+                                        >
+                                            Card
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className={`payment-tab-btn ${paymentMethod === 'netbanking' ? 'active' : ''}`}
+                                            onClick={() => setPaymentMethod('netbanking')}
+                                            style={{ flex: 1, padding: 'var(--space-md)', border: '1px solid var(--border-color)', background: paymentMethod === 'netbanking' ? 'var(--brand-gradient-solid)' : 'var(--bg-surface-alt)', color: paymentMethod === 'netbanking' ? '#fff' : 'var(--text-secondary)', cursor: 'pointer', fontWeight: 600, borderTopRightRadius: 'var(--radius-md)', borderBottomRightRadius: 'var(--radius-md)' }}
+                                        >
+                                            Net Banking
+                                        </button>
                                     </div>
 
-                                    {/* UPI fields */}
-                                    {payTab === 'upi' && (
-                                        <div style={{ padding: 'var(--space-md) 0' }}>
-                                            <div style={{ textAlign: 'center', fontSize: '3rem', marginVertical: 'var(--space-md)' }}>📱</div>
-                                            <p className="text-center text-muted text-sm" style={{ marginBottom: 'var(--space-lg)' }}>Scan QR or enter UPI ID below</p>
+                                    {/* UPI Fields */}
+                                    {paymentMethod === 'upi' && (
+                                        <div className="payment-tab-content active" style={{ padding: 'var(--space-xl) 0' }}>
+                                            <div className="qr-placeholder" style={{ width: '150px', height: '150px', background: 'var(--bg-surface-alt)', border: '2px dashed var(--border-color)', borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 'var(--space-lg) auto', fontSize: '3rem' }}>📱</div>
+                                            <p className="text-center text-muted text-sm" style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: 'var(--space-lg)', fontSize: '0.85rem' }}>Scan QR or enter UPI ID below</p>
                                             <div className="form-group">
-                                                <label className="form-label required">UPI ID</label>
+                                                <label className="form-label">UPI ID</label>
                                                 <input
                                                     type="text"
                                                     className="form-input"
                                                     placeholder="yourname@upi"
                                                     value={upiId}
-                                                    onChange={(e) => setUpiId(e.target.value)}
+                                                    onChange={e => setUpiId(e.target.value)}
                                                 />
                                             </div>
                                         </div>
                                     )}
 
-                                    {/* Card fields */}
-                                    {payTab === 'card' && (
-                                        <div style={{ padding: 'var(--space-md) 0', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                                    {/* Card Fields */}
+                                    {paymentMethod === 'card' && (
+                                        <div className="payment-tab-content active" style={{ padding: 'var(--space-xl) 0' }}>
                                             <div className="form-group">
-                                                <label className="form-label required">Card Number</label>
+                                                <label className="form-label">Card Number</label>
                                                 <input
                                                     type="text"
                                                     className="form-input"
                                                     placeholder="1234 5678 9012 3456"
                                                     value={cardNumber}
-                                                    onChange={(e) => setCardNumber(e.target.value)}
+                                                    onChange={e => setCardNumber(e.target.value)}
                                                     maxLength="19"
                                                 />
                                             </div>
-                                            <div className="grid grid-2 gap-md">
-                                                <div className="form-group">
-                                                    <label className="form-label required">Expiry</label>
+                                            <div className="card-input-group" style={{ display: 'flex', gap: 'var(--space-md)', marginTop: 'var(--space-md)' }}>
+                                                <div className="form-group" style={{ flex: 1 }}>
+                                                    <label className="form-label">Expiry</label>
                                                     <input
                                                         type="text"
                                                         className="form-input"
                                                         placeholder="MM/YY"
                                                         value={cardExpiry}
-                                                        onChange={(e) => setCardExpiry(e.target.value)}
+                                                        onChange={e => setCardExpiry(e.target.value)}
                                                         maxLength="5"
                                                     />
                                                 </div>
-                                                <div className="form-group">
-                                                    <label className="form-label required">CVV</label>
+                                                <div className="form-group" style={{ flex: 1 }}>
+                                                    <label className="form-label">CVV</label>
                                                     <input
                                                         type="password"
                                                         className="form-input"
                                                         placeholder="•••"
                                                         value={cardCvv}
-                                                        onChange={(e) => setCardCvv(e.target.value)}
+                                                        onChange={e => setCardCvv(e.target.value)}
                                                         maxLength="3"
                                                     />
                                                 </div>
@@ -297,16 +319,15 @@ export default function CheckoutPage() {
                                         </div>
                                     )}
 
-                                    {/* Net Banking fields */}
-                                    {payTab === 'netbanking' && (
-                                        <div style={{ padding: 'var(--space-md) 0' }}>
+                                    {/* Netbanking Fields */}
+                                    {paymentMethod === 'netbanking' && (
+                                        <div className="payment-tab-content active" style={{ padding: 'var(--space-xl) 0' }}>
                                             <div className="form-group">
-                                                <label className="form-label required">Select Bank</label>
+                                                <label className="form-label">Select Bank</label>
                                                 <select
                                                     className="form-select"
                                                     value={bankSelect}
-                                                    onChange={(e) => setBankSelect(e.target.value)}
-                                                    style={{ width: '100%' }}
+                                                    onChange={e => setBankSelect(e.target.value)}
                                                 >
                                                     <option value="">Choose your bank...</option>
                                                     <option value="SBI">State Bank of India</option>
@@ -314,75 +335,121 @@ export default function CheckoutPage() {
                                                     <option value="ICICI">ICICI Bank</option>
                                                     <option value="Axis">Axis Bank</option>
                                                     <option value="Kotak">Kotak Mahindra Bank</option>
+                                                    <option value="PNB">Punjab National Bank</option>
                                                 </select>
                                             </div>
                                         </div>
                                     )}
 
-                                    <button onClick={processPayment} className="btn btn-primary btn-lg w-full" style={{ marginTop: 'var(--space-lg)', justifyContent: 'center' }}>
-                                        Pay Now — ₹{grandTotal.toLocaleString('en-IN')} <span className="arrow">→</span>
+                                    <button type="button" className="btn btn-primary btn-lg w-full" style={{ marginTop: 'var(--space-xl)' }} onClick={handlePay} disabled={processing}>
+                                        {processing ? 'Processing...' : 'Pay Now'} <span className="arrow">→</span>
                                     </button>
                                 </div>
                             </div>
 
-                            {/* Right Col: Order Summary */}
-                            <div className="order-summary">
-                                <div className="card" style={{ padding: 'var(--space-lg)' }}>
-                                    <h4 style={{ marginBottom: 'var(--space-xl)' }}>🛍️ Order Summary</h4>
-                                    
-                                    <div className="flex gap-lg items-center" style={{ marginBottom: 'var(--space-lg)' }}>
+                            {/* Right: Order Summary */}
+                            <div className="order-summary" style={{ position: 'sticky', top: 'calc(var(--nav-height) + var(--space-xl))' }}>
+                                <div className="card" style={{ padding: 'var(--space-xl)' }}>
+                                    <h4 style={{ marginBottom: 'var(--space-xl)', fontWeight: 700 }}>🧾 Order Summary</h4>
+                                    <div className="flex gap-lg items-center" style={{ display: 'flex', gap: 'var(--space-lg)', alignItems: 'center', marginBottom: 'var(--space-lg)' }}>
                                         <span style={{ fontSize: '2.5rem' }}>{selectedCourse.icon}</span>
                                         <div>
-                                            <h4 style={{ margin: 0 }}>{selectedCourse.title}</h4>
-                                            <p className="text-sm text-muted" style={{ margin: 0 }}>{selectedCourse.duration} · {selectedCourse.level}</p>
+                                            <h4 style={{ fontWeight: 600 }}>{selectedCourse.title}</h4>
+                                            <p className="text-sm text-muted" style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{selectedCourse.duration} · {selectedCourse.level}</p>
                                         </div>
                                     </div>
-
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-lg)' }}>
-                                        <div className="flex justify-between">
-                                            <span className="text-muted">Course Fee</span>
-                                            <span>₹{totalFee.toLocaleString('en-IN')}</span>
+                                    <div className="flex justify-between" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
+                                        <span className="text-muted" style={{ color: 'var(--text-muted)' }}>Course Fee</span>
+                                        <span>{formatCurrency(selectedCourse.price)}</span>
+                                    </div>
+                                    {discountAmount > 0 && (
+                                        <div className="flex justify-between" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
+                                            <span className="text-muted" style={{ color: 'var(--text-muted)' }}>Discount</span>
+                                            <span style={{ color: 'var(--accent-green)' }}>-{formatCurrency(discountAmount)}</span>
                                         </div>
-                                        {discount > 0 && (
-                                            <div className="flex justify-between" style={{ color: 'var(--accent-green)' }}>
-                                                <span>Discount</span>
-                                                <span>-₹{discount.toLocaleString('en-IN')}</span>
+                                    )}
+                                    <div className="flex justify-between" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
+                                        <span className="text-muted" style={{ color: 'var(--text-muted)' }}>GST (18%)</span>
+                                        <span>{formatCurrency(Math.round((selectedCourse.price - discountAmount) * 0.18))}</span>
+                                    </div>
+
+                                    <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: 'var(--space-lg)', paddingTop: 'var(--space-lg)' }}>
+                                        <div className="form-group">
+                                            <label className="form-label">Discount Code</label>
+                                            <div className="flex gap-sm" style={{ display: 'flex', gap: 'var(--space-sm)', marginTop: 'var(--space-sm)' }}>
+                                                <input
+                                                    type="text"
+                                                    className="form-input"
+                                                    placeholder="Enter code"
+                                                    value={discountCode}
+                                                    onChange={e => setDiscountCode(e.target.value)}
+                                                    style={{ flex: 1 }}
+                                                />
+                                                <button type="button" className="btn btn-secondary btn-sm" onClick={handleApplyDiscount}>Apply</button>
                                             </div>
-                                        )}
-                                        <div className="flex justify-between">
-                                            <span className="text-muted">GST (18%)</span>
-                                            <span>₹{gst.toLocaleString('en-IN')}</span>
                                         </div>
                                     </div>
 
-                                    <div style={{ borderTop: '1px solid var(--border-subtle)', marginVertical: 'var(--space-lg)', paddingTop: 'var(--space-lg)' }}>
-                                        <div className="flex justify-between">
-                                            <span style={{ fontWeight: 700, fontSize: '1.1rem' }}>Total</span>
-                                            <span style={{ fontFamily: 'Outfit', fontSize: '1.5rem', fontWeight: 800, color: 'var(--brand-primary)' }}>₹{grandTotal.toLocaleString('en-IN')}</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Promo code */}
-                                    <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-lg)' }}>
-                                        <label className="form-label" style={{ display: 'block', marginBottom: '8px' }}>Promo Code</label>
-                                        <div className="flex gap-sm">
-                                            <input
-                                                type="text"
-                                                className="form-input"
-                                                placeholder="e.g. WELCOME10"
-                                                value={promoCode}
-                                                onChange={(e) => setPromoCode(e.target.value)}
-                                                style={{ flex: 1 }}
-                                            />
-                                            <button className="btn btn-secondary" onClick={handleApplyPromo}>Apply</button>
-                                        </div>
+                                    <div style={{ borderTop: '2px solid var(--brand-primary)', paddingValue: '0', paddingTop: 'var(--space-lg)', marginTop: 'var(--space-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{ fontWeight: 700, fontSize: '1.1rem' }}>Total</span>
+                                        <span style={{ fontFamily: 'Outfit', fontSize: '1.5rem', fontWeight: 800, color: 'var(--brand-primary)' }}>
+                                            {formatCurrency(Math.round((selectedCourse.price - discountAmount) * 1.18))}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )}
+
+                    {/* STEP 3: Success */}
+                    {step === 3 && successData && (
+                        <div style={{ textAlign: 'center', padding: 'var(--space-3xl) 0' }}>
+                            <div style={{ fontSize: '4rem', marginBottom: 'var(--space-md)', color: 'var(--accent-green)' }}>✅</div>
+                            <h2 style={{ marginBottom: 'var(--space-md)', fontWeight: 700 }}>Payment Successful!</h2>
+                            <p style={{ maxWidth: '500px', margin: '0 auto var(--space-xl)', color: 'var(--text-secondary)' }}>
+                                Welcome, {successData.student.name}! You're now enrolled in {selectedCourse.title}. Your student portal account is ready.
+                            </p>
+                            
+                            <div className="card" style={{ maxWidth: '500px', margin: '0 auto var(--space-xl)', padding: 'var(--space-xl)', textAlign: 'left', border: '1px solid var(--border-color)' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
+                                    <span className="text-muted" style={{ color: 'var(--text-muted)' }}>Receipt No</span>
+                                    <span className="font-mono" style={{ fontFamily: 'monospace' }}>{successData.payment.receiptNo}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
+                                    <span className="text-muted" style={{ color: 'var(--text-muted)' }}>Course</span>
+                                    <span>{selectedCourse.title}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
+                                    <span className="text-muted" style={{ color: 'var(--text-muted)' }}>Amount Paid</span>
+                                    <span style={{ fontWeight: 'bold', color: 'var(--accent-green)' }}>{formatCurrency(successData.payment.amount)}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
+                                    <span className="text-muted" style={{ color: 'var(--text-muted)' }}>Method</span>
+                                    <span>{successData.payment.method}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <span className="text-muted" style={{ color: 'var(--text-muted)' }}>Date</span>
+                                    <span>{new Date(successData.payment.date).toLocaleDateString()}</span>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'flex', gap: 'var(--space-md)', justifyContent: 'center' }}>
+                                <Link to="/portal" className="btn btn-primary btn-lg">Go to Student Portal →</Link>
+                                <Link to="/training" className="btn btn-secondary btn-lg">Browse More Programs</Link>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
+
+            {/* Processing Overlay */}
+            {processing && (
+                <div style={{ position: 'fixed', inset: 0, zIndex: 5000, background: 'rgba(10, 10, 26, 0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 'var(--space-xl)' }}>
+                    <div style={{ width: '60px', height: '60px', borderRadius: '50%', border: '4px solid var(--border-color)', borderTopColor: 'var(--brand-primary)', animation: 'spin 1s linear infinite' }}></div>
+                    <h3 style={{ color: '#fff' }}>Processing Payment...</h3>
+                    <p style={{ color: 'var(--text-muted)' }}>Please do not close this window</p>
+                </div>
+            )}
         </div>
     );
 }

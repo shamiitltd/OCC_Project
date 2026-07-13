@@ -82,7 +82,9 @@ export default function CorporatePortal() {
 
   const processApplicant = (studentId, jobId, newStatus) => {
     AppState.updateApplicationStatus(jobId, studentId, newStatus);
-    alert(`Candidate status updated to: ${newStatus}`);
+    if (window.OC2 && window.OC2.Toast) {
+      window.OC2.Toast.success(`Candidate status successfully updated to: ${newStatus}`);
+    }
     loadData();
   };
 
@@ -109,7 +111,9 @@ export default function CorporatePortal() {
       applications: []
     });
 
-    alert(`Job Opening "${newJobTitle}" published!`);
+    if (window.OC2 && window.OC2.Toast) {
+      window.OC2.Toast.success(`Job Opening "${newJobTitle}" published successfully!`);
+    }
     setShowJobModal(false);
     setNewJobTitle('');
     setNewJobDesc('');
@@ -128,7 +132,9 @@ export default function CorporatePortal() {
       status: 'Pending Approval'
     }];
     setScheduledDrives(nextDrives);
-    alert(`Drive request submitted to ${driveCollege} for ${driveDate}!`);
+    if (window.OC2 && window.OC2.Toast) {
+      window.OC2.Toast.info(`Drive request submitted to ${driveCollege} for ${driveDate}!`);
+    }
     setShowDriveModal(false);
   };
 
@@ -145,7 +151,9 @@ export default function CorporatePortal() {
       corps[idx] = currentUser;
       AppState.set('corporates', corps);
     }
-    alert('Profile settings saved.');
+    if (window.OC2 && window.OC2.Toast) {
+      window.OC2.Toast.success('Profile settings saved successfully.');
+    }
     loadData();
   };
 
